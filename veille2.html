@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veille 2 : L'essor de Rust – Lilian</title>
+  <link rel="stylesheet" href="css/audio.css">
+  <script src="js/audio.js" defer></script>
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/veille.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; color: #fff; font-family: "Pixelify Sans", sans-serif; text-shadow: 1px 1px 2px black; }
+    .videoback { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+    .videoback video { width: 100%; height: 100%; object-fit: cover; }
+    footer.espace { height: 30px; }
+  </style>
+</head>
+<body>
+<header class="topnav">
+  <nav class="nav">
+    <a href="index.html" class="nav-home">Accueil</a>
+    <span class="nav-spacer"></span>
+    <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
+    <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs/TDs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a><a href="tds-annee-1.html">TDs année 1</a><a href="tds-annee-2.html">TDs année 2</a></div></div>
+    <a href="CV.html">CV</a><a href="Lettre-de-motivation.html">Lettre de motivation</a>
+    
+    <div class="dd active" id="dd-veilles">
+      <a href="#" class="dd-toggle">Veilles ▾</a>
+      <div class="dd-menu">
+        <a href="veille1.html">Veille 1</a>
+        <a href="veille2.html" aria-current="page">Veille 2</a>
+      </div>
+    </div>
+    
+    <a href="contact.html">Contacts</a>
+  </nav>
+</header>
+<div class="videoback"><video autoplay muted loop playsinline><source src="video/veille2.mp4" type="video/mp4"></video></div>
+<main class="veille-container">
+  <header class="veille-header">
+    <span class="tag" style="background:#e05a2b;">Développement Système</span><h1>Rust : Le successeur du C++ ?</h1><p>Pourquoi ce langage réinvente la sécurité logicielle et la performance.</p>
+  </header>
+  <div class="veille-grid">
+    <article class="v-card"><h2>1. Pourquoi Rust explose ?</h2><p>Créé par Mozilla, <strong>Rust</strong> résout le problème n°1 du C et C++ : la gestion de la mémoire. Grâce à son système de "propriété" (<em>ownership</em>) et d'emprunt (<em>borrowing</em>), il empêche mathématiquement les bugs de mémoire (buffer overflows) <strong>à la compilation</strong>, sans avoir besoin de "Garbage Collector" qui ralentit l'exécution.</p></article>
+    <article class="v-card"><h2>2. Une adoption historique</h2><p>C'est une révolution industrielle :</p><ul class="v-list"><li><strong>Linux :</strong> Rust est le deuxième langage accepté dans le noyau Linux (après le C en 30 ans).</li><li><strong>Microsoft :</strong> Réécrit des parties de Windows en Rust pour la sécurité.</li><li><strong>Android :</strong> Utilise Rust pour ses nouvelles couches bas niveau.</li></ul></article>
+    <article class="v-card"><h2>3. Performance & WebAssembly</h2><p>Rust est aussi rapide que le C++. Il est aussi le langage de prédilection pour le <strong>WebAssembly (Wasm)</strong>, qui permet de faire tourner des applications lourdes (montage vidéo, 3D, Photoshop) directement dans le navigateur web à des vitesses quasi-natives.</p></article>
+  </div>
+  <div class="conclusion-box"><h3>🔍 Mon avis</h3><p>Pour un développeur ou un admin système, ignorer Rust aujourd'hui est risqué. Il combine la performance du bas niveau avec la sécurité des langages modernes. C'est un excellent sujet de veille car il redéfinit les standards de l'industrie pour les 20 prochaines années.</p></div>
+</main>
+<footer class="espace"></footer>
+</body>
+</html>

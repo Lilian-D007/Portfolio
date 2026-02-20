@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TPs Année 1 – Lilian</title>
+  <link rel="stylesheet" href="css/audio.css">
+  <script src="js/audio.js" defer></script>
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/tps.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; color: #fff; font-family: "Pixelify Sans", sans-serif; text-shadow: 1px 1px 2px black; background: #0b0d0f; }
+    .videoback { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .videoback video { width: 100%; height: 100%; object-fit: cover; }
+    footer.espace { height: 30px; width: 100%; }
+    main { margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <nav class="nav">
+      <a href="index.html" class="nav-home">Accueil</a>
+      <span class="nav-spacer"></span>
+      <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
+      
+      <div class="dd active" id="dd-tps">
+        <a href="#" class="dd-toggle">TPs/TDs ▾</a>
+        <div class="dd-menu">
+          <a href="tps-annee-1.html" aria-current="page">TPs année 1</a>
+          <a href="tps-annee-2.html">TPs année 2</a>
+          <a href="tds-annee-1.html">TDs année 1</a>
+          <a href="tds-annee-2.html">TDs année 2</a>
+        </div>
+      </div>
+
+      <a href="CV.html">CV</a><a href="Lettre-de-motivation.html">Lettre de motivation</a>
+      <div class="dd" id="dd-veilles"><a href="#" class="dd-toggle">Veilles ▾</a><div class="dd-menu"><a href="veille1.html">Veille 1</a><a href="veille2.html">Veille 2</a></div></div>
+      <a href="contact.html">Contacts</a>
+    </nav>
+  </header>
+
+  <div class="videoback"><video autoplay muted loop playsinline><source src="video/tps-annee-1.mp4" type="video/mp4"></video></div>
+
+  <main class="tps-container">
+    <header class="page-header">
+      <h1>Travaux Pratiques – Année 1</h1>
+      <p>Retrouvez ici l'ensemble des travaux réalisés durant ma première année de BTS SIO.</p>
+    </header>
+    <div class="tp-grid">
+      <a href="TP_faits/TP_Montage_PC.pdf" target="_blank" class="tp-card">
+        <div class="tp-icon">🖥️</div><h2>Montage PC</h2><p>Découverte des composants hardware, assemblage complet d'une unité centrale et premier démarrage (POST).</p><div class="tp-action">📄 Voir le PDF</div>
+      </a>
+      <a href="TP_faits/TP_diagnostic_reseau.pdf" target="_blank" class="tp-card">
+        <div class="tp-icon">🌐</div><h2>Diagnostic Réseau</h2><p>Analyse de pannes réseaux, utilisation des commandes Ping/Traceroute et vérification de la connectivité.</p><div class="tp-action">📄 Voir le PDF</div>
+      </a>
+      <a href="TP_faits/TP_CMD.pdf" target="_blank" class="tp-card">
+        <div class="tp-icon">⌨️</div><h2>Invite de Commande</h2><p>Prise en main de l'environnement Windows CMD : navigation, gestion de fichiers et administration système de base.</p><div class="tp-action">📄 Voir le PDF</div>
+      </a>
+      <a href="TP_faits/TP_SQL_SELECT_UPDATE_INSERT_DELETE.pdf" target="_blank" class="tp-card">
+        <div class="tp-icon">🗃️</div><h2>Bases de Données SQL</h2><p>Manipulation de données : requêtes de sélection, mise à jour, insertion et suppression (CRUD) sur une base relationnelle.</p><div class="tp-action">📄 Voir le PDF</div>
+      </a>
+      <a href="TP_faits/TP_Bases_CMD_Powershell.pdf" target="_blank" class="tp-card">
+        <div class="tp-icon">⚙️</div><h2>Intro PowerShell</h2><p>Initiation au scripting et à l'automatisation des tâches administratives via PowerShell.</p><div class="tp-action">📄 Voir le PDF</div>
+      </a>
+    </div>
+  </main>
+  <footer class="espace"></footer>
+</body>
+</html>

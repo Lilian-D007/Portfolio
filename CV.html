@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV – Lilian</title>
+  <link rel="stylesheet" href="css/audio.css">
+  <script src="js/audio.js" defer></script>
+  <link rel="stylesheet" href="css/navigation.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body{ margin:0; color:#fff; background:#0b0d0f; font-family:"Pixelify Sans",sans-serif; text-align:center; text-shadow:-1px -1px 0 #000,1px -1px 0 #000; }
+    .videoback{ position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+    .videoback video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .cv-box{ width:min(92vw,950px); margin:100px auto 24px; padding:24px; border-radius:16px; border:2px solid rgba(255,255,255,.6); background:rgba(35,39,42,.6); backdrop-filter:blur(8px); box-shadow:0 6px 16px rgba(0,0,0,.45); }
+    .cv-img{ width:100%; height:auto; border-radius:12px; border:2px solid rgba(255,255,255,.55); }
+    .download-wrap{ text-align:center; }
+    .download-btn{ display:inline-block; margin:20px 0 50px; padding:12px 24px; background:rgba(114,137,218,.9); color:#fff; font-weight:700; text-decoration:none; border-radius:10px; border:2px solid rgba(255,255,255,.35); transition:.25s; font-family: inherit; }
+    .download-btn:hover{ transform:scale(1.05); background:rgba(114,137,218,1); box-shadow: 0 0 15px rgba(114,137,218,0.8); }
+    footer.espace { height: 30px; width: 100%; }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <nav class="nav">
+      <a href="index.html" class="nav-home">Accueil</a>
+      <span class="nav-spacer"></span>
+      <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
+      <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs/TDs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a><a href="tds-annee-1.html">TDs année 1</a><a href="tds-annee-2.html">TDs année 2</a></div></div>
+      
+      <a href="CV.html" aria-current="page">CV</a>
+      
+      <a href="Lettre-de-motivation.html">Lettre de motivation</a>
+      <div class="dd" id="dd-veilles"><a href="#" class="dd-toggle">Veilles ▾</a><div class="dd-menu"><a href="veille1.html">Veille 1</a><a href="veille2.html">Veille 2</a></div></div>
+      <a href="contact.html">Contacts</a>
+    </nav>
+  </header>
+  <div class="videoback"><video autoplay muted loop playsinline><source src="video/CV.mp4" type="video/mp4"></video></div>
+  <div class="cv-box"><h1>Mon CV</h1><img src="image/CV.jpg" alt="CV de Lilian DUSSY" class="cv-img"></div>
+  <div class="download-wrap">
+  <a href="image/CV.pdf" download="CV-Lilian-DUSSY.pdf" class="download-btn" target="_blank">
+    📄 Télécharger mon CV (PDF)
+  </a>
+</div>
+  <footer class="espace"></footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lettre de motivation – Lilian</title>
+  <link rel="stylesheet" href="css/audio.css">
+  <script src="js/audio.js" defer></script>
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/Lettre-de-motivation.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { color: #fff; font-family: "Pixelify Sans", sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000; text-align: center; overflow-x: hidden; }
+    .videoback { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .videoback video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .photoLilian { position: absolute; top: 110px; right: 40px; width: 130px; height: 130px; border-radius: 50%; border: 2px solid rgba(255,255,255,.55); box-shadow: 0 0 10px rgba(0,0,0,.4); z-index: 10; }
+    .lm-box { width: min(92vw, 720px); margin: 100px auto 50px; padding: 24px 28px; border: 2px solid #ffffff; border-radius: 16px; color: #ffffff; background: rgba(35,39,42,0.6); backdrop-filter: blur(6px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); box-sizing: border-box; line-height: 1.6; text-align: center; }
+    .lm-box h1 { margin-top: 0; margin-bottom: 18px; }
+    @media (hover: hover) and (pointer: fine) { .lm-box:hover { transform: scale(1.02); box-shadow: 0 10px 24px rgba(0,0,0,.55); } }
+    footer.espace { height: 30px; width: 100%; }
+    @media (max-width: 700px) { .photoLilian { position: static; display: block; margin: 12px auto 0; } }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <nav class="nav">
+      <a href="index.html" class="nav-home">Accueil</a>
+      <span class="nav-spacer"></span>
+      <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
+      <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs/TDs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a><a href="tds-annee-1.html">TDs année 1</a><a href="tds-annee-2.html">TDs année 2</a></div></div>
+      <a href="CV.html">CV</a>
+      
+      <a href="Lettre-de-motivation.html" aria-current="page">Lettre de motivation</a>
+      
+      <div class="dd" id="dd-veilles"><a href="#" class="dd-toggle">Veilles ▾</a><div class="dd-menu"><a href="veille1.html">Veille 1</a><a href="veille2.html">Veille 2</a></div></div>
+      <a href="contact.html">Contacts</a>
+    </nav>
+  </header>
+  <div class="videoback"><video autoplay muted loop playsinline><source src="video/Japan%20street%20live%20wallpaper.mp4" type="video/mp4"></video></div>
+  <img src="image/LilianDUSSY.jpg" alt="Photo de Lilian DUSSY" class="photoLilian">
+  <div class="lm-box">
+    <h1>Ma lettre de motivation</h1>
+    <p>Bonjour je me présente Lilian DUSSY, actuellement étudiant en BTS informatique sur le développement web ainsi que la gestion de réseaux.</p> 
+    <p>J'ai déjà travaillé en tant que monteur indépendant, ainsi qu'à la mairie de Paris en informatique. Je suis sérieux et assidu, toujours ponctuel et avide d'apprendre.</p>
+    <p>Le BTS de Saint-Remi m'apprend actuellement le HTML, et m'apprendra la CSS ainsi que le JavaScript. De mon côté j'ai appris à coder en Python.</p>
+    <p>Je suis à la recherche d'un stage de 6 semaines dans le domaine de l'informatique, que ce soit en développement web ou en gestion de réseaux.</p>
+    <p>Je suis disponible du 3 juin au 12 juillet 2025, pour effectuer un stage dans votre entreprise « … ».</p>
+    <p>Je suis très motivé à l'idée de rejoindre votre équipe et de contribuer à vos projets tout en développant mes compétences professionnelles.</p>
+    <p>Je vous joins mon <a href="CV.html" style="color:#fff; text-decoration:underline;">CV</a> pour plus d'informations sur mon parcours et mes compétences.</p>
+    <p>Je vous remercie de l'attention que vous porterez à ma candidature, et reste à votre disposition pour un entretien.</p>
+  </div>
+  <footer class="espace"></footer>
+</body>
+</html>

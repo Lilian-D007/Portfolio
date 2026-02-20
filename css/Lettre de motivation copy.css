@@ -1,0 +1,91 @@
+body {
+  background: linear-gradient(to bottom, #2c2f33, #7289da);
+  color: white;
+  font-family: "Pixelify Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  text-shadow:
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black; /* contour noir autour du texte */
+}
+
+/* ========== Photo Lilian ========== */
+.photoLilian {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 3px solid rgba(35,39,42,0.6);
+}
+
+.monpaf {
+  text-align: right !important;
+}
+
+.mapuf {
+  text-align: center;
+}
+
+.blanche {
+  color: white !important;
+}
+
+/* ========== Bloc principal ========== */
+.box2 {
+  backdrop-filter: blur(6px);          
+  width: min(92vw, 720px);        
+  margin: 24px auto;              
+  padding: 16px 20px;             
+  border: 2px solid #ffffff;      
+  border-radius: 16px;            
+  color: #ffffff;                 
+  background: rgba(35,39,42,0.6);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2); 
+  box-sizing: border-box;         
+  line-height: 1.5;               
+  overflow-wrap: anywhere;        
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Effet au survol du bloc sur PC */
+@media (hover: hover) and (pointer: fine) {
+  .box2:hover {
+    transform: scale(1.03); /* agrandissement léger */
+    box-shadow: 0 8px 22px rgba(255,255,255,0.15);
+  }
+}
+
+/* Petits écrans : pas d’effet de zoom */
+@media (max-width: 600px) {
+  .box2 {
+    padding: 14px 16px;           
+    border-radius: 14px;
+  }
+}
+
+/* ========== Fond vidéo ========== */
+.videoback {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.videoback > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Petit espace de fin de page */
+footer.espace {
+  height: 30px;          /* hauteur du footer */
+  width: 100%;           /* occupe toute la largeur */
+  background: transparent; /* reste invisible (laisse voir la vidéo) */
+  border: none;
+}
+

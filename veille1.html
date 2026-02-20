@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veille 1 : L'Informatique Quantique – Lilian</title>
+  <link rel="stylesheet" href="css/audio.css">
+  <script src="js/audio.js" defer></script>
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/veille.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; color: #fff; font-family: "Pixelify Sans", sans-serif; text-shadow: 1px 1px 2px black; }
+    .videoback { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+    .videoback video { width: 100%; height: 100%; object-fit: cover; }
+    footer.espace { height: 30px; }
+  </style>
+</head>
+<body>
+<header class="topnav">
+  <nav class="nav">
+    <a href="index.html" class="nav-home">Accueil</a>
+    <span class="nav-spacer"></span>
+    <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
+    <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs/TDs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a><a href="tds-annee-1.html">TDs année 1</a><a href="tds-annee-2.html">TDs année 2</a></div></div>
+    <a href="CV.html">CV</a><a href="Lettre-de-motivation.html">Lettre de motivation</a>
+    
+    <div class="dd active" id="dd-veilles">
+      <a href="#" class="dd-toggle">Veilles ▾</a>
+      <div class="dd-menu">
+        <a href="veille1.html" aria-current="page">Veille 1</a>
+        <a href="veille2.html">Veille 2</a>
+      </div>
+    </div>
+    
+    <a href="contact.html">Contacts</a>
+  </nav>
+</header>
+<div class="videoback"><video autoplay muted loop playsinline><source src="video/rainjapanwallpaper.mp4" type="video/mp4"></video></div>
+<main class="veille-container">
+  <header class="veille-header">
+    <span class="tag">Hardware & Innovation</span><h1>L'Informatique Quantique</h1><p>Au-delà du binaire : la prochaine grande révolution de calcul.</p>
+  </header>
+  <div class="veille-grid">
+    <article class="v-card"><h2>1. Le concept : Bit vs Qubit</h2><p>L'informatique classique repose sur le <strong>bit</strong> (0 ou 1). L'informatique quantique utilise le <strong>Qubit</strong>. Grâce au principe de <em>superposition</em>, un qubit peut être à la fois 0 et 1. Cela permet de réaliser des calculs parallèles massifs impossibles pour nos supercalculateurs actuels.</p></article>
+    <article class="v-card"><h2>2. Les dangers pour la Cybersécurité</h2><p>C'est l'enjeu majeur pour nous, informaticiens. La puissance de calcul quantique pourrait théoriquement casser le chiffrement <strong>RSA</strong> (utilisé pour sécuriser le web, les banques) en quelques minutes.<br><br>La réponse ? La <strong>cryptographie post-quantique</strong>, déjà en développement par le NIST.</p></article>
+    <article class="v-card"><h2>3. Acteurs & Avancées</h2><ul class="v-list"><li><strong>IBM Eagle :</strong> Processeur dépassant les 100 qubits.</li><li><strong>Google Sycamore :</strong> A atteint la "suprématie quantique" sur un calcul spécifique.</li><li><strong>Pasqal (France) :</strong> Start-up française leader sur les atomes neutres.</li></ul></article>
+  </div>
+  <div class="conclusion-box"><h3>🔍 Mon avis</h3><p>Bien que l'ordinateur quantique grand public ne soit pas pour demain (problèmes de refroidissement proche du zéro absolu), son impact sur le décryptage et l'IA sera disruptif d'ici 10 à 15 ans. Il est crucial de suivre l'évolution des algorithmes résistants au quantique.</p></div>
+</main>
+<footer class="espace"></footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+.videoback{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+}           
+.videoback > video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  pointer-events:none;
+}
+
+.margehaut{
+margin-top: 0px;
+
+}
+
+.flou{
+  filter: blur(1px);
+}
+
+.download-marge{
+text-align: right;
+margin: 2vw 33vw 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.download-btn {
+  display: inline-block;
+  border-radius: 50%;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform .15s ease, box-shadow .15s ease;
+  outline: none;
+}
+.download-btn img {
+  display: block;            /* enlève l'espace sous l'image */
+  width: min(10vw, 60px);   /* taille fluide, max 240px */
+  height: auto;
+  border-radius: 16px;
+}
+.download-btn:hover,
+.download-btn:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0,0,0,.35);
+  cursor: pointer;
+}
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+body {
+  background: radial-gradient(circle at center, #4a4e69, #222);
+  color: white;
+  font-family: "Pixelify Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  text-shadow:
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
+  margin: 0;
+  padding-top: 90px; /* espace pour laisser respirer la nav en haut */
+  min-height: 100vh;
+}
+
+/* Le bloc contact reste centré horizontalement */
+.contact-box {
+  backdrop-filter: blur(10px);
+  background: rgba(35, 39, 42, 0.7);
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  padding: 30px 40px;
+  width: min(90vw, 600px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 auto;
+}
+
+.contact-box:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(255,255,255,0.15);
+}

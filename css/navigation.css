@@ -1,0 +1,106 @@
+
+html, body { height: 100%; }
+
+.topnav{
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(24,25,26,.85);
+  border: 2px solid rgba(255,255,255,.15);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  margin: 10px;
+  padding: 10px 14px;
+}
+
+/* ===== LIGNE ===== */
+.nav{
+  display: flex; align-items: center; gap: 12px;
+  max-width: 1100px; margin: 0 auto;
+}
+
+/* pousse Accueil à gauche / les autres à droite */
+.nav-spacer{ flex: 1; }
+
+/* ===== LIENS ===== */
+.nav a, .nav .dd-toggle{
+  color: #fff; text-decoration: none; font-weight: 600;
+  padding: 8px 14px;
+  border: 2px solid rgba(255,255,255,.2);
+  border-radius: 12px;
+  background: rgba(35,39,42,.6);
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+.nav a:hover, .nav .dd-toggle:hover{
+  background: rgba(114,137,218,.8);
+  border-color: rgba(255,255,255,.4);
+  transform: scale(1.04);
+}
+
+/* ===== ACCUEIL (bleu par défaut) ===== */
+.nav a.nav-home{
+  background: #6e8cfb;
+  border-color: #9eb4ff;
+  box-shadow: 0 0 8px rgba(110,140,255,.5);
+  font-weight: 700;
+}
+.nav a.nav-home:hover,
+.nav a.nav-home:focus,
+.nav a.nav-home[aria-current="page"]{
+  background: #809dff;
+  border-color: #c2d0ff;
+  box-shadow: 0 0 16px rgba(130,160,255,.9);
+  transform: scale(1.08);
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dd{ position: relative; }
+
+/* pont anti “zone morte” sous le bouton */
+.dd::after{
+  content:""; position:absolute; left:0; right:0; height:6px; top:100%;
+}
+
+.dd-menu{
+  display: none; position: absolute; top: calc(100% + 4px); left: 0;
+  background: rgba(24,25,26,.95);
+  border: 2px solid rgba(255,255,255,.2);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.4);
+  padding: 6px 0; z-index: 10;
+  min-width: 180px;
+}
+.dd:hover .dd-menu{ display: block; }
+
+.dd-menu a{
+  display: block; padding: 9px 16px; color:#fff; text-decoration:none;
+  border-radius: 8px; margin: 2px 6px;
+}
+.dd-menu a:hover{ background: rgba(114,137,218,.8); }
+
+/* ===== ÉTAT ACTIF (PAGE COURANTE) ===== */
+/* Lien de premier niveau actif */
+.nav a[aria-current="page"]{
+  background: #6e8cfb !important;
+  border-color: #9eb4ff !important;
+  box-shadow: 0 0 12px rgba(110,140,255,.6) !important;
+  transform: none;
+}
+/* Sous-lien actif dans un menu */
+.dd-menu a[aria-current="page"]{
+  background: rgba(114,137,218,.9) !important;
+  border: 2px solid rgba(255,255,255,.35);
+}
+/* Quand un sous-lien est actif, le parent est bleu/glow */
+.dd.active > .dd-toggle{
+  background: #6e8cfb !important;
+  border-color: #9eb4ff !important;
+  box-shadow: 0 0 12px rgba(110,140,255,.6) !important;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px){
+  .nav{ flex-wrap: wrap; }
+  .nav-spacer{ display: none; }
+}

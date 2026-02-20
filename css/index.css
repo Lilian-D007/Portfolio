@@ -1,0 +1,116 @@
+/* css/index.css */
+
+/* Conteneur principal */
+.home-container {
+    width: min(92vw, 1000px);
+    margin: 60px auto 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* --- SECTION HERO --- */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    background: rgba(35, 39, 42, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero-photo {
+    width: 180px; height: 180px; border-radius: 50%;
+    border: 4px solid rgba(110, 140, 255, 0.8);
+    object-fit: cover; box-shadow: 0 0 20px rgba(110, 140, 255, 0.4);
+    transition: transform 0.3s ease;
+}
+.hero-photo:hover { transform: scale(1.05) rotate(2deg); }
+.hero-text { text-align: left; max-width: 500px; }
+.hero-text h1 {
+    font-size: 2.5rem; margin: 0 0 10px 0;
+    background: linear-gradient(90deg, #fff, #9eb4ff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+.hero-text h2 { font-size: 1.2rem; color: #ccc; margin: 0 0 20px 0; font-weight: 400; }
+.cta-button {
+    display: inline-block; padding: 10px 24px; background: #6e8cfb; color: white;
+    text-decoration: none; border-radius: 8px; font-weight: bold;
+    transition: all 0.2s; border: 2px solid transparent;
+}
+.cta-button:hover {
+    background: transparent; border-color: #6e8cfb; box-shadow: 0 0 15px rgba(110,140,255,0.6);
+}
+
+/* --- SECTION STACK (COMPÉTENCES) AVEC CONTOUR COULEUR --- */
+.stack-section {
+    text-align: center;
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+    
+    /* NOUVEAU DESIGN DEMANDÉ */
+    background: rgba(35, 39, 42, 0.6);
+    border: 2px solid #6e8cfb; /* Bordure bleue lumineuse */
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 0 15px rgba(110, 140, 255, 0.2); /* Glow externe */
+    backdrop-filter: blur(5px);
+}
+
+.stack-section h3 {
+    margin-bottom: 20px; color: #fff; font-size: 1.2rem;
+    text-transform: uppercase; letter-spacing: 2px;
+    text-shadow: 0 0 5px rgba(110,140,255,0.8);
+}
+
+.badges-container {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+}
+
+.badge {
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    cursor: default;
+    
+    /* NOUVEAU CONTOUR BULLES */
+    border: 1px solid #9eb4ff; /* Contour fin clair */
+    box-shadow: 0 0 5px rgba(110, 140, 255, 0.3);
+}
+.badge:hover {
+    background: rgba(110,140,255,0.3);
+    border-color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 0 12px rgba(110, 140, 255, 0.6);
+}
+
+/* --- GRID MENU --- */
+.grid-menu {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; animation: fadeInUp 1s ease-out 0.6s backwards;
+}
+.grid-card {
+    background: rgba(24, 25, 26, 0.85);
+    border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 16px;
+    padding: 24px; text-align: center; text-decoration: none; color: white;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.grid-card:hover {
+    transform: translateY(-5px); border-color: #6e8cfb;
+    box-shadow: 0 8px 25px rgba(110, 140, 255, 0.25);
+}
+.grid-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; color: #9eb4ff; }
+.grid-card p { margin: 0; font-size: 0.95rem; color: #ddd; }
+
+/* Responsive & Anim */
+@media (max-width: 768px) { .hero-section { flex-direction: column; text-align: center; } .hero-text { text-align: center; } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }

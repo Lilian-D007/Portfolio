@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacts – Lilian</title>
+  
+  <link rel="stylesheet" href="css/audio.css">
+  <script src="js/audio.js" defer></script>
+  <link rel="stylesheet" href="css/navigation.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    html, body { height: 100%; }
+    
+    body { 
+      margin: 0; 
+      color: #fff; 
+      font-family: "Pixelify Sans", sans-serif; 
+      /* On retire l'image de fond ici */
+      background: #0b0d0f; 
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000; 
+      overflow-x: hidden; 
+    }
+
+    /* Style pour la vidéo de fond */
+    .videoback { 
+      position: fixed; 
+      inset: 0; 
+      z-index: -1; 
+      overflow: hidden; 
+      pointer-events: none; 
+    }
+    .videoback video { 
+      position: absolute; 
+      inset: 0; 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+    }
+
+    /* Contenu principal */
+    main { 
+      width: min(92vw, 720px); 
+      margin: 100px auto; 
+      text-align: center; 
+    }
+
+    /* Carte Glassmorphism */
+    .card { 
+      background: rgba(35,39,42,.60); 
+      border: 2px solid rgba(255,255,255,.60); 
+      border-radius: 16px; 
+      padding: 24px; 
+      backdrop-filter: blur(8px); 
+      box-shadow: 0 6px 16px rgba(0,0,0,.45); 
+      box-sizing: border-box; 
+    }
+    .card h1 { margin: 0 0 10px; } 
+    .card p { margin: 10px 0; line-height: 1.6; } 
+    .card a { color: #9eb4ff; text-decoration: underline; }
+
+    /* Animation au survol (PC) */
+    @media (hover: hover) and (pointer: fine) { 
+      .card { 
+        transition: transform .2s ease, box-shadow .2s ease; 
+        transform-origin: center; 
+      } 
+      .card:hover { 
+        transform: scale(1.02); 
+        box-shadow: 0 10px 24px rgba(0,0,0,.55); 
+      } 
+    }
+    
+    /* Footer espace */
+    footer.espace { height: 30px; width: 100%; }
+  </style>
+</head>
+<body>
+
+  <header class="topnav">
+    <nav class="nav">
+      <a href="index.html" class="nav-home">Accueil</a>
+      <span class="nav-spacer"></span>
+      <div class="dd" id="dd-projets">
+        <a href="#" class="dd-toggle">Projets ▾</a>
+        <div class="dd-menu">
+          <a href="projet-annee-1.html">Projets Année 1</a>
+          <a href="projet-annee-2.html">Projets Année 2</a>
+        </div>
+      </div>
+      <div class="dd" id="dd-tps">
+        <a href="#" class="dd-toggle">TPs/TDs ▾</a>
+        <div class="dd-menu">
+          <a href="tps-annee-1.html">TPs année 1</a>
+          <a href="tps-annee-2.html">TPs année 2</a>
+          <a href="tds-annee-1.html">TDs année 1</a>
+          <a href="tds-annee-2.html">TDs année 2</a>
+        </div>
+      </div>
+      <a href="CV.html">CV</a>
+      <a href="Lettre-de-motivation.html">Lettre de motivation</a>
+      <div class="dd" id="dd-veilles">
+        <a href="#" class="dd-toggle">Veilles ▾</a>
+        <div class="dd-menu">
+          <a href="veille1.html">Veille 1</a>
+          <a href="veille2.html">Veille 2</a>
+        </div>
+      </div>
+      
+      <a href="contact.html" aria-current="page">Contacts</a>
+      
+    </nav>
+  </header>
+
+  <div class="videoback">
+    <video autoplay muted loop playsinline>
+      <source src="video/contact.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <main>
+    <div class="card">
+      <h1>Contacts</h1>
+      <p><em>Cordialement,</em></p>
+      <p>Dans l’attente de votre réponse, je vous prie d’agréer, Madame,<br/>Monsieur, l’expression de mes salutations distinguées.</p>
+      <p>Pour plus d’information ainsi que mon adresse mail : <a href="mailto:lilian.dussy@saint-remi.net">lilian.dussy@saint-remi.net</a></p>
+      <p><strong>Lilian DUSSY</strong> — <a href="tel:+33768727688">+33&nbsp;7&nbsp;68&nbsp;72&nbsp;76&nbsp;88</a></p>
+    </div>
+  </main>
+
+  <footer class="espace"></footer>
+</body>
+</html>
