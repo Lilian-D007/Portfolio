@@ -1,96 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil – Portfolio Lilian</title>
-  <link rel="stylesheet" href="css/audio.css">
-  <script src="js/audio.js" defer></script>
-  <link rel="stylesheet" href="css/navigation.css">
-  <link rel="stylesheet" href="css/index.css">
-  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body{ margin:0; color:#fff; background:#0b0d0f; font-family:"Pixelify Sans",sans-serif; overflow-x:hidden; text-shadow:-1px -1px 0 #000,1px -1px 0 #000; }
-    .videoback{ position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
-    .videoback video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-    footer.espace { height: 30px; width: 100%; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès Sécurisé - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background: #0b0d0f; /* Ton fond sombre habituel */
+            color: white; 
+            font-family: 'Pixelify Sans', sans-serif; 
+        }
+        .login-box { 
+            border: 4px solid rgba(255, 255, 255, 0.4); 
+            padding: 40px; 
+            background: rgba(35, 39, 42, 0.8); 
+            backdrop-filter: blur(10px);
+            text-align: center; 
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 320px;
+        }
+        h2 { font-size: 1.5rem; margin-bottom: 25px; letter-spacing: 2px; }
+        input { 
+            width: 80%;
+            padding: 12px; 
+            margin-bottom: 20px; 
+            border: 2px solid #555; 
+            background: #000; 
+            color: #fff; 
+            font-family: inherit;
+            text-align: center;
+            border-radius: 8px;
+        }
+        input:focus { outline: none; border-color: #7289da; }
+        button { 
+            background: #7289da; 
+            color: white; 
+            padding: 12px 30px; 
+            cursor: pointer; 
+            border: none; 
+            font-family: inherit; 
+            font-weight: bold;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        button:hover { transform: scale(1.05); background: #5b73c7; }
+        
+        #error-msg { 
+            color: #ff4d4d; 
+            margin-top: 20px; 
+            font-size: 0.9rem; 
+            display: none; /* Caché par défaut */
+        }
+    </style>
 </head>
 <body>
-  
-  <header class="topnav">
-    <nav class="nav">
-      <a href="index.html" class="nav-home" aria-current="page">Accueil</a>
-      <span class="nav-spacer"></span>
-      <div class="dd" id="dd-projets">
-        <a href="#" class="dd-toggle">Projets ▾</a>
-        <div class="dd-menu">
-          <a href="projet-annee-1.html">Projets Année 1</a>
-          <a href="projet-annee-2.html">Projets Année 2</a>
-        </div>
-      </div>
-      <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs/TDs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a><a href="tds-annee-1.html">TDs année 1</a><a href="tds-annee-2.html">TDs année 2</a></div></div>
-      <a href="CV.html">CV</a><a href="lettre-de-motivation.html">Lettre de motivation</a>
-      <div class="dd" id="dd-veilles"><a href="#" class="dd-toggle">Veilles ▾</a><div class="dd-menu"><a href="veille1.html">Veille 1</a><a href="veille2.html">Veille 2</a></div></div>
-      <a href="contact.html">Contacts</a>
-    </nav>
-  </header>
-
-  <div class="videoback">
-    <video autoplay muted loop playsinline>
-      <source src="video/acceuil.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <main class="home-container">
-    <section class="hero-section">
-      <img src="image/LilianDUSSY.jpg" alt="Lilian DUSSY" class="hero-photo">
-      <div class="hero-text">
-        <h1>Lilian DUSSY</h1>
-        <h2>Étudiant en BTS SIO – Option SISR/SLAM</h2>
-        <p style="line-height:1.6; color:#e0e0e0;">
-          Passionné par l'informatique, le développement web et la gestion de réseaux. 
-          Bienvenue sur mon portfolio où je partage mes projets, mes veilles technologiques et mon parcours.
-        </p>
+    <div class="login-box">
+        <h2>ACCÈS RÉSERVÉ</h2>
+        <input type="password" id="passwordField" placeholder="Entrez le code..." onkeypress="if(event.key === 'Enter') checkPassword()">
         <br>
-        <a href="projet-annee-1.html" class="cta-button">Voir mes projets →</a>
-      </div>
-    </section>
+        <button onclick="checkPassword()">VALIDER</button>
+        <div id="error-msg">Mauvais mot de passe</div>
+    </div>
 
-    <section class="stack-section">
-      <h3>Mes Compétences</h3>
-      <div class="badges-container">
-        <span class="badge" style="border-color: #E34F26; box-shadow: 0 0 8px #E34F26;">HTML5</span>
-        <span class="badge" style="border-color: #1572B6; box-shadow: 0 0 8px #1572B6;">CSS3</span>
-        <span class="badge" style="border-color: #F7DF1E; box-shadow: 0 0 8px #F7DF1E;">JavaScript</span>
-        <span class="badge" style="border-color: #3776AB; box-shadow: 0 0 8px #3776AB;">Python</span>
-        <span class="badge" style="border-color: #00FF99; box-shadow: 0 0 8px #00FF99;">Réseaux</span>
-        <span class="badge" style="border-color: #FCC624; box-shadow: 0 0 8px #FCC624;">Linux</span>
-        <span class="badge" style="border-color: #00A4EF; box-shadow: 0 0 8px #00A4EF;">Windows Server</span>
-        
-        <span class="badge" style="border-color: #0E85CD; box-shadow: 0 0 8px #0E85CD;">OpenOffice</span>
-        <span class="badge" style="border-color: #31A8FF; box-shadow: 0 0 8px #31A8FF;">Photoshop</span>
-        <span class="badge" style="border-color: #9999FF; box-shadow: 0 0 8px #9999FF;">Premiere Pro</span>
-        <span class="badge" style="border-color: #D090FF; box-shadow: 0 0 8px #D090FF;">After Effect</span>
-        <span class="badge" style="border-color: #EA7600; box-shadow: 0 0 8px #EA7600;">Blender</span>
-      </div>
-    </section>
+    <script>
+        async function checkPassword() {
+            const password = document.getElementById("passwordField").value;
+            const errorDiv = document.getElementById("error-msg");
+            
+            // Hachage du texte saisi en SHA-256
+            const msgUint8 = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-    <section class="grid-menu">
-      <a href="veille1.html" class="grid-card">
-        <h3>📡 Veilles Tech</h3>
-        <p>Découvrez mes recherches sur l'informatique quantique et les nouveaux langages.</p>
-      </a>
-      <a href="CV.html" class="grid-card">
-        <h3>📄 Mon CV</h3>
-        <p>Consultez mon parcours académique et téléchargez mon CV au format PDF.</p>
-      </a>
-      <a href="contact.html" class="grid-card">
-        <h3>✉️ Me Contacter</h3>
-        <p>Une proposition de stage ou une question ? C'est par ici.</p>
-      </a>
-    </section>
-  </main>
-  <footer class="espace"></footer>
+            // Empreinte correspondant exactement à "lili7769"
+            const correctHash = "c7d7455110d79d97a6f29e1f5928d32b508f7f90e668c12a7a49339e80242220";
+
+            if (hashHex === correctHash) {
+                // Direction la page d'accueil (pense à bien renommer ton ancienne page)
+                window.location.href = "accueil.html";
+            } else {
+                // Affichage du message d'erreur en rouge
+                errorDiv.style.display = "block";
+                document.getElementById("passwordField").value = ""; // Vide le champ
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil – Portfolio Lilian</title>
+  <link rel="stylesheet" href="css/audio.css">
+  <script src="js/audio.js" defer></script>
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body{ margin:0; color:#fff; background:#0b0d0f; font-family:"Pixelify Sans",sans-serif; overflow-x:hidden; text-shadow:-1px -1px 0 #000,1px -1px 0 #000; }
+    .videoback{ position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+    .videoback video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    footer.espace { height: 30px; width: 100%; }
+  </style>
+</head>
+<body>
+  
+  <header class="topnav">
+    <nav class="nav">
+      <a href="home.html" class="nav-home" aria-current="page">Accueil</a>
+      <span class="nav-spacer"></span>
+      <div class="dd" id="dd-projets">
+        <a href="#" class="dd-toggle">Projets ▾</a>
+        <div class="dd-menu">
+          <a href="projet-annee-1.html">Projets Année 1</a>
+          <a href="projet-annee-2.html">Projets Année 2</a>
+        </div>
+      </div>
+      <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs/TDs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a><a href="tds-annee-1.html">TDs année 1</a><a href="tds-annee-2.html">TDs année 2</a></div></div>
+      <a href="CV.html">CV</a><a href="lettre-de-motivation.html">Lettre de motivation</a>
+      <div class="dd" id="dd-veilles"><a href="#" class="dd-toggle">Veilles ▾</a><div class="dd-menu"><a href="veille1.html">Veille 1</a><a href="veille2.html">Veille 2</a></div></div>
+      <a href="contact.html">Contacts</a>
+    </nav>
+  </header>
+
+  <div class="videoback">
+    <video autoplay muted loop playsinline>
+      <source src="video/acceuil.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <main class="home-container">
+    <section class="hero-section">
+      <img src="image/LilianDUSSY.jpg" alt="Lilian DUSSY" class="hero-photo">
+      <div class="hero-text">
+        <h1>Lilian DUSSY</h1>
+        <h2>Étudiant en BTS SIO – Option SISR/SLAM</h2>
+        <p style="line-height:1.6; color:#e0e0e0;">
+          Passionné par l'informatique, le développement web et la gestion de réseaux. 
+          Bienvenue sur mon portfolio où je partage mes projets, mes veilles technologiques et mon parcours.
+        </p>
+        <br>
+        <a href="projet-annee-1.html" class="cta-button">Voir mes projets →</a>
+      </div>
+    </section>
+
+    <section class="stack-section">
+      <h3>Mes Compétences</h3>
+      <div class="badges-container">
+        <span class="badge" style="border-color: #E34F26; box-shadow: 0 0 8px #E34F26;">HTML5</span>
+        <span class="badge" style="border-color: #1572B6; box-shadow: 0 0 8px #1572B6;">CSS3</span>
+        <span class="badge" style="border-color: #F7DF1E; box-shadow: 0 0 8px #F7DF1E;">JavaScript</span>
+        <span class="badge" style="border-color: #3776AB; box-shadow: 0 0 8px #3776AB;">Python</span>
+        <span class="badge" style="border-color: #00FF99; box-shadow: 0 0 8px #00FF99;">Réseaux</span>
+        <span class="badge" style="border-color: #FCC624; box-shadow: 0 0 8px #FCC624;">Linux</span>
+        <span class="badge" style="border-color: #00A4EF; box-shadow: 0 0 8px #00A4EF;">Windows Server</span>
+        
+        <span class="badge" style="border-color: #0E85CD; box-shadow: 0 0 8px #0E85CD;">OpenOffice</span>
+        <span class="badge" style="border-color: #31A8FF; box-shadow: 0 0 8px #31A8FF;">Photoshop</span>
+        <span class="badge" style="border-color: #9999FF; box-shadow: 0 0 8px #9999FF;">Premiere Pro</span>
+        <span class="badge" style="border-color: #D090FF; box-shadow: 0 0 8px #D090FF;">After Effect</span>
+        <span class="badge" style="border-color: #EA7600; box-shadow: 0 0 8px #EA7600;">Blender</span>
+      </div>
+    </section>
+
+    <section class="grid-menu">
+      <a href="veille1.html" class="grid-card">
+        <h3>📡 Veilles Tech</h3>
+        <p>Découvrez mes recherches sur l'informatique quantique et les nouveaux langages.</p>
+      </a>
+      <a href="CV.html" class="grid-card">
+        <h3>📄 Mon CV</h3>
+        <p>Consultez mon parcours académique et téléchargez mon CV au format PDF.</p>
+      </a>
+      <a href="contact.html" class="grid-card">
+        <h3>✉️ Me Contacter</h3>
+        <p>Une proposition de stage ou une question ? C'est par ici.</p>
+      </a>
+    </section>
+  </main>
+  <footer class="espace"></footer>
+</body>
+</html>
