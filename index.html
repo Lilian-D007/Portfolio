@@ -2,94 +2,47 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accès Sécurisé - Portfolio</title>
+    <title>Accès Sécurisé</title>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            background: #0b0d0f; /* Ton fond sombre habituel */
-            color: white; 
-            font-family: 'Pixelify Sans', sans-serif; 
-        }
-        .login-box { 
-            border: 4px solid rgba(255, 255, 255, 0.4); 
-            padding: 40px; 
-            background: rgba(35, 39, 42, 0.8); 
-            backdrop-filter: blur(10px);
-            text-align: center; 
-            border-radius: 16px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            width: 320px;
-        }
-        h2 { font-size: 1.5rem; margin-bottom: 25px; letter-spacing: 2px; }
-        input { 
-            width: 80%;
-            padding: 12px; 
-            margin-bottom: 20px; 
-            border: 2px solid #555; 
-            background: #000; 
-            color: #fff; 
-            font-family: inherit;
-            text-align: center;
-            border-radius: 8px;
-        }
-        input:focus { outline: none; border-color: #7289da; }
-        button { 
-            background: #7289da; 
-            color: white; 
-            padding: 12px 30px; 
-            cursor: pointer; 
-            border: none; 
-            font-family: inherit; 
-            font-weight: bold;
-            border-radius: 8px;
-            transition: 0.2s;
-        }
-        button:hover { transform: scale(1.05); background: #5b73c7; }
-        
-        #error-msg { 
-            color: #ff4d4d; 
-            margin-top: 20px; 
-            font-size: 0.9rem; 
-            display: none; /* Caché par défaut */
-        }
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #0b0d0f; color: white; font-family: 'Pixelify Sans', sans-serif; }
+        .login-box { border: 4px solid rgba(255,255,255,0.4); padding: 40px; background: rgba(35,39,42,0.8); backdrop-filter: blur(10px); text-align: center; border-radius: 16px; width: 320px; }
+        input { width: 85%; padding: 12px; margin-bottom: 20px; border: 2px solid #555; background: #000; color: #fff; font-family: inherit; text-align: center; border-radius: 8px; }
+        button { background: #7289da; color: white; padding: 12px 30px; cursor: pointer; border: none; font-family: inherit; font-weight: bold; border-radius: 8px; transition: 0.2s; }
+        button:hover { background: #5b73c7; }
+        #error-msg { color: #ff4d4d; margin-top: 20px; font-weight: bold; display: none; }
     </style>
 </head>
 <body>
     <div class="login-box">
         <h2>ACCÈS RÉSERVÉ</h2>
-        <input type="password" id="passwordField" placeholder="Entrez le code..." onkeypress="if(event.key === 'Enter') checkPassword()">
+        <input type="password" id="pass" placeholder="Mot de passe..." onkeypress="if(event.key === 'Enter') verifier()">
         <br>
-        <button onclick="checkPassword()">VALIDER</button>
+        <button onclick="verifier()">VALIDER</button>
         <div id="error-msg">Mauvais mot de passe</div>
     </div>
 
     <script>
-        async function checkPassword() {
-            const password = document.getElementById("passwordField").value;
-            const errorDiv = document.getElementById("error-msg");
+        async function verifier() {
+            const mdp = document.getElementById("pass").value;
+            const erreur = document.getElementById("error-msg");
             
-            // Hachage du texte saisi en SHA-256
-            const msgUint8 = new TextEncoder().encode(password);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+            // On transforme le mot de passe en empreinte SHA-256
+            const encoder = new TextEncoder();
+            const data = encoder.encode(mdp);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-            // Empreinte correspondant exactement à "lili7769"
-            const correctHash = "c7d7455110d79d97a6f29e1f5928d32b508f7f90e668c12a7a49339e80242220";
+           
+            const hashValide = "789d3b5707409f1a01653126e1c1bda1ca0f0195ce2daedf8cbe93f1f5ab5b90";
 
-            if (hashHex === correctHash) {
-                // Direction la page d'accueil (pense à bien renommer ton ancienne page)
-                window.location.href = "accueil.html";
+            if (hashHex === hashValide) {
+                // Redirection vers ta page d'accueil (renommée en accueil.html)
+                window.location.href = "home.html";
             } else {
-                // Affichage du message d'erreur en rouge
-                errorDiv.style.display = "block";
-                document.getElementById("passwordField").value = ""; // Vide le champ
+                erreur.style.display = "block";
+                document.getElementById("pass").value = "";
             }
         }
     </script>
