@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // 1. DÉTECTION DE LA PAGE ET DU MP3
     const path = window.location.pathname;
-    const pageName = path.split("/").pop() || "index.html"; 
+    const pageName = path.split("/").pop() || "home.html"; 
 
     const playlist = {
-        "index.html":              "musique/index.mp3",
+        "home.html":              "musique/home.mp3",
         "CV.html":                 "musique/CV.mp3",
-        "Lettre-de-motivation.html": "musique/lettre-de-motivation.mp3",
+        "lettre-de-motivation.html": "musique/lettre-de-motivation.mp3",
         "contact.html":            "musique/contact.mp3",
         "projet-annee-1.html":     "musique/projet-annee-1.mp3",
         "projet-annee-2.html":     "musique/projet-annee-2.mp3",
