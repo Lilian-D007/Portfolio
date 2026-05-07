@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# Couleurs pour l'affichage
+VERT='\033[0;32m'
+ROUGE='\033[0;31m'
+NC='\033[0m' # Pas de couleur
+
+echo "=========================================="
+echo "   VÉRIFICATION DES INSTALLATIONS (TP)    "
+echo "=========================================="
+
+# Fonction pour vérifier si un paquet est installé
+verifier_paquet() {
+    if dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -q "ok installed"; then
+        echo -e "[${VERT}OK${NC}] Paquet : $1"
+    else
+        echo -e "[${ROUGE}MANQUANT${NC}] Paquet : $1"
+    fi
+}
+
+# Fonction pour vérifier si un service est actif
+verifier_service() {
+    if systemctl is-active --quiet "$1"; then
+        echo -e "[${VERT}OK${NC}] Service : $1 (Actif)"
+    else
+        echo -e "[${ROUGE}INACTIF${NC}] Service : $1"
+    fi
+}
+
+# Fonction pour vérifier un module Apache
+verifier_module_apache() {
+    if ls /etc/apache2/mods-enabled/ | grep -q "$1"; then
+        echo -e "[${VERT}OK${NC}] Module Apache : $1"
+    else
+        echo -e "[${ROUGE}DÉSACTIVÉ${NC}] Module Apache : $1"
+    fi
+}
+
+echo -e "\n--- 1. Utilisateurs et Groupes (Étape 5) ---"
+# Vérification du groupe invite
+if getent group invite > /dev/null; then
+    echo -e "[${VERT}OK${NC}] Le groupe 'invite' existe."
+else
+    echo -e "[${ROUGE}MANQUANT${NC}] Le groupe 'invite' n'existe pas."
+fi
+
+# Vérification de user1 et user2
+for user in user1 user2; do
+    if id "$user" >/dev/null 2>&1; then
+        echo -e "[${VERT}OK${NC}] L'utilisateur '$user' existe."
+    else
+        echo -e "[${ROUGE}MANQUANT${NC}] L'utilisateur '$user' n'existe pas."
+    fi
+done
+
+# Vérification de user2 dans le groupe adm
+if id -nG user2 2>/dev/null | grep -qw "adm"; then
+    echo -e "[${VERT}OK${NC}] user2 appartient bien au groupe 'adm'."
+else
+    echo -e "[${ROUGE}ERREUR${NC}] user2 n'est pas dans le groupe 'adm'."
+fi
+
+echo -e "\n--- 2. Outils Essentiels (Étape 3 & 6) ---"
+paquets_outils=("vim-gui-common" "gnome-tweaks" "vlc" "nmap" "wireshark" "fail2ban" "suricata")
+for pkt in "${paquets_outils[@]}"; do
+    verifier_paquet "$pkt"
+done
+
+echo -e "\n--- 3. Serveur Web, PHP et Base de données (Étape 7.1 & 8.2) ---"
+paquets_serveur=("openssh-server" "apache2" "php" "mariadb-server" "phpmyadmin")
+for pkt in "${paquets_serveur[@]}"; do
+    verifier_paquet "$pkt"
+done
+
+echo -e "\n--- 4. État des Services ---"
+services=("ssh" "apache2" "mariadb" "fail2ban")
+for srv in "${services[@]}"; do
+    verifier_service "$srv"
+done
+
+echo -e "\n--- 5. Modules Apache ---"
+verifier_module_apache "userdir"
+verifier_module_apache "ssl"
+
+echo "=========================================="
+echo "          FIN DE LA VÉRIFICATION          "
+echo "=========================================="

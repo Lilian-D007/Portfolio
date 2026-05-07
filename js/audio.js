@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
         "projet-annee-2.html":     "musique/projet-annee-2.mp3",
         "tps-annee-1.html":        "musique/TP-annee-1.mp3",
         "tps-annee-2.html":        "musique/TP-annee-2.mp3",
-        "tds-annee-1.html":        "musique/TD-annee-1.mp3",
-        "tds-annee-2.html":        "musique/TD-annee-2.mp3",
         "veille1.html":            "musique/veille1.mp3",
         "veille2.html":            "musique/veille2.mp3"
     };

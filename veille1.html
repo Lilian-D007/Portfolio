@@ -21,7 +21,7 @@
     <a href="home.html" class="nav-home">Accueil</a>
     <span class="nav-spacer"></span>
     <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
-    <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs/TDs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a><a href="tds-annee-1.html">TDs année 1</a><a href="tds-annee-2.html">TDs année 2</a></div></div>
+    <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a></div></div>
     <a href="CV.html">CV</a><a href="lettre-de-motivation.html">Lettre de motivation</a>
     
     <div class="dd active" id="dd-veilles">
@@ -42,11 +42,29 @@
   </header>
   <div class="veille-grid">
     <article class="v-card"><h2>1. Le concept : Bit vs Qubit</h2><p>L'informatique classique repose sur le <strong>bit</strong> (0 ou 1). L'informatique quantique utilise le <strong>Qubit</strong>. Grâce au principe de <em>superposition</em>, un qubit peut être à la fois 0 et 1. Cela permet de réaliser des calculs parallèles massifs impossibles pour nos supercalculateurs actuels.</p></article>
-    <article class="v-card"><h2>2. Les dangers pour la Cybersécurité</h2><p>C'est l'enjeu majeur pour nous, informaticiens. La puissance de calcul quantique pourrait théoriquement casser le chiffrement <strong>RSA</strong> (utilisé pour sécuriser le web, les banques) en quelques minutes.<br><br>La réponse ? La <strong>cryptographie post-quantique</strong>, déjà en développement par le NIST.</p></article>
-    <article class="v-card"><h2>3. Acteurs & Avancées</h2><ul class="v-list"><li><strong>IBM Eagle :</strong> Processeur dépassant les 100 qubits.</li><li><strong>Google Sycamore :</strong> A atteint la "suprématie quantique" sur un calcul spécifique.</li><li><strong>Pasqal (France) :</strong> Start-up française leader sur les atomes neutres.</li></ul></article>
+    <article class="v-card"><h2>2. Dangers pour la Cybersécurité</h2><p>C'est l'enjeu majeur pour nous, informaticiens. La puissance de calcul quantique pourrait théoriquement casser le chiffrement <strong>RSA</strong> en quelques minutes. La réponse ? La <strong>cryptographie post-quantique</strong>, standardisée par le NIST en 2024 (FIPS 203, 204, 205).</p></article>
+    <article class="v-card"><h2>3. Acteurs & Avancées</h2><ul class="v-list"><li><strong>IBM Eagle/Condor :</strong> Processeurs dépassant les 1000 qubits.</li><li><strong>Google Sycamore :</strong> A atteint la "suprématie quantique" sur un calcul spécifique.</li><li><strong>Pasqal (France) :</strong> Start-up leader sur les atomes neutres.</li></ul></article>
+    <article class="v-card"><h2>4. "Harvest Now, Decrypt Later"</h2><p>Une menace bien réelle en 2026 : les attaquants <strong>interceptent et stockent aujourd'hui</strong> des données chiffrées sensibles. Leur pari ? Attendre qu'un ordinateur quantique assez puissant soit disponible dans 10 ans pour déchiffrer ces informations archivées.</p></article>
   </div>
-  <div class="conclusion-box"><h3>🔍 Mon avis</h3><p>Bien que l'ordinateur quantique grand public ne soit pas pour demain (problèmes de refroidissement proche du zéro absolu), son impact sur le décryptage et l'IA sera disruptif d'ici 10 à 15 ans. Il est crucial de suivre l'évolution des algorithmes résistants au quantique.</p></div>
+  <div class="conclusion-box">
+    <h3>🔍 Mon avis</h3>
+    <p>Bien que l'ordinateur quantique grand public ne soit pas pour demain (problèmes de refroidissement proche du zéro absolu), son impact sur le décryptage et l'IA sera disruptif d'ici 10 à 15 ans. Il est crucial pour les administrateurs systèmes de suivre l'évolution de la crypto-agilité et des nouveaux algorithmes résistants au quantique.</p>
+    <hr style="border-color: rgba(255,255,255,0.2); margin: 15px 0;">
+    <h4>🔗 Sources et Bibliographie</h4>
+    <ul class="v-list" style="font-size: 0.9em; column-count: 2; column-gap: 20px;">
+      <li><a href="https://www.nist.gov/pqcrypto" target="_blank" style="color: #ffd54f; text-decoration: underline;">NIST.gov : Algorithmes PQC</a></li>
+      <li><a href="https://www.ibm.com/quantum" target="_blank" style="color: #ffd54f; text-decoration: underline;">IBM Quantum : Roadmap</a></li>
+      <li><a href="https://cyber.gouv.fr/publications/transition-vers-la-cryptographie-post-quantique" target="_blank" style="color: #ffd54f; text-decoration: underline;">ANSSI : Transition quantique</a></li>
+      <li><a href="https://www.youtube.com/watch?v=lvTqbM5Dq4Q" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (MinutePhysics)</a></li>
+      <li><a href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (Computerphile)</a></li>
+      <li><a href="https://www.reddit.com/r/cybersecurity/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Reddit : r/cybersecurity</a></li>
+      <li><a href="https://www.reddit.com/r/QuantumComputing/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Reddit : r/QuantumComputing</a></li>
+      <li><a href="https://www.lemondeinformatique.fr/actualites/lire-pasqal-veut-devenir-le-leader-europeen-du-quantique-91234.html" target="_blank" style="color: #ffd54f; text-decoration: underline;">Le Monde Informatique : Pasqal</a></li>
+      <li><a href="https://www.youtube.com/watch?v=6B14798o6oQ" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (TEDx) : Q-Threat</a></li>
+      <li><a href="https://www.thalesgroup.com/fr/marches/securite-numerique/technologie/cryptographie-post-quantique" target="_blank" style="color: #ffd54f; text-decoration: underline;">Thales : Solutions hybrides</a></li>
+    </ul>
+  </div>
 </main>
-<footer class="espace"></footer>
+<footer class="espace" style="height: auto; padding: 20px 0;"><p style="font-size: 0.8em; text-align: center; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
 </body>
 </html>

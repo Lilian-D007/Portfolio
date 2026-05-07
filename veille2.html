@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veille 2 : L'essor de Rust – Lilian</title>
+  <title>Veille 2 : NVIDIA DLSS – Lilian</title>
   <link rel="stylesheet" href="css/audio.css">
   <script src="js/audio.js" defer></script>
   <link rel="stylesheet" href="css/navigation.css">
@@ -21,7 +21,7 @@
     <a href="home.html" class="nav-home">Accueil</a>
     <span class="nav-spacer"></span>
     <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
-    <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs/TDs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a><a href="tds-annee-1.html">TDs année 1</a><a href="tds-annee-2.html">TDs année 2</a></div></div>
+    <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a></div></div>
     <a href="CV.html">CV</a><a href="lettre-de-motivation.html">Lettre de motivation</a>
     
     <div class="dd active" id="dd-veilles">
@@ -38,15 +38,34 @@
 <div class="videoback"><video autoplay muted loop playsinline><source src="video/veille2.mp4" type="video/mp4"></video></div>
 <main class="veille-container">
   <header class="veille-header">
-    <span class="tag" style="background:#e05a2b;">Développement Système</span><h1>Rust : Le successeur du C++ ?</h1><p>Pourquoi ce langage réinvente la sécurité logicielle et la performance.</p>
+    <span class="tag" style="background:#76b900;">Hardware & IA</span><h1>NVIDIA DLSS 4.5 & Multi Frame Generation</h1><p>Comment l'IA de NVIDIA révolutionne la fluidité des jeux en 2026.</p>
   </header>
   <div class="veille-grid">
-    <article class="v-card"><h2>1. Pourquoi Rust explose ?</h2><p>Créé par Mozilla, <strong>Rust</strong> résout le problème n°1 du C et C++ : la gestion de la mémoire. Grâce à son système de "propriété" (<em>ownership</em>) et d'emprunt (<em>borrowing</em>), il empêche mathématiquement les bugs de mémoire (buffer overflows) <strong>à la compilation</strong>, sans avoir besoin de "Garbage Collector" qui ralentit l'exécution.</p></article>
-    <article class="v-card"><h2>2. Une adoption historique</h2><p>C'est une révolution industrielle :</p><ul class="v-list"><li><strong>Linux :</strong> Rust est le deuxième langage accepté dans le noyau Linux (après le C en 30 ans).</li><li><strong>Microsoft :</strong> Réécrit des parties de Windows en Rust pour la sécurité.</li><li><strong>Android :</strong> Utilise Rust pour ses nouvelles couches bas niveau.</li></ul></article>
-    <article class="v-card"><h2>3. Performance & WebAssembly</h2><p>Rust est aussi rapide que le C++. Il est aussi le langage de prédilection pour le <strong>WebAssembly (Wasm)</strong>, qui permet de faire tourner des applications lourdes (montage vidéo, 3D, Photoshop) directement dans le navigateur web à des vitesses quasi-natives.</p></article>
+    <article class="v-card"><h2>1. Le Multi Frame Generation (MFG)</h2><p>Le DLSS 4.5 (exclusif aux cartes RTX 50-series "Blackwell") introduit le <strong>Multi Frame Generation</strong>. Contrairement au DLSS 3 qui intercalait une seule image, le MFG peut générer jusqu'à <strong>5 images intermédiaires</strong> gérées par l'IA pour chaque image rendue par le GPU, offrant un multiplicateur de performances allant jusqu'à 6x.</p></article>
+    <article class="v-card"><h2>2. Dynamic MFG : La boîte automatique</h2><p>La nouveauté majeure de 2026 est le <strong>Dynamic Multi Frame Generation</strong>. Cette technologie agit comme une transmission automatique : l'IA ajuste en temps réel le multiplicateur d'images (de 1x à 6x) en fonction des besoins du jeu et du taux de rafraîchissement de l'écran, garantissant une latence minimale et une stabilité parfaite.</p></article>
+    <article class="v-card"><h2>3. Architecture Transformer</h2><p>Le DLSS 4 repose sur de nouveaux modèles d'IA basés sur les <strong>Transformers</strong>. Ces réseaux neuronaux offrent une meilleure compréhension du contexte spatial et temporel, ce qui réduit drastiquement les artefacts visuels (ghosting) et améliore considérablement la netteté des images générées, même lors de mouvements rapides.</p></article>
+    <article class="v-card"><h2>4. Latence et Écosystème (Reflex)</h2><p>Générer 5 fausses frames ajoute intrinsèquement de la latence entre l'action du joueur et l'affichage. C'est pourquoi le DLSS 4 oblige l'intégration de <strong>NVIDIA Reflex</strong> au niveau du moteur de jeu. Reflex court-circuite la file d'attente de rendu du processeur, permettant au jeu de réagir instantanément malgré l'interpolation massive.</p></article>
   </div>
-  <div class="conclusion-box"><h3>🔍 Mon avis</h3><p>Pour un développeur ou un admin système, ignorer Rust aujourd'hui est risqué. Il combine la performance du bas niveau avec la sécurité des langages modernes. C'est un excellent sujet de veille car il redéfinit les standards de l'industrie pour les 20 prochaines années.</p></div>
+  
+  <div class="conclusion-box">
+    <h3>🔍 Mon avis</h3>
+    <p>L'évolution du DLSS montre que l'avenir du hardware gaming ne dépend plus seulement de la puissance brute (rasterisation), mais de l'optimisation algorithmique et de l'IA. Pour les techniciens et gamers, comprendre ces technologies d'interpolation devient crucial pour optimiser les configurations de demain.</p>
+    <hr style="border-color: rgba(255,255,255,0.2); margin: 15px 0;">
+    <h4>🔗 Sources et Bibliographie</h4>
+    <ul class="v-list" style="font-size: 0.9em; column-count: 2; column-gap: 20px;">
+      <li><a href="https://www.nvidia.com/fr-fr/geforce/news/" target="_blank" style="color: #ffd54f; text-decoration: underline;">NVIDIA Newsroom : DLSS 4.5</a></li>
+      <li><a href="https://www.tomshardware.com/pc-components/gpus" target="_blank" style="color: #ffd54f; text-decoration: underline;">Tom's Hardware : Architecture Blackwell</a></li>
+      <li><a href="https://www.techpowerup.com" target="_blank" style="color: #ffd54f; text-decoration: underline;">TechPowerUp : Analyse du Dynamic MFG</a></li>
+      <li><a href="https://www.youtube.com/user/DigitalFoundry" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (Digital Foundry) : DLSS 4 Frame Pacing</a></li>
+      <li><a href="https://www.youtube.com/c/Hardwareunboxednow" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (Hardware Unboxed) : DLSS vs FSR</a></li>
+      <li><a href="https://www.youtube.com/nvidia" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (NVIDIA) : Conférence CES</a></li>
+      <li><a href="https://www.reddit.com/r/nvidia/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Reddit : r/nvidia (Retours utilisateurs)</a></li>
+      <li><a href="https://www.reddit.com/r/hardware/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Reddit : r/hardware (Débat technique)</a></li>
+      <li><a href="https://www.lesnumeriques.com/carte-graphique/nvidia-geforce-rtx-50-c-dlss-4-a-quoi-s-attendre-n228646.html" target="_blank" style="color: #ffd54f; text-decoration: underline;">Les Numériques : Test DLSS 4</a></li>
+      <li><a href="https://www.unrealengine.com/en-US/blog" target="_blank" style="color: #ffd54f; text-decoration: underline;">Unreal Engine : Plugin DLSS 4.5</a></li>
+    </ul>
+  </div>
 </main>
-<footer class="espace"></footer>
+<footer class="espace" style="height: auto; padding: 20px 0;"><p style="font-size: 0.8em; text-align: center; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
 </body>
 </html>

@@ -24,12 +24,12 @@
       <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
       
       <div class="dd active" id="dd-tps">
-        <a href="#" class="dd-toggle">TPs/TDs ▾</a>
+        <a href="#" class="dd-toggle">TPs ▾</a>
         <div class="dd-menu">
           <a href="tps-annee-1.html" aria-current="page">TPs année 1</a>
           <a href="tps-annee-2.html">TPs année 2</a>
-          <a href="tds-annee-1.html">TDs année 1</a>
-          <a href="tds-annee-2.html">TDs année 2</a>
+          
+          
         </div>
       </div>
 
@@ -44,26 +44,280 @@
   <main class="tps-container">
     <header class="page-header">
       <h1>Travaux Pratiques – Année 1</h1>
-      <p>Retrouvez ici l'ensemble des travaux réalisés durant ma première année de BTS SIO.</p>
+      <p>Retrouvez ici l'ensemble des travaux réalisés durant ma première année de BTS SIO. Choisissez une catégorie ci-dessous pour voir les TPs correspondants :</p>
     </header>
-    <div class="tp-grid">
-      <a href="TP_faits/TP_Montage_PC.pdf" target="_blank" class="tp-card">
-        <div class="tp-icon">🖥️</div><h2>Montage PC</h2><p>Découverte des composants hardware, assemblage complet d'une unité centrale et premier démarrage (POST).</p><div class="tp-action">📄 Voir le PDF</div>
-      </a>
-      <a href="TP_faits/TP_diagnostic_reseau.pdf" target="_blank" class="tp-card">
-        <div class="tp-icon">🌐</div><h2>Diagnostic Réseau</h2><p>Analyse de pannes réseaux, utilisation des commandes Ping/Traceroute et vérification de la connectivité.</p><div class="tp-action">📄 Voir le PDF</div>
-      </a>
-      <a href="TP_faits/TP_CMD.pdf" target="_blank" class="tp-card">
-        <div class="tp-icon">⌨️</div><h2>Invite de Commande</h2><p>Prise en main de l'environnement Windows CMD : navigation, gestion de fichiers et administration système de base.</p><div class="tp-action">📄 Voir le PDF</div>
-      </a>
-      <a href="TP_faits/TP_SQL_SELECT_UPDATE_INSERT_DELETE.pdf" target="_blank" class="tp-card">
-        <div class="tp-icon">🗃️</div><h2>Bases de Données SQL</h2><p>Manipulation de données : requêtes de sélection, mise à jour, insertion et suppression (CRUD) sur une base relationnelle.</p><div class="tp-action">📄 Voir le PDF</div>
-      </a>
-      <a href="TP_faits/TP_Bases_CMD_Powershell.pdf" target="_blank" class="tp-card">
-        <div class="tp-icon">⚙️</div><h2>Intro PowerShell</h2><p>Initiation au scripting et à l'automatisation des tâches administratives via PowerShell.</p><div class="tp-action">📄 Voir le PDF</div>
-      </a>
+
+    <!-- Liste des thèmes (Visible par défaut) -->
+    <div id="themes-grid" style="margin-top: 40px;">
+      
+      <header class="page-header category-header-openable" onclick="openTheme('cat-1')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🖥️ Fondamentaux & Matériel</h2>
+        <p>Bases du support informatique, montage de PC et diagnostic matériel/réseau.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-2')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">⌨️ Scripting & Ligne de Commande</h2>
+        <p>Automatisation des tâches d'administration sous Windows (CMD et PowerShell).</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-3')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🏢 Infrastructure Réseau</h2>
+        <p>Conception, configuration et simulation de topologies réseaux avec Cisco Packet Tracer.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-4')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🧮 Adressage IP et Sous-réseaux</h2>
+        <p>Théorie, calculs et exercices pratiques sur l'adressage IPv4 et le VLSM.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-5')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🗃️ Bases de Données (SQL)</h2>
+        <p>Conception, requêtage et manipulation de données.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-6')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🐧 Virtualisation et Serveurs</h2>
+        <p>Déploiement de machines virtuelles, gestion système et services réseaux.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-7')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">📅 Gestion de Projet</h2>
+        <p>Planification, ordonnancement et utilisation d'outils de gestion de projets.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
     </div>
+
+    <!-- Conteneur pour les catégories (Cachées par défaut) -->
+    <div id="categories-content">
+      
+      <!-- Catégorie 1 : Bases & Hardware -->
+      <div id="cat-1" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-1')">
+          <h2>Fondamentaux & Matériel</h2>
+          <p>Bases du support informatique, montage de PC et diagnostic matériel/réseau.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/TP_Montage_PC.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🖥️</div><h2>Montage PC</h2><p>Découverte des composants hardware, assemblage complet d'une unité centrale.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/TP_diagnostic_reseau.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🌐</div><h2>Diagnostic Réseau</h2><p>Analyse de pannes réseaux et vérification de la connectivité locale.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bordel/TP_5.2_A_–_Diagnostic_d’un_problème_de_connexion_réseau.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📡</div><h2>Problème Connexion</h2><p>Diagnostic approfondi d'un problème de connexion réseau.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 2 : Administration Système et Scripting -->
+      <div id="cat-2" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-2')">
+          <h2>Scripting & Ligne de Commande</h2>
+          <p>Automatisation des tâches d'administration sous Windows (CMD et PowerShell).</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/TP_CMD.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">⌨️</div><h2>Bases CMD</h2><p>Navigation, gestion de fichiers et administration système de base sous CMD.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bordel/TP_6.1_a__Commandes_CMD_Essentielles_du_Support_Informatique.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🛠️</div><h2>CMD Support Info</h2><p>Les commandes CMD essentielles pour le technicien support.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/TP_Bases_CMD_Powershell.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">⚙️</div><h2>Intro PowerShell</h2><p>Initiation au scripting et à l'automatisation des tâches administratives.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bash/TP01_PS_cmdlets.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🔧</div><h2>PS : Cmdlets</h2><p>Initiation à PowerShell et découverte des Cmdlets de base.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bash/TP02_PS_script.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📜</div><h2>PS : Scripts</h2><p>Création et exécution de premiers scripts PowerShell.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bash/TP03_Exos_script.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📝</div><h2>PS : Exercices</h2><p>Série d'exercices pratiques de scripting système.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bash/TP04_Fonctions_PS.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🧩</div><h2>PS : Fonctions</h2><p>Modulariser le code PowerShell à l'aide de fonctions.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bash/TP04b_Expression_régulière.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🔍</div><h2>PS : Regex</h2><p>Manipulation et validation de données avec les expressions régulières.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bash/TP05_Gestion_erreurs_PS.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🚨</div><h2>PS : Erreurs</h2><p>Gestion avancée des erreurs dans les scripts PowerShell.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 3 : Infrastructure Réseau (Packet Tracer) -->
+      <div id="cat-3" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-3')">
+          <h2>Infrastructure Réseau (Packet Tracer)</h2>
+          <p>Conception, configuration et simulation de topologies réseaux avec Cisco Packet Tracer.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/packet-tracer/LAB_03__Etape_1___Mise_en_place_d’une_infrastructure_de_services_réseau.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🏢</div><h2>Infra Services</h2><p>Mise en place d'une infrastructure de services réseau complets.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/packet-tracer/LAB_03__Etape_2__Separation_reseaux_.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🔗</div><h2>Séparation Réseaux</h2><p>Mise en place de VLANs et séparation logique des réseaux locaux.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/packet-tracer/Correction_et_suite_TP3_PacketTracer.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">✅</div><h2>Correction Infra</h2><p>Correction et améliorations de l'infrastructure de services (TP3).</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/packet-tracer/Lab_02_IoT_Avancé_Partie_1.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">💡</div><h2>IoT Avancé</h2><p>Simulation de capteurs et objets connectés intelligents (IoT) dans Packet Tracer.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 4 : Adressage IP et Sous-réseaux -->
+      <div id="cat-4" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-4')">
+          <h2>Adressage IP et Sous-réseaux</h2>
+          <p>Théorie, calculs et exercices pratiques sur l'adressage IPv4 et le VLSM.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/adresses-ip/Adresses_IPv4_et_Notion_de_Classes.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📖</div><h2>Classes IPv4</h2><p>Théorie fondamentale sur les adresses IPv4, les classes (A, B, C) et les masques par défaut.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/adresses-ip/TD0_Adressage_réseaux_et_sous_reseaux.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🧮</div><h2>TD 0 : Sous-réseaux</h2><p>Introduction pratique au découpage d'un réseau en plusieurs sous-réseaux (Subnetting).</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/adresses-ip/TD2.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📝</div><h2>TD 2 : Exercices</h2><p>Série d'exercices d'application sur le calcul de plages IP et de masques de sous-réseaux.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/adresses-ip/TD3.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">✍️</div><h2>TD 3 : Pratique</h2><p>Exercices de renforcement sur la manipulation binaire et l'adressage réseau.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/adresses-ip/TD_01_Exercices_sur_VLSM.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📐</div><h2>TD 1 : Intro VLSM</h2><p>Découverte du Variable Length Subnet Mask (VLSM) pour optimiser l'espace d'adressage.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/adresses-ip/Exercice_VLSM_Avancé.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🧠</div><h2>VLSM Avancé</h2><p>Cas d'étude complexe de découpage réseau optimisé au plus juste avec la méthode VLSM.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 5 : Bases de Données (SQL) -->
+      <div id="cat-5" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-5')">
+          <h2>Bases de Données (SQL)</h2>
+          <p>Conception, requêtage et manipulation de données.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/TP_SQL_SELECT_UPDATE_INSERT_DELETE.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🗃️</div><h2>Bases du CRUD</h2><p>Requêtes de sélection, mise à jour, insertion et suppression.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bordel/insert.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">➕</div><h2>SQL : Insert</h2><p>Ajout massif et manipulation des insertions de données.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bordel/update.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🔄</div><h2>SQL : Update</h2><p>Mises à jour conditionnelles et opérations complexes.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bordel/delete.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">❌</div><h2>SQL : Delete</h2><p>Suppression de données de manière sécurisée et intègre.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bordel/exo6.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📝</div><h2>Exercice 6 SQL</h2><p>Cas pratique de manipulation de données relationnelles (1).</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/bordel/exo7.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📝</div><h2>Exercice 7 SQL</h2><p>Cas pratique de manipulation de données relationnelles (2).</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 6 : Virtualisation et Serveurs (VM-TPs) -->
+      <div id="cat-6" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-6')">
+          <h2>Virtualisation et Serveurs (VM-TPs)</h2>
+          <p>Série de TPs sur le déploiement de machines virtuelles, la gestion système et les services réseaux (Debian/Xubuntu).</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/vm-tps/Installation_et_configuration_xbuntu_avec_vb_Etape_1.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🐧</div><h2>Étape 1 : Installation Xubuntu</h2><p>Installation et configuration initiale d'une machine virtuelle Xubuntu sur VirtualBox.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/vm-tps/Installation_et_configuration_xbuntu_avec_vb_Etape_2_.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">⚙️</div><h2>Étape 2 : Configuration Xubuntu</h2><p>Suite de la configuration de Xubuntu et paramètres de virtualisation.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/vm-tps/Etape_3_Première_connexion_et_environnement_de_travail_ (1).pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🖥️</div><h2>Étape 3 : Environnement de Travail</h2><p>Première connexion, découverte de l'interface et configuration de l'espace de travail.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/vm-tps/Etape_4_Installation_et_configuration_des_addons-invités_de_VirtualBox (1).pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📦</div><h2>Étape 4 : Addons-Invités</h2><p>Installation des Addons-Invités VirtualBox pour de meilleures performances et intégration.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/vm-tps/Etape_5_Gestion_des_utilisateurs (1).pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">👥</div><h2>Étape 5 : Gestion Utilisateurs</h2><p>Création, modification et gestion des droits des utilisateurs sous Linux.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/vm-tps/Etape_6_Installation_d_application.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🛒</div><h2>Étape 6 : Installation d'Applications</h2><p>Gestionnaire de paquets et installation de nouvelles applications sous l'environnement Linux.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/vm-tps/Etape_7.1_Installation_serveur_Web.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🌐</div><h2>Étape 7.1 : Serveur Web</h2><p>Mise en place et configuration d'un premier serveur Web.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/vm-tps/Partie_8.2_—_Serveur_Web_sécurisé_(HTTPS)__PHP__MariaDB__phpMyAdmin.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🔒</div><h2>Étape 8.2 : Serveur LAMP Sécurisé</h2><p>Configuration avancée : HTTPS, PHP, base de données MariaDB et phpMyAdmin.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/vm-tps/installation_de_NextCloud_sur_Debian.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">☁️</div><h2>NextCloud sur Debian</h2><p>Déploiement d'une solution de cloud privé NextCloud sur un serveur Debian.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 7 : Gestion de Projet et Outils -->
+      <div id="cat-7" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-7')">
+          <h2>Gestion de Projet et Outils (Gantt)</h2>
+          <p>Planification, ordonnancement et utilisation d'outils de gestion de projets.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/gantt/projectlibre.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📅</div><h2>ProjectLibre : Guide</h2><p>Initiation à ProjectLibre pour la création de diagrammes de Gantt.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/gantt/ProjectLibre-Notice-V2.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📖</div><h2>ProjectLibre : Notice</h2><p>Documentation détaillée et astuces d'utilisation de ProjectLibre.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/gantt/TD_4_Gantt.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📊</div><h2>Gantt : TD 4</h2><p>Création d'un planning de projet complexe avec dépendances.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/gantt/TD_ordon.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">⏳</div><h2>Ordonnancement</h2><p>Exercices pratiques d'ordonnancement de tâches (PERT/Gantt).</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/gantt/TP_2_VE.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📋</div><h2>Gantt : TP 2</h2><p>Suivi et gestion des ressources d'un projet de veille d'entreprise.</p><div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Script pour l'interactivité des catégories -->
+    <script>
+      function openTheme(themeId) {
+        document.getElementById('themes-grid').style.display = 'none';
+        document.querySelectorAll('.category-section').forEach(el => el.style.display = 'none');
+        document.getElementById(themeId).style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function closeTheme(themeId) {
+        document.getElementById(themeId).style.display = 'none';
+        document.getElementById('themes-grid').style.display = 'grid';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    </script>
   </main>
-  <footer class="espace"></footer>
+  <footer class="espace" style="height: auto; padding: 20px 0;"><p style="font-size: 0.8em; text-align: center; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
 </body>
 </html>

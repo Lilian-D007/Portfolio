@@ -92,10 +92,10 @@
 
 /* Conclusion box */
 .conclusion-box {
-    background: rgba(114, 137, 218, 0.2);
+    background: rgba(25, 50, 110, 0.85);
     border: 2px solid #6e8cfb;
     border-radius: 16px;
     padding: 20px;
     text-align: center;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(10px);
 }
