@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab Nmap – Cartographie et audit réseau en environnement professionnel – BTS SIO SISR</title>
+  <style>
+    @page { size: A4; margin: 18mm 15mm; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0 auto; max-width: 900px; padding: 20px; }
+    header.doc-header { border-bottom: 3px solid #dc2626; padding-bottom: 15px; margin-bottom: 25px; }
+    .badge-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .badge { background: #eff6ff; color: #1d4ed8; padding: 4px 10px; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; border: 1px solid #bfdbfe; }
+    .badge-cyber { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+    h1 { color: #0f172a; margin: 0 0 8px 0; font-size: 1.8rem; }
+    .meta-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+    .meta-table td, .meta-table th { border: 1px solid #e2e8f0; padding: 8px 12px; }
+    .meta-table th { background: #f8fafc; text-align: left; width: 25%; font-weight: 600; color: #475569; }
+    h2 { color: #991b1b; border-left: 4px solid #dc2626; padding-left: 10px; margin-top: 30px; font-size: 1.3rem; }
+    h3 { color: #b91c1c; margin-top: 20px; font-size: 1.1rem; }
+    table.data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+    table.data-table th, table.data-table td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+    table.data-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+    table.data-table tr:nth-child(even) { background: #f8fafc; }
+    .info-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; margin: 15px 0; border-radius: 4px; font-size: 0.9rem; }
+    .alert-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 12px 16px; margin: 15px 0; border-radius: 4px; font-size: 0.9rem; }
+    .cli-box { background: #0f172a; color: #4ade80; padding: 12px 16px; border-radius: 8px; font-family: "Consolas", "Courier New", monospace; font-size: 0.85rem; overflow-x: auto; margin: 12px 0; border: 1px solid #334155; }
+    .cli-box .prompt { color: #f43f5e; font-weight: bold; }
+    .cli-box .cmd { color: #38bdf8; }
+    .cli-box .comment { color: #64748b; font-style: italic; }
+    .qa-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; margin: 12px 0; }
+    .qa-title { font-weight: bold; color: #1e293b; margin-bottom: 6px; }
+    .qa-answer { background: #ffffff; border-left: 3px solid #dc2626; padding: 8px 12px; margin-top: 6px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<header class="doc-header">
+  <div class="badge-bar">
+    <span class="badge">BTS SIO SISR – 2ème Année</span>
+    <span class="badge badge-cyber">Bloc 3 : Cybersécurité</span>
+    <span class="badge">Audit & Cartographie Réseau</span>
+    <span class="badge">Auteur : Lilian DUSSY</span>
+  </div>
+  <h1>Lab Nmap – Cartographie et Audit Réseau en Environnement Professionnel</h1>
+  <p style="margin: 0; color: #64748b; font-size: 0.95rem;">Méthodologie d'audit offensif/défensif, détection de services, analyse de vulnérabilités NSE et durcissement système</p>
+</header>
+
+<table class="meta-table">
+  <tr><th>Environnement</th><td>Kali Linux (auditeur) · Ubuntu Server 24.04 · Windows 10 · Metasploitable2</td><th>Topologie</th><td>Réseau Host-Only isolé (192.168.56.0/24)</td></tr>
+  <tr><th>Compétences visées</th><td colspan="3"><strong>Bloc 3 Cybersécurité :</strong> Protéger les données du SI, détecter les vulnérabilités, analyser les risques d'exposition, auditer les configurations réseau et appliquer des mesures de remédiation conformes au cadre légal.</td></tr>
+  <tr><th>Outils mobilisés</th><td colspan="3">Nmap, Nmap Scripting Engine (NSE), Wireshark, Metasploit Framework, Hydra, curl.</td></tr>
+</table>
+
+<h2>1. Cadre Légal et Déontologie de l'Auditeur</h2>
+<div class="alert-box">
+  <strong>Rappel juridique capital (Article 323-1 du Code Pénal) :</strong>
+  <p style="margin: 5px 0 0 0;">Le fait d'accéder ou de se maintenir frauduleusement dans un système de traitement automatisé de données (STAD) est puni par la loi. En entreprise, tout scan ou audit de vulnérabilité est strictement encadré par un <strong>ordre de mission signé</strong>, des <strong>règles d'engagement (RoE)</strong> et un périmètre IP précisément délimité. En lab pédagogique, les scans sont confinés sur un sous-réseau virtuel étanche (192.168.56.0/24).</p>
+</div>
+
+<h2>2. Maîtrise Protocolaire de Nmap</h2>
+<p>Nmap (<em>Network Mapper</em>) exploite le protocole TCP/IP et les réponses du <strong>three-way handshake</strong> pour cartographier les hôtes et l'état des ports :</p>
+<table class="data-table">
+  <thead><tr><th>État de Port</th><th>Comportement Protocolaire Observé</th><th>Signification en Audit</th></tr></thead>
+  <tbody>
+    <tr><td><strong style="color:#16a34a;">open</strong></td><td>Réception d'un paquet <strong>SYN/ACK</strong></td><td>Une application écoute activement et accepte les connexions. Surface d'attaque potentielle.</td></tr>
+    <tr><td><strong style="color:#dc2626;">closed</strong></td><td>Réception d'un paquet <strong>RST (Reset)</strong></td><td>L'hôte est actif mais aucun service n'écoute sur ce port.</td></tr>
+    <tr><td><strong style="color:#d97706;">filtered</strong></td><td>Aucune réponse (Timeout) ou message <strong>ICMP Unreachable (Type 3)</strong></td><td>Un pare-feu (ex: Pare-feu Windows Defender, IPTables) filtre la sonde sans répondre.</td></tr>
+  </tbody>
+</table>
+
+<h3>Techniques de scan fondamentales :</h3>
+<ul>
+  <li><code>nmap -sS &lt;cible&gt;</code> : <strong>SYN Scan (Half-open)</strong>. Ne termine jamais la connexion TCP (envoie RST après SYN/ACK). Rapide, fiable, requiert les droits root.</li>
+  <li><code>nmap -sT &lt;cible&gt;</code> : <strong>TCP Connect Scan</strong>. Complète la connexion via l'appel système <code>connect()</code>. Utilisable sans privilèges root mais journalisé par les cibles.</li>
+  <li><code>nmap -sU -p &lt;ports&gt; &lt;cible&gt;</code> : <strong>UDP Scan</strong>. Sonde les services DNS (53), DHCP (67), SNMP (161). Lent en raison de l'absence d'ACK.</li>
+  <li><code>nmap -sV -sC -O -p- &lt;cible&gt;</code> : <strong>Audit approfondi</strong>. Détection de version des bannières (-sV), scripts par défaut (-sC), empreinte d'OS (-O) sur l'ensemble des 65535 ports (-p-).</li>
+</ul>
+
+<h2>3. Déroulement des Travaux Pratiques (TP1 à TP6)</h2>
+
+<div class="qa-box">
+  <div class="qa-title">TP 1 & 2 – Découverte Réseau & Export Multi-Formats</div>
+  <div class="qa-answer">
+    <p>Découverte passive d'hôtes sans sonder les ports : <code>nmap -sn 192.168.56.0/24</code>. Utilisation de l'option <code>-n</code> pour désactiver la résolution DNS et accélérer le scan par un facteur 4.</p>
+    <p>Génération des rapports d'audit sous 3 formats simultanés avec <code>-oA nom_scan</code> (.nmap pour lecture humaine, .xml pour intégration dans un SIEM, .gnmap pour filtrage grep/bash).</p>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">TP 3 – Audit du Serveur Ubuntu & Durcissement SSH</div>
+  <div class="qa-answer">
+    <div class="cli-box">
+      <span class="prompt">kali@kali:~$</span> <span class="cmd">nmap -sV -sC -p 22,80 192.168.56.20</span><br>
+      22/tcp open  ssh     OpenSSH 9.6p1 Ubuntu 3ubuntu13<br>
+      80/tcp open  http    Apache httpd 2.4.62 ((Ubuntu))
+    </div>
+    <p><strong>Remédiation appliquée :</strong> Constat que la connexion root en SSH était autorisée. Modification de <code>/etc/ssh/sshd_config</code> pour appliquer <code>PermitRootLogin no</code>, redémarrage du service et vérification via <code>nmap --script ssh-auth-methods -p 22 192.168.56.20</code>. Boucle complète d'audit validée.</p>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">TP 4 – Analyse du Poste Windows 10 & Pare-feu Defender</div>
+  <div class="qa-answer">
+    <p>Face au pare-feu Windows, les pings ICMP sont bloqués. L'usage de l'option <code>-Pn</code> est obligatoire pour forcer le scan sans ping préalable. Les ports apparaissent à l'état <code>filtered</code>. L'audit du partage SMB (port 445) avec <code>--script smb-os-discovery</code> permet de remonter le build précis de Windows et le nom NetBIOS de la machine.</p>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">TP 5 – Metasploitable2 & Détection de Vulnérabilités NSE</div>
+  <div class="qa-answer">
+    <p>Exécution des scripts de la catégorie vulnérabilités : <code>nmap --script vuln -p 21,22,23,80 192.168.56.40</code>.</p>
+    <p><strong>Résultat critique détecté :</strong> Détection de la porte dérobée historique dans <strong>vsftpd 2.3.4 (CVE-2011-2523)</strong>. Preuve de concept réalisée de manière strictement encadrée sous Metasploit (<code>exploit/unix/ftp/vsftpd_234_backdoor</code>) pour confirmer l'impact d'une exécution de code non autorisée.</p>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">TP 6 – Discrétion, Analyse Wireshark & Évasion IDS</div>
+  <div class="qa-answer">
+    <p>Observation du comportement réseau sous Wireshark lors de la modulation du timing <code>-T0</code> (Paranoid, espacement de plusieurs secondes entre paquets) vs <code>-T5</code> (Insane, rafale massive détectée immédiatement par Snort/Suricata). Test de la fragmentation de paquets IP (<code>-f</code>) et des leurres (<code>-D RND:5</code>).</p>
+  </div>
+</div>
+
+<h2>4. Défi Final – Rapport d'Audit & Recommandations ACME Corp</h2>
+<table class="data-table">
+  <thead><tr><th>Actif Audité</th><th>Vulnérabilité / Risque Identifié</th><th>Criticité</th><th>Plan de Remédiation Prioritaire</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Serveur Web (Ubuntu)</strong></td><td>Bannière HTTP et version Apache exposées publiquement</td><td>Faible</td><td>Configurer <code>ServerTokens Prod</code> et <code>ServerSignature Off</code> dans <code>security.conf</code>.</td></tr>
+    <tr><td><strong>Poste Client (Windows)</strong></td><td>Partage SMB v1/v2 activé sur profil réseau privé</td><td>Moyenne</td><td>Désactiver SMB v1, forcer SMB signing et bloquer le port 445 en entrée depuis l'extérieur.</td></tr>
+    <tr><td><strong>Serveur Métier (Legacy)</strong></td><td>Service FTP obsolète vsftpd 2.3.4 (Porte dérobée connue)</td><td>Critique</td><td>Suppression immédiate du service vsftpd, bascule sur SFTP sécurisé par clés SSH.</td></tr>
+    <tr><td><strong>Routeur & Commutateurs</strong></td><td>Gestion non chiffrée (Telnet port 23 actif)</td><td>Élevée</td><td>Désactiver Telnet, activer exclusivement SSH v2 avec clé RSA 2048 bits et ACL VTY.</td></tr>
+  </tbody>
+</table>
+
+<footer style="margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; font-size: 0.8rem; color: #64748b; text-align: center;">
+  Document rédigé par Lilian DUSSY – BTS SIO SISR Saint Rémi – Portfolio Professionnel
+</footer>
+
+</body>
+</html>

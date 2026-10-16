@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab Packet Tracer – Routage Dynamique RIP – Lilian DUSSY SISR 2</title>
+  <style>
+    @page { size: A4; margin: 18mm 15mm; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0 auto; max-width: 900px; padding: 20px; }
+    header.doc-header { border-bottom: 3px solid #0284c7; padding-bottom: 15px; margin-bottom: 25px; }
+    .badge-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .badge { background: #f0f9ff; color: #0369a1; padding: 4px 10px; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; border: 1px solid #bae6fd; }
+    .badge-cisco { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+    h1 { color: #0f172a; margin: 0 0 8px 0; font-size: 1.8rem; }
+    .meta-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+    .meta-table td, .meta-table th { border: 1px solid #e2e8f0; padding: 8px 12px; }
+    .meta-table th { background: #f8fafc; text-align: left; width: 25%; font-weight: 600; color: #475569; }
+    h2 { color: #0369a1; border-left: 4px solid #0284c7; padding-left: 10px; margin-top: 30px; font-size: 1.3rem; }
+    h3 { color: #0284c7; margin-top: 20px; font-size: 1.1rem; }
+    table.data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+    table.data-table th, table.data-table td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+    table.data-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+    table.data-table tr:nth-child(even) { background: #f8fafc; }
+    .info-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; margin: 15px 0; border-radius: 4px; font-size: 0.9rem; }
+    .cli-box { background: #0f172a; color: #38bdf8; padding: 12px 16px; border-radius: 8px; font-family: "Consolas", "Courier New", monospace; font-size: 0.85rem; overflow-x: auto; margin: 12px 0; border: 1px solid #334155; }
+    .cli-box .prompt { color: #a855f7; font-weight: bold; }
+    .cli-box .comment { color: #64748b; font-style: italic; }
+    .qa-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; margin: 12px 0; }
+    .qa-title { font-weight: bold; color: #1e293b; margin-bottom: 6px; }
+    .qa-answer { background: #ffffff; border-left: 3px solid #0284c7; padding: 8px 12px; margin-top: 6px; font-size: 0.9rem; }
+    .topology-diagram { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; text-align: center; margin: 15px 0; }
+  </style>
+</head>
+<body>
+
+<header class="doc-header">
+  <div class="badge-bar">
+    <span class="badge">BTS SIO SISR – 2ème Année</span>
+    <span class="badge badge-cisco">Bloc 2 : Administration Réseau</span>
+    <span class="badge">Routage Dynamique Cisco</span>
+    <span class="badge">Auteur : Lilian DUSSY SISR 2</span>
+  </div>
+  <h1>Lab Packet Tracer – Comprendre et Mettre en Œuvre le Routage Dynamique RIP</h1>
+  <p style="margin: 0; color: #64748b; font-size: 0.95rem;">Protocole à vecteur de distance RIPv2, convergence réseau, redondance physique, split horizon et extension multi-sites</p>
+</header>
+
+<table class="meta-table">
+  <tr><th>Auteur de l'étude</th><td>Lilian DUSSY SISR 2</td><th>Outil de simulation</th><td>Cisco Packet Tracer (Routeurs 1841, Switchs 2960)</td></tr>
+  <tr><th>Compétences visées</th><td colspan="3"><strong>Bloc 2 :</strong> Concevoir, installer, interconnecter et superviser une infrastructure réseau multi-routeurs avec protocole de routage dynamique, analyser la résilience et diagnostiquer les tables de routage.</td></tr>
+  <tr><th>Contexte d'entreprise</th><td>Entreprise KARIPOU – 4 sites en carré fermé (UNO, DUE, TRE, QUATRO) + Rachat 5ᵉ site (CINQUO)</td></tr>
+</table>
+
+<h2>1. Principes Théoriques du Protocole RIP</h2>
+<p>Le routage statique montre ses limites dès que l'infrastructure s'étend ou qu'un lien tombe en panne. Le <strong>routage dynamique</strong> permet aux routeurs d'échanger automatiquement l'état de leurs liaisons et de recalculer leurs tables sans intervention humaine.</p>
+
+<table class="data-table">
+  <thead><tr><th>Paramètre</th><th>Valeur & Caractéristique</th><th>Impact Opérationnel</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Type d'algorithme</strong></td><td>Vecteur de distance (Bellman-Ford)</td><td>Chaque routeur ne connaît que la distance et le prochain saut (next-hop).</td></tr>
+    <tr><td><strong>Métrique</strong></td><td>Nombre de sauts (Hop Count)</td><td>Métrique simple (1 à 15 sauts). <strong>16 = infini</strong> (réseau inaccessible).</td></tr>
+    <tr><td><strong>Protocole de transport</strong></td><td>UDP port 520</td><td>Diffusion par paquets multicast vers <code>224.0.0.9</code> (RIPv2).</td></tr>
+    <tr><td><strong>Fréquence d'annonces</strong></td><td>Toutes les 30 secondes</td><td>Émission périodique de toute la table de routage.</td></tr>
+    <tr><td><strong>Distance administrative</strong></td><td>120</td><td>Priorité relative par rapport aux routes statiques (1) ou OSPF (110).</td></tr>
+    <tr><td><strong>Mécanisme Split Horizon</strong></td><td>Horizon partagé (avec poison reverse)</td><td>Empêche un routeur de réémettre une route sur l'interface d'où elle a été apprise (évite le comptage à l'infini).</td></tr>
+  </tbody>
+</table>
+
+<h2>2. Topologie de l'Entreprise KARIPOU & Plan d'Adressage</h2>
+<div class="topology-diagram">
+  <p style="font-weight: bold; margin-bottom: 8px;">Architecture en carré fermé (Redondance 4 sites) + Extension CINQUO</p>
+  <div style="background: #e2e8f0; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.85rem; display: inline-block; text-align: left;">
+    [Router1 - UNO] (LAN 200.10.1.0/24) ====== (200.10.12.0/24) ====== [Router2 - DUE] (LAN 200.10.2.0/24)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||<br>
+    (200.10.14.0/24)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(200.10.23.0/24)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||<br>
+    [Router4 - QUATRO] (LAN 200.10.4.0/24) === (200.10.34.0/24) ====== [Router3 - TRE] (LAN 200.10.3.0/24)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\ (Liaison 200.10.35.0/24)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Router5 - CINQUO] (LAN 200.10.5.0/24)
+  </div>
+</div>
+
+<h2>3. Configuration & Réponses aux Questions Clés</h2>
+
+<div class="qa-box">
+  <div class="qa-title">Parties 3 & 4 – Configuration RIPv2 & Table de Routage (Q1 à Q7)</div>
+  <div class="qa-answer">
+    <ul>
+      <li><strong>Total réseaux (Q1) :</strong> 8 réseaux distincts (4 LANs + 4 liaisons séries WAN). Chaque routeur possède 3 interfaces actives.</li>
+      <li><strong>Connectivité avant RIP (Q2) :</strong> Le ping PC1 &rarr; PC2 échoue car Router1 ne possède aucune route vers 200.10.2.0/24.</li>
+      <li><strong>Configuration Router3 (Q3) :</strong>
+        <div class="cli-box">
+          <span class="prompt">Router3(config)#</span> router rip<br>
+          <span class="prompt">Router3(config-router)#</span> version 2<br>
+          <span class="prompt">Router3(config-router)#</span> network 200.10.3.0<br>
+          <span class="prompt">Router3(config-router)#</span> network 200.10.23.0<br>
+          <span class="prompt">Router3(config-router)#</span> network 200.10.34.0
+        </div>
+      </li>
+      <li><strong>Partage de charge / Load Balancing (Q5) :</strong> Le réseau 200.10.3.0/24 (site TRE) apparaît avec deux lignes via Router2 et Router4 car les deux chemins ont strictement la même métrique ([120/2]). RIP réalise un équilibrage de charge à coût égal.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">Partie 5 – Observation du Protocole (debug ip rip, Q8 à Q12)</div>
+  <div class="qa-answer">
+    <p><strong>Split Horizon (Q8) :</strong> Router1 n'annonce pas 200.10.2.0/24 sur Serial0/0/0 car il l'a appris par Router2 via cette même interface. L'annoncer en retour créerait une boucle de routage en cas de panne.</p>
+    <p><strong>Adresse Multicast (Q10) :</strong> <code>224.0.0.9</code> permet de cibler uniquement les processus RIPv2 sans interrompre les autres hôtes du réseau.</p>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">Partie 6 – Réaction à une Panne de Lien (Convergence Réseau, Q13 à Q15)</div>
+  <div class="qa-answer">
+    <p>Lors de la coupure de la liaison directe Router1 &larr;&rarr; Router4 (<code>shutdown</code> sur Serial0/0/1) :</p>
+    <ul>
+      <li>Le site QUATRO reste <strong>100% accessible</strong> grâce à la redondance en boucle fermée.</li>
+      <li>La table de routage s'adapte automatiquement : le trafic bascule sur <strong>Serial0/0/0</strong> (via Router2 et Router3) avec une métrique qui passe de <strong>1 saut à 3 sauts</strong>.</li>
+      <li><strong>Délai de convergence :</strong> RIP met entre 30 et 180 secondes pour invalider la route (convergence lente par rapport à OSPF).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">Partie 7 – Défi d'Intégration Autonome du 5ᵉ Site (CINQUO, D1 à D5)</div>
+  <div class="qa-answer">
+    <p>Extension réussie sans guide : installation du module <code>WIC-2T</code> sur Router3 et Router5, raccordement série, adressage LAN 200.10.5.0/24 et liaison 200.10.35.0/24.</p>
+    <div class="cli-box">
+      <span class="prompt">Router5(config)#</span> interface fastEthernet 0/0 ; ip address 200.10.5.5 255.255.255.0 ; no shutdown<br>
+      <span class="prompt">Router5(config)#</span> interface serial 0/0/0 ; ip address 200.10.35.5 255.255.255.0 ; no shutdown<br>
+      <span class="prompt">Router5(config)#</span> router rip ; version 2 ; network 200.10.5.0 ; network 200.10.35.0<br>
+      <span class="comment">! Déclaration sur Router3 pour annoncer la nouvelle liaison</span><br>
+      <span class="prompt">Router3(config)#</span> router rip ; network 200.10.35.0
+    </div>
+    <p><strong>Résultat :</strong> Ping immédiat PC5 &rarr; PC1 et PC2 avec une métrique de 2 sauts (Router5 &rarr; Router3 &rarr; Router2 &rarr; PC2). Analyse du SPOF : ce 5ᵉ site n'étant pas relié en boucle, la coupure de la liaison 35 isole totalement CINQUO.</p>
+  </div>
+</div>
+
+<footer style="margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; font-size: 0.8rem; color: #64748b; text-align: center;">
+  Document rédigé par Lilian DUSSY SISR 2 – BTS SIO Saint Rémi – Portfolio Professionnel
+</footer>
+
+</body>
+</html>

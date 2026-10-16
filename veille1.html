@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veille 1 : L'Informatique Quantique – Lilian</title>
+  <title>Veille 1 : Pourquoi Rust est partout sans qu'on le sache ? – Lilian</title>
   <link rel="stylesheet" href="css/audio.css">
   <script src="js/audio.js" defer></script>
   <link rel="stylesheet" href="css/navigation.css">
@@ -22,6 +22,7 @@
     <span class="nav-spacer"></span>
     <div class="dd" id="dd-projets"><a href="#" class="dd-toggle">Projets ▾</a><div class="dd-menu"><a href="projet-annee-1.html">Projets Année 1</a><a href="projet-annee-2.html">Projets Année 2</a></div></div>
     <div class="dd" id="dd-tps"><a href="#" class="dd-toggle">TPs ▾</a><div class="dd-menu"><a href="tps-annee-1.html">TPs année 1</a><a href="tps-annee-2.html">TPs année 2</a></div></div>
+    <div class="dd" id="dd-stages"><a href="#" class="dd-toggle">Stages ▾</a><div class="dd-menu"><a href="stagesio1.html">Stage 1 (1ère année)</a><a href="stagesio2.html">Stage 2 (2ème année)</a></div></div>
     <a href="CV.html">CV</a><a href="lettre-de-motivation.html">Lettre de motivation</a>
     
     <div class="dd active" id="dd-veilles">
@@ -38,30 +39,68 @@
 <div class="videoback"><video autoplay muted loop playsinline><source src="video/rainjapanwallpaper.mp4" type="video/mp4"></video></div>
 <main class="veille-container">
   <header class="veille-header">
-    <span class="tag">Hardware & Innovation</span><h1>L'Informatique Quantique</h1><p>Au-delà du binaire : la prochaine grande révolution de calcul.</p>
+    <span class="tag" style="background: #ea580c;">Cybersécurité & Nouveaux Langages</span>
+    <h1>Pourquoi Rust est partout sans qu'on le sache ?</h1>
+    <p>La révolution silencieuse de la sécurité mémoire (Memory Safety) au cœur des systèmes critiques et de nos infrastructures.</p>
   </header>
   <div class="veille-grid">
-    <article class="v-card"><h2>1. Le concept : Bit vs Qubit</h2><p>L'informatique classique repose sur le <strong>bit</strong> (0 ou 1). L'informatique quantique utilise le <strong>Qubit</strong>. Grâce au principe de <em>superposition</em>, un qubit peut être à la fois 0 et 1. Cela permet de réaliser des calculs parallèles massifs impossibles pour nos supercalculateurs actuels.</p></article>
-    <article class="v-card"><h2>2. Dangers pour la Cybersécurité</h2><p>C'est l'enjeu majeur pour nous, informaticiens. La puissance de calcul quantique pourrait théoriquement casser le chiffrement <strong>RSA</strong> en quelques minutes. La réponse ? La <strong>cryptographie post-quantique</strong>, standardisée par le NIST en 2024 (FIPS 203, 204, 205).</p></article>
-    <article class="v-card"><h2>3. Acteurs & Avancées</h2><ul class="v-list"><li><strong>IBM Eagle/Condor :</strong> Processeurs dépassant les 1000 qubits.</li><li><strong>Google Sycamore :</strong> A atteint la "suprématie quantique" sur un calcul spécifique.</li><li><strong>Pasqal (France) :</strong> Start-up leader sur les atomes neutres.</li></ul></article>
-    <article class="v-card"><h2>4. "Harvest Now, Decrypt Later"</h2><p>Une menace bien réelle en 2026 : les attaquants <strong>interceptent et stockent aujourd'hui</strong> des données chiffrées sensibles. Leur pari ? Attendre qu'un ordinateur quantique assez puissant soit disponible dans 10 ans pour déchiffrer ces informations archivées.</p></article>
+    <article class="v-card">
+      <h2>1. L'Infiltration Silencieuse dans nos OS</h2>
+      <p>Pourquoi « sans qu'on le sache » ? Parce que <strong>Rust</strong> ne remplace pas des applications visibles, mais les fondations invisibles du numérique :</p>
+      <ul class="v-list">
+        <li><strong>Noyau Linux :</strong> Depuis la version 6.1, Rust est le seul langage accepté aux côtés du C dans le kernel pour écrire des pilotes et sous-systèmes sécurisés.</li>
+        <li><strong>Noyau Windows 11 :</strong> Microsoft a discrètement réécrit des parties critiques de <code>win32k.sys</code>, GDI et DirectWrite en Rust pour éradiquer les vulnérabilités d'élévation de privilèges.</li>
+        <li><strong>Android & Chromium :</strong> Google utilise Rust par défaut pour tout nouveau code natif bas-niveau, réduisant drastiquement les failles zéro-day.</li>
+        <li><strong>Cloudflare & AWS :</strong> Le proxy Pingora de Cloudflare (qui gère 20% du web mondial) a remplacé Nginx (en C) par du Rust, gagnant en débit et en immunité contre les crashs mémoire.</li>
+      </ul>
+    </article>
+    <article class="v-card">
+      <h2>2. Le Fléau Historique : 70% des Failles Sont Mémoire</h2>
+      <p>Les rapports conjoints de la <strong>NSA</strong>, de la <strong>CISA</strong>, de <strong>Google</strong> et du <strong>Microsoft Security Response Center (MSRC)</strong> aboutissent tous au même constat terrifiant :</p>
+      <p><strong>70 % de l'ensemble des vulnérabilités de sécurité critiques (CVE)</strong> proviennent d'erreurs de gestion de la mémoire inhérentes au C et au C++ :</p>
+      <ul class="v-list">
+        <li><strong>Dépassement de tampon (Buffer Overflow) :</strong> écrasement de mémoire permettant l'exécution de code arbitraire à distance (RCE).</li>
+        <li><strong>Utilisation après libération (Use-After-Free) :</strong> manipulation de pointeurs obsolètes provoquant des prises de contrôle.</li>
+        <li><strong>Conditions de course (Data Races) :</strong> corruptions de données en multithreading.</li>
+      </ul>
+    </article>
+    <article class="v-card">
+      <h2>3. L'Arme Absolue : Le Borrow Checker</h2>
+      <p>Comment Rust résout-il ce dilemme sans sacrifier la vitesse ? Contrairement à Java, C# ou Go, Rust n'a <strong>aucun ramasse-miettes (Garbage Collector)</strong> : ses performances sont aussi fulgurantes que le C/C++.</p>
+      <p>Le compilateur intègre un <strong>Borrow Checker</strong> (vérificateur d'emprunts) fondé sur trois piliers :</p>
+      <ul class="v-list">
+        <li><strong>Propriété (Ownership) :</strong> Chaque ressource n'a qu'un seul propriétaire à un instant T.</li>
+        <li><strong>Emprunt (Borrowing) :</strong> Soit plusieurs lectures simultanées, soit une seule écriture exclusive, jamais les deux.</li>
+        <li><strong>Durées de vie (Lifetimes) :</strong> Aucun pointeur ne peut survivre à la donnée vers laquelle il pointe.</li>
+      </ul>
+      <p style="margin-top: 10px;"><em>Règle absolue : si le code compile en Rust, il est mathématiquement garanti sans corruption mémoire !</em></p>
+    </article>
+    <article class="v-card">
+      <h2>4. L'Injonction Politique : Maison Blanche & ANSSI</h2>
+      <p>La sécurité logicielle est désormais une question de souveraineté nationale :</p>
+      <ul class="v-list">
+        <li><strong>Maison Blanche (ONCD, février 2024) :</strong> Publication d'un rapport fédéral exhortant l'ensemble des industriels et agences gouvernementales à abandonner C/C++ pour adopter des langages <em>Memory-Safe</em> avec Rust en chef de file.</li>
+        <li><strong>CISA (Cybersecurity and Infrastructure Security Agency) :</strong> Feuille de route imposant aux fabricants de logiciels critiques de concevoir des produits « Secure by Design » en éliminant les défauts de mémoire.</li>
+        <li><strong>ANSSI (France) :</strong> Recommandations officielles intégrant Rust dans le développement sécurisé et la protection des Opérateurs d'Importance Vitale (OIV).</li>
+      </ul>
+    </article>
   </div>
   <div class="conclusion-box">
-    <h3>🔍 Mon avis</h3>
-    <p>Bien que l'ordinateur quantique grand public ne soit pas pour demain (problèmes de refroidissement proche du zéro absolu), son impact sur le décryptage et l'IA sera disruptif d'ici 10 à 15 ans. Il est crucial pour les administrateurs systèmes de suivre l'évolution de la crypto-agilité et des nouveaux algorithmes résistants au quantique.</p>
+    <h3>🔍 Mon avis (Étudiant BTS SIO SISR)</h3>
+    <p>Pour un futur administrateur systèmes et réseaux orienté cybersécurité, comprendre la montée en puissance de Rust est fondamental. Les outils d'infrastructure modernes (proxys comme Pingora, agents EDR, parseurs de paquets réseaux comme Snort 3 plugins, utilitaires CLI ultra-rapides comme ripgrep ou zoxide) sont tous réécrits en Rust. Ce n'est pas un effet de mode, mais la nouvelle norme de durcissement défensif recommandée par l'ANSSI et la NSA pour les 20 prochaines années.</p>
     <hr style="border-color: rgba(255,255,255,0.2); margin: 15px 0;">
-    <h4>🔗 Sources et Bibliographie</h4>
+    <h4>🔗 Sources et Bibliographie Vérifiées</h4>
     <ul class="v-list" style="font-size: 0.9em; column-count: 2; column-gap: 20px;">
-      <li><a href="https://www.nist.gov/pqcrypto" target="_blank" style="color: #ffd54f; text-decoration: underline;">NIST.gov : Algorithmes PQC</a></li>
-      <li><a href="https://www.ibm.com/quantum" target="_blank" style="color: #ffd54f; text-decoration: underline;">IBM Quantum : Roadmap</a></li>
-      <li><a href="https://cyber.gouv.fr/publications/transition-vers-la-cryptographie-post-quantique" target="_blank" style="color: #ffd54f; text-decoration: underline;">ANSSI : Transition quantique</a></li>
-      <li><a href="https://www.youtube.com/watch?v=lvTqbM5Dq4Q" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (MinutePhysics)</a></li>
-      <li><a href="https://www.youtube.com/watch?v=aqz-KE-bpKQ" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (Computerphile)</a></li>
-      <li><a href="https://www.reddit.com/r/cybersecurity/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Reddit : r/cybersecurity</a></li>
-      <li><a href="https://www.reddit.com/r/QuantumComputing/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Reddit : r/QuantumComputing</a></li>
-      <li><a href="https://www.lemondeinformatique.fr/actualites/lire-pasqal-veut-devenir-le-leader-europeen-du-quantique-91234.html" target="_blank" style="color: #ffd54f; text-decoration: underline;">Le Monde Informatique : Pasqal</a></li>
-      <li><a href="https://www.youtube.com/watch?v=6B14798o6oQ" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (TEDx) : Q-Threat</a></li>
-      <li><a href="https://www.thalesgroup.com/fr/marches/securite-numerique/technologie/cryptographie-post-quantique" target="_blank" style="color: #ffd54f; text-decoration: underline;">Thales : Solutions hybrides</a></li>
+      <li><a href="https://www.whitehouse.gov/oncd/briefing-room/2024/02/26/press-release-technical-report/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Maison Blanche (ONCD) : Rapport officiel Memory Safety</a></li>
+      <li><a href="https://www.cisa.gov/resources-tools/resources/roadmap-memory-safety" target="_blank" style="color: #ffd54f; text-decoration: underline;">CISA.gov : Roadmap pour les langages Memory-Safe</a></li>
+      <li><a href="https://cyber.gouv.fr/publications/developpement-securise-de-logiciels" target="_blank" style="color: #ffd54f; text-decoration: underline;">ANSSI : Recommandations développement sécurisé</a></li>
+      <li><a href="https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Microsoft MSRC : 70% de failles de mémoire</a></li>
+      <li><a href="https://security.googleblog.com/2022/12/memory-safe-languages-in-android-13.html" target="_blank" style="color: #ffd54f; text-decoration: underline;">Google Security : Rust dans Android 13</a></li>
+      <li><a href="https://www.kernel.org/doc/html/next/rust/index.html" target="_blank" style="color: #ffd54f; text-decoration: underline;">Kernel.org : Documentation Rust for Linux</a></li>
+      <li><a href="https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Cloudflare : Pingora en Rust remplace Nginx</a></li>
+      <li><a href="https://www.rust-lang.org/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Site officiel : The Rust Programming Language</a></li>
+      <li><a href="https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/3215264/nsa-releases-guidance-on-how-to-protect-against-software-memory-safety-issues/" target="_blank" style="color: #ffd54f; text-decoration: underline;">NSA : Protection contre les failles mémoire</a></li>
+      <li><a href="https://www.zdnet.com/article/microsoft-is-rewriting-core-windows-code-in-rust/" target="_blank" style="color: #ffd54f; text-decoration: underline;">ZDNet : Microsoft réécrit le code Windows en Rust</a></li>
     </ul>
   </div>
 </main>

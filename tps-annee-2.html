@@ -28,8 +28,14 @@
         <div class="dd-menu">
           <a href="tps-annee-1.html">TPs année 1</a>
           <a href="tps-annee-2.html" aria-current="page">TPs année 2</a>
-          
-          
+        </div>
+      </div>
+
+      <div class="dd" id="dd-stages">
+        <a href="#" class="dd-toggle">Stages ▾</a>
+        <div class="dd-menu">
+          <a href="stagesio1.html">Stage 1 (1ère année)</a>
+          <a href="stagesio2.html">Stage 2 (2ème année)</a>
         </div>
       </div>
 
@@ -44,9 +50,157 @@
   <main class="tps-container">
     <header class="page-header">
       <h1>Travaux Pratiques – Année 2</h1>
-      <p>Cette section est en cours de construction pour la deuxième année.</p>
+      <p>Retrouvez ici l'ensemble des travaux réalisés durant ma deuxième année de BTS SIO (option SISR), organisés par blocs de compétences du référentiel. Choisissez une catégorie pour accéder aux comptes-rendus et livrables :</p>
     </header>
-    </main>
+
+    <!-- Liste des thèmes (Visible par défaut) -->
+    <div id="themes-grid" style="margin-top: 40px;">
+      
+      <header class="page-header category-header-openable" onclick="openTheme('cat-1')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">☁️ Virtualisation & Hyperviseurs (Bloc 2)</h2>
+        <p>Déploiement d'hyperviseurs Type 1 (Bare-metal), virtualisation imbriquée (nested), déploiement Windows 11 & Debian 12, pilotes VirtIO et contrôle RBAC.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-2')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🐧 Administration Système Linux (Bloc 1 & 2)</h2>
+        <p>Shell Linux, arborescence, gestion avancée des utilisateurs et groupes, sécurité /etc/shadow, politiques chage et scripting sous Ubuntu 24.04 LTS.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-3')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🌐 Réseaux & Routage Dynamique Cisco (Bloc 2)</h2>
+        <p>Interconnexion d'infrastructures d'entreprise, segmentation VLAN, liens Trunk 802.1Q, routage Inter-VLAN, et routage dynamique RIPv2 avec résilience réseau.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-4')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🛡️ Cybersécurité & Audit d'Infrastructure (Bloc 3)</h2>
+        <p>Filtrage périmétrique avancé par ACLs Cisco (standards, étendues, nommées), sécurisation stateless, et cartographie d'audit de vulnérabilités avec Nmap & scripts NSE.</p>
+        <div class="open-hint">📂 Voir les TPs</div>
+      </header>
+
+    </div>
+
+    <!-- Conteneur pour les catégories (Cachées par défaut) -->
+    <div id="categories-content">
+      
+      <!-- Catégorie 1 : Virtualisation & Hyperviseurs -->
+      <div id="cat-1" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-1')">
+          <h2>Virtualisation & Hyperviseurs (Proxmox VE) – Bloc 2</h2>
+          <p>Déploiement d'hyperviseurs de Type 1 (Bare-metal), virtualisation imbriquée (nested), gestion KVM/LXC et contrôle RBAC.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/TP1_Prise_en_main_sur_VirtualBox.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">☁️</div>
+            <h2>Prise en main Proxmox VE (TP 1)</h2>
+            <p>Installation et configuration de l'hyperviseur Type 1 Proxmox VE en virtualisation imbriquée (nested virtualization). Paramétrage du pont réseau vmbr0, gestion des dépôts sans abonnement (No-Subscription), déploiement d'une VM Debian 12 avec agent QEMU et gestion des droits administrateur RBAC.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/TP3_Windows11_Proxmox_Enrichi.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🪟</div>
+            <h2>Déploiement VM Windows 11 (TP 3)</h2>
+            <p>Virtualisation avancée de Windows 11 sous Proxmox VE : configuration du firmware UEFI (OVMF), puce TPM 2.0 virtuelle (swtpm), Secure Boot, bus PCIe (chipset q35), intégration des pilotes paravirtualisés VirtIO (SCSI, réseau NetKVM) et agent invité QEMU.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 2 : Administration Système Linux -->
+      <div id="cat-2" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-2')">
+          <h2>Administration Système Linux – Bloc 1 & 2</h2>
+          <p>Révision approfondie du shell Linux, gestion de l'arborescence, flux, liens physiques/symboliques et scripts d'accueil sous Ubuntu 24.04 LTS.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/LAB1_Linux_Commandes_Fondamentales_Debutant.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🐧</div>
+            <h2>Commandes Fondamentales Linux (Lab 1)</h2>
+            <p>Maîtrise du shell Linux sous Ubuntu 24.04 LTS : informations système, arborescence et navigation relative/absolue, redirections de flux (&gt; et &gt;&gt;), comparaison de fichiers diff, analyse d'inodes (liens physiques vs symboliques) et création d'un script d'accueil (MOTD).</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/LAB2_Linux_Utilisateurs_Groupes_Debutant.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">👥</div>
+            <h2>Gestion Utilisateurs & Groupes (Lab 2)</h2>
+            <p>Sécurité et administration des comptes sous Ubuntu 24.04 LTS : anatomie des fichiers /etc/passwd et /etc/shadow (hachage SHA-512/yescrypt), politiques d'expiration de mot de passe (chage), compte d'arrêt système (/sbin/shutdown), gestion des shells et cycle de vie utilisateur.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 3 : Réseaux & Routage Dynamique Cisco -->
+      <div id="cat-3" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-3')">
+          <h2>Réseaux & Routage Dynamique Cisco – Bloc 2</h2>
+          <p>Configuration et sécurisation d'équipements actifs Cisco (switchs 2960, routeurs), segmentation VLAN, chiffrement SSH v2, Port-Security et routage RIPv2.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/Lab1_Fondations_VLAN_SSH.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🛡️</div>
+            <h2>Sécurisation Switch, VLAN & SSH (Lab 1)</h2>
+            <p>Durcissement et sécurisation d'un switch Cisco Catalyst 2960 : sécurisation console & VTY, chiffrement SSH v2 avec clés RSA 1024/2048 bits, segmentation par VLANs (SALES, ADMIN, Management), SVI et protection anti-intrusion Port-Security (sticky MAC, violation shutdown).</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/LAB2_Cisco_VLANs_Infrastructure_TravelHorizon.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🏢</div>
+            <h2>Infrastructure Réseau d'Entreprise (Lab 2)</h2>
+            <p>Déploiement d'une architecture réseau multi-commutateurs et routeur Cisco (cas Travel Horizon) : VLANs par services, agrégation Trunk 802.1Q, routage Inter-VLAN (Router-on-a-Stick), serveur DHCP sur routeur IOS, SVI, SSH v2 et extension autonome (VLAN RH).</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/Lab_Routage_Dynamique_RIP.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🔄</div>
+            <h2>Routage Dynamique RIPv2 (Lab Packet Tracer)</h2>
+            <p>Étude et déploiement du protocole à vecteur de distance RIPv2 sur une topologie en carré fermé 4 sites (Entreprise KARIPOU). Configuration IOS (router rip, version 2, network, passive-interface), partage de charge (load balancing), mécanisme du Split Horizon, analyse de la convergence lors d'une panne de lien et raccordement autonome d'un 5ᵉ site (CINQUO).</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 4 : Cybersécurité & Audit d'Infrastructure -->
+      <div id="cat-4" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-4')">
+          <h2>Cybersécurité & Audit d'Infrastructure – Bloc 3</h2>
+          <p>Filtrage de flux stateless par ACL Cisco, sécurisation de périmètre et audit de cartographie réseau / détection de vulnérabilités avec Nmap & scripts NSE.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="TP_faits/TP02_Cisco_ACL_Filtrage.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🛡️</div>
+            <h2>Filtrage Réseau par ACL Cisco (TP 02)</h2>
+            <p>Conception, implémentation et validation d'Access Control Lists (ACL standards, étendues et nommées) sur routeurs Cisco 2911 (cas PME SISR2). Calcul de Wildcard masks, sens d'application in/out, politique de liste blanche/noire, filtrage applicatif (HTTP/DNS/FTP), gestion des flux de réponse avec l'option established et diagnostic de pannes.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="TP_faits/Lab_Nmap_Audit_Reseau.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🔍</div>
+            <h2>Cartographie & Audit Nmap (Lab Sécurité)</h2>
+            <p>Audit de sécurité et cartographie en environnement professionnel (Kali Linux, Ubuntu, Windows 10, Metasploitable2). Techniques de scan TCP SYN/Connect/UDP, interprétation des états open/closed/filtered, détection de versions et d'OS, analyse de vulnérabilités CVE avec le moteur de scripts NSE, tests d'évasion IDS/pare-feu et remédiations priorisées.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Script pour l'interactivité des catégories -->
+    <script>
+      function openTheme(themeId) {
+        document.getElementById('themes-grid').style.display = 'none';
+        document.querySelectorAll('.category-section').forEach(el => el.style.display = 'none');
+        document.getElementById(themeId).style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function closeTheme(themeId) {
+        document.getElementById(themeId).style.display = 'none';
+        document.getElementById('themes-grid').style.display = 'grid';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    </script>
+  </main>
   <footer class="espace" style="height: auto; padding: 20px 0;"><p style="font-size: 0.8em; text-align: center; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
 </body>
 </html>

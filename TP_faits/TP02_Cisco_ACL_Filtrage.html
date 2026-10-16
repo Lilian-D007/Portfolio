@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>TP02 – Filtrer le trafic réseau avec les ACL Cisco – BTS SIO SISR</title>
+  <style>
+    @page { size: A4; margin: 18mm 15mm; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1e293b; background: #fff; margin: 0 auto; max-width: 900px; padding: 20px; }
+    header.doc-header { border-bottom: 3px solid #2563eb; padding-bottom: 15px; margin-bottom: 25px; }
+    .badge-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .badge { background: #eff6ff; color: #1d4ed8; padding: 4px 10px; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; border: 1px solid #bfdbfe; }
+    .badge-cyber { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+    h1 { color: #0f172a; margin: 0 0 8px 0; font-size: 1.8rem; }
+    .meta-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9rem; }
+    .meta-table td, .meta-table th { border: 1px solid #e2e8f0; padding: 8px 12px; }
+    .meta-table th { background: #f8fafc; text-align: left; width: 25%; font-weight: 600; color: #475569; }
+    h2 { color: #1e3a8a; border-left: 4px solid #3b82f6; padding-left: 10px; margin-top: 30px; font-size: 1.3rem; }
+    h3 { color: #1e40af; margin-top: 20px; font-size: 1.1rem; }
+    table.data-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+    table.data-table th, table.data-table td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
+    table.data-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+    table.data-table tr:nth-child(even) { background: #f8fafc; }
+    .info-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; margin: 15px 0; border-radius: 4px; font-size: 0.9rem; }
+    .alert-box { background: #fff7ed; border-left: 4px solid #ea580c; padding: 12px 16px; margin: 15px 0; border-radius: 4px; font-size: 0.9rem; }
+    .cli-box { background: #0f172a; color: #38bdf8; padding: 12px 16px; border-radius: 8px; font-family: "Consolas", "Courier New", monospace; font-size: 0.85rem; overflow-x: auto; margin: 12px 0; border: 1px solid #334155; }
+    .cli-box .prompt { color: #a855f7; font-weight: bold; }
+    .cli-box .comment { color: #64748b; font-style: italic; }
+    .qa-box { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; margin: 12px 0; }
+    .qa-title { font-weight: bold; color: #1e293b; margin-bottom: 6px; }
+    .qa-answer { background: #ffffff; border-left: 3px solid #3b82f6; padding: 8px 12px; margin-top: 6px; font-size: 0.9rem; }
+    .topology-diagram { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; text-align: center; margin: 15px 0; }
+    .page-break { page-break-before: always; }
+  </style>
+</head>
+<body>
+
+<header class="doc-header">
+  <div class="badge-bar">
+    <span class="badge">BTS SIO SISR – 2ème Année</span>
+    <span class="badge">Bloc 2 : Administration Réseau</span>
+    <span class="badge badge-cyber">Bloc 3 : Cybersécurité</span>
+    <span class="badge">Auteur : Lilian DUSSY</span>
+  </div>
+  <h1>TP02 – Filtrer le trafic réseau avec les ACL Cisco</h1>
+  <p style="margin: 0; color: #64748b; font-size: 0.95rem;">Sécurisation périmétrique, contrôle d'accès stateless et filtrage de flux inter-sites sous Cisco IOS</p>
+</header>
+
+<table class="meta-table">
+  <tr><th>Niveau & Option</th><td>BTS SIO option SISR – Travaux Pratiques</td><th>Outil de simulation</th><td>Cisco Packet Tracer (8.x)</td></tr>
+  <tr><th>Compétences visées</th><td colspan="3"><strong>B2.2</strong> Installer, tester et déployer une solution d’infrastructure réseau.<br><strong>B2.3</strong> Exploiter, dépanner et superviser une solution d’infrastructure réseau.<br><strong>Bloc 3</strong> Cybersécurité : sécurisation d'une infrastructure réseau et filtrage des accès.</td></tr>
+  <tr><th>Durée estimée</th><td>6 heures (Cours : 1h – TP : 5h)</td><th>Livrables</th><td>Compte-rendu technique + Fichiers .pkt + show running-config R1/R2</td></tr>
+</table>
+
+<h2>1. Synthèse du Cours & Fondements Théoriques des ACL</h2>
+<p>Une <strong>Access Control List (ACL)</strong> est une liste ordonnée de règles (ACE - <em>Access Control Entry</em>) appliquée sur un équipement réseau (routeur, switch L3) permettant d'autoriser (<code>permit</code>) ou d'interdire (<code>deny</code>) le transit de paquets en fonction d'adresses IP, de protocoles et de ports TCP/UDP.</p>
+
+<div class="info-box">
+  <strong>Algorithme de lecture :</strong>
+  <ol style="margin: 5px 0 0 20px; padding: 0;">
+    <li><strong>Séquentiel :</strong> Évaluation de haut en bas (du plus spécifique au plus général).</li>
+    <li><strong>Première correspondance :</strong> Dès qu'une règle correspond, l'action est exécutée et l'analyse s'arrête immédiatement.</li>
+    <li><strong>Deny implicite :</strong> Tout paquet ne correspondant à aucune règle explicite est silencieusement rejeté (<code>deny ip any any</code>).</li>
+    <li><strong>Stateless (sans état) :</strong> Chaque paquet est analysé isolément, sans mémoire de la session retour (utilisation de <code>established</code> pour TCP).</li>
+  </ol>
+</div>
+
+<table class="data-table">
+  <thead><tr><th>Caractéristique</th><th>ACL Standard</th><th>ACL Étendue</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Plages de numéros</strong></td><td>1 à 99 et 1300 à 1999</td><td>100 à 199 et 2000 à 2699</td></tr>
+    <tr><td><strong>Critères analysés</strong></td><td>Adresse IP Source uniquement</td><td>IP Source, IP Destination, Protocole (IP/TCP/UDP/ICMP), Ports & Drapeaux</td></tr>
+    <tr><td><strong>Placement recommandé</strong></td><td><strong>Au plus près de la destination</strong> (pour éviter de bloquer la source vers d'autres destinations)</td><td><strong>Au plus près de la source</strong> (pour éliminer le trafic indésirable dès l'entrée et préserver la bande passante)</td></tr>
+    <tr><td><strong>Syntaxe type</strong></td><td><code>access-list 10 deny host 192.168.1.112</code></td><td><code>access-list 101 permit tcp any host 172.16.1.100 eq 80</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Calcul du Wildcard Mask</h3>
+<p>Le <strong>wildcard mask</strong> est le masque inversé : un bit à <code>0</code> indique une correspondance stricte, un bit à <code>1</code> est ignoré. Formule : <code>Wildcard = 255.255.255.255 - Masque de sous-réseau</code>.</p>
+<ul>
+  <li>/24 (255.255.255.0) &rarr; <code>0.0.0.255</code></li>
+  <li>/30 (255.255.255.252) &rarr; <code>0.0.0.3</code></li>
+  <li>Hôte unique (/32) &rarr; <code>host IP</code> ou <code>0.0.0.0</code></li>
+  <li>Tout le trafic (/0) &rarr; <code>any</code> (0.0.0.0 255.255.255.255)</li>
+</ul>
+
+<h2>2. Architecture de la Maquette (Entreprise SISR2)</h2>
+<div class="topology-diagram">
+  <p style="font-weight: bold; margin-bottom: 8px;">Topologie du TP02 : Siège &larr;&rarr; Liaison Série 1.1.1.0/30 &larr;&rarr; Agence</p>
+  <div style="background: #e2e8f0; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.85rem; display: inline-block; text-align: left;">
+    [LAN SIÈGE 192.168.1.0/24] (Web .251, DNS .252, DHCP .250, PC1 .111, PC2 .112)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Gi0/0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Routeur R1] (192.168.1.1 / 1.1.1.2)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Se0/0/0 (Liaison WAN 1.1.1.0/30 DCE)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Routeur R2] (1.1.1.1 / 172.16.1.1)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Gi0/0<br>
+    [LAN AGENCE 172.16.1.0/24] (Serveur-Agence .100 HTTP/FTP, PC3 .10)
+  </div>
+</div>
+
+<h3>Politique de Sécurité à implémenter :</h3>
+<ul>
+  <li><strong>R1 :</strong> Les postes du LAN Siège ne doivent pas pouvoir envoyer de ping vers le réseau d'interconnexion 1.1.1.0/30.</li>
+  <li><strong>R2 :</strong> PC2 (192.168.1.112) ne doit avoir aucun accès au réseau de l'agence.</li>
+  <li><strong>R3 :</strong> Depuis le LAN Siège, le Serveur-Agence (172.16.1.100) n'est accessible qu'en HTTP (TCP 80). Le reste de l'agence (PC3) reste joignable.</li>
+  <li><strong>R4 :</strong> Depuis l'agence, seuls sont autorisés vers le siège : le serveur Web (HTTP) et le serveur DNS (DNS UDP 53). Les réponses aux connexions initiées depuis le siège doivent passer.</li>
+</ul>
+
+<h2>3. Réponses aux Questions & Configurations Réalisées</h2>
+
+<div class="qa-box">
+  <div class="qa-title">Partie B – Analyse & Wildcard Masks (B1 à B5)</div>
+  <div class="qa-answer">
+    <ul>
+      <li><strong>192.168.1.0 /24 :</strong> Wildcard = <code>0.0.0.255</code></li>
+      <li><strong>1.1.1.0 /30 :</strong> Wildcard = <code>0.0.0.3</code> (255.255.255.255 - 255.255.255.252)</li>
+      <li><strong>10.0.0.0 /8 :</strong> Wildcard = <code>0.255.255.255</code></li>
+      <li><strong>Ordre de lecture (B2.1) :</strong> Si <code>permit ip any any</code> est placé avant le deny ICMP, le ping n'est <strong>pas bloqué</strong> car la première règle autorise tout le trafic et stoppe l'évaluation. Il faut placer la règle spécifique <code>deny icmp</code> au-dessus.</li>
+      <li><strong>Deny implicite (B2.2) :</strong> Si l'on ne laisse que <code>deny icmp</code>, tout le trafic HTTP est <strong>bloqué</strong> à cause du deny implicite final.</li>
+      <li><strong>Sens in / out (B3.1) :</strong> Aller (PC1&rarr;PC3) : R1 Gi0/0 (in), R1 Se0/0/0 (out), R2 Se0/0/0 (in), R2 Gi0/0 (out). Retour (PC3&rarr;PC1) : R2 Gi0/0 (in), R2 Se0/0/0 (out), R1 Se0/0/0 (in), R1 Gi0/0 (out).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">Partie C – Règle R2 : ACL Standard sur R2 (Isolation de PC2)</div>
+  <div class="qa-answer">
+    <p>Une ACL standard ne filtre que la source : pour ne pas bloquer PC2 vers son propre LAN ou d'autres destinations, on la place <strong>au plus près de la destination</strong> : sur le routeur <strong>R2</strong>, interface <strong>Gi0/0</strong>, sens <strong>out</strong>.</p>
+    <div class="cli-box">
+      <span class="prompt">R2(config)#</span> access-list 10 deny host 192.168.1.112<br>
+      <span class="prompt">R2(config)#</span> access-list 10 permit any<br>
+      <span class="prompt">R2(config)#</span> interface gigabitEthernet 0/0<br>
+      <span class="prompt">R2(config-if)#</span> ip access-group 10 out
+    </div>
+    <p><strong>Limite constatée (C6) :</strong> Si PC2 change d'adresse IP (ex: 192.168.1.113), le filtrage devient inopérant. D'où la nécessité de combiner ACL avec DHCP Snooping, 802.1X ou filtrage par VLAN.</p>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">Partie D & E – Règles R1 & R3 : ACL Étendue Nommée sur R1 (FILTRE_LAN)</div>
+  <div class="qa-answer">
+    <p>Pour R1 et R3, nous déployons une ACL étendue nommée <code>FILTRE_LAN</code> sur R1 (Gi0/0 in) regroupant l'interdiction du ping vers le WAN, l'autorisation stricte HTTP vers le Serveur-Agence, et l'interdiction du reste vers ce serveur :</p>
+    <div class="cli-box">
+      <span class="prompt">R1(config)#</span> ip access-list extended FILTRE_LAN<br>
+      <span class="prompt">R1(config-ext-nacl)#</span> 10 deny icmp 192.168.1.0 0.0.0.255 1.1.1.0 0.0.0.3<br>
+      <span class="prompt">R1(config-ext-nacl)#</span> 20 permit tcp 192.168.1.0 0.0.0.255 host 172.16.1.100 eq 80<br>
+      <span class="prompt">R1(config-ext-nacl)#</span> 30 deny ip 192.168.1.0 0.0.0.255 host 172.16.1.100<br>
+      <span class="prompt">R1(config-ext-nacl)#</span> 40 permit ip any any<br>
+      <span class="prompt">R1(config)#</span> interface gigabitEthernet 0/0<br>
+      <span class="prompt">R1(config-if)#</span> ip access-group FILTRE_LAN in
+    </div>
+  </div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-title">Partie F – Règle R4 : Filtrage Agence &rarr; Siège (Liste Blanche & Established)</div>
+  <div class="qa-answer">
+    <p>Conception d'une ACL en liste blanche <code>AGENCE_IN</code> appliquée sur <strong>R2 Gi0/0 in</strong>. On autorise le HTTP vers le Web, le DNS vers le serveur DNS, les réponses TCP initiées depuis le siège grâce à l'option <code>established</code> (ACK/RST), et les réponses ICMP (<code>echo-reply</code>) :</p>
+    <div class="cli-box">
+      <span class="prompt">R2(config)#</span> ip access-list extended AGENCE_IN<br>
+      <span class="prompt">R2(config-ext-nacl)#</span> permit tcp 172.16.1.0 0.0.0.255 host 192.168.1.251 eq 80<br>
+      <span class="prompt">R2(config-ext-nacl)#</span> permit udp 172.16.1.0 0.0.0.255 host 192.168.1.252 eq 53<br>
+      <span class="prompt">R2(config-ext-nacl)#</span> permit tcp 172.16.1.0 0.0.0.255 192.168.1.0 0.0.0.255 established<br>
+      <span class="prompt">R2(config-ext-nacl)#</span> permit icmp 172.16.1.0 0.0.0.255 192.168.1.0 0.0.0.255 echo-reply<br>
+      <span class="prompt">R2(config-ext-nacl)#</span> deny ip 172.16.1.0 0.0.0.255 192.168.1.0 0.0.0.255<br>
+      <span class="prompt">R2(config-ext-nacl)#</span> permit ip any any<br>
+      <span class="prompt">R2(config)#</span> interface gigabitEthernet 0/0<br>
+      <span class="prompt">R2(config-if)#</span> ip access-group AGENCE_IN in
+    </div>
+  </div>
+</div>
+
+<h2>4. Bilan Professionnel & Cybersécurité</h2>
+<table class="data-table">
+  <thead><tr><th>Question de Bilan</th><th>Analyse Technique & Recommandation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Limites du filtrage stateless (H1)</strong></td><td>Les ACL ne conservent pas l'état des sessions : elles exigent des ouvertures manuelles ou l'usage de <code>established</code> (facilement contournable par spoofing de flags). Solution : Pare-feu d'état (Stateful Firewall / Cisco ASA / pfSense).</td></tr>
+    <tr><td><strong>Fragilité du filtrage par IP (H2)</strong></td><td>Une adresse IP peut changer via DHCP ou être usurpée. Solutions : filtrage basé sur l'authentification 802.1X, segmentation par VLANs de rôle, et inspection dynamique ARP (DAI) / DHCP Snooping.</td></tr>
+    <tr><td><strong>Politique Liste Blanche vs Liste Noire (H3)</strong></td><td>La liste noire (terminant par <code>permit ip any any</code>) autorise tout par défaut sauf les menaces connues (faible sécurité). La liste blanche (rejetant tout par défaut) respecte le principe de moindre privilège recommandé par l'ANSSI.</td></tr>
+  </tbody>
+</table>
+
+<footer style="margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; font-size: 0.8rem; color: #64748b; text-align: center;">
+  Document rédigé par Lilian DUSSY – BTS SIO SISR Saint Rémi – Portfolio Professionnel
+</footer>
+
+</body>
+</html>
