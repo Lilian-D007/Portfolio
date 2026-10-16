@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stage 1ère Année – Ministère de l'Intérieur – Lilian</title>
+  <title>Stage 1ère Année – Cellule de Crise & Alertes – Ministère de l'Intérieur – Lilian</title>
   <link rel="stylesheet" href="css/audio.css">
   <script src="js/audio.js" defer></script>
   <link rel="stylesheet" href="css/navigation.css">
@@ -39,7 +39,7 @@
 
     .hero-header h1 {
       margin: 10px 0;
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       color: #9eb4ff;
     }
 
@@ -61,8 +61,13 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    .tag-gov {
-      background: #b91c1c;
+    .tag-alert {
+      background: #dc2626;
+      box-shadow: 0 0 10px rgba(220, 38, 38, 0.6);
+    }
+
+    .tag-telecom {
+      background: #ea580c;
     }
 
     .meta-grid {
@@ -131,6 +136,36 @@
       color: #e2e8f0;
     }
 
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .partner-box {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .partner-box h4 {
+      margin: 0 0 8px 0;
+      color: #38bdf8;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .partner-box p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+    }
+
     .skills-badge-list {
       display: flex;
       flex-wrap: wrap;
@@ -145,6 +180,20 @@
       border-radius: 8px;
       font-size: 0.8rem;
       color: #c7d2fe;
+    }
+
+    .oral-memo {
+      background: rgba(22, 101, 52, 0.25);
+      border: 2px solid #22c55e;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 15px;
+    }
+
+    .oral-memo h4 {
+      margin: 0 0 10px 0;
+      color: #4ade80;
+      font-size: 1.1rem;
     }
   </style>
 </head>
@@ -172,29 +221,30 @@
   <main class="stage-container">
     <section class="glass-panel hero-header">
       <div class="tag-bar">
-        <span class="stage-tag tag-gov">🏛️ Ministère de l'Intérieur</span>
-        <span class="stage-tag">Paris (Site Central)</span>
-        <span class="stage-tag">BTS SIO SISR – 1ère Année</span>
+        <span class="stage-tag tag-alert">🚨 Cellule Crise & Alertes Nationales</span>
+        <span class="stage-tag">🏛️ Ministère de l'Intérieur (Paris)</span>
+        <span class="stage-tag tag-telecom">📡 Résilience Télécoms & Opérateurs</span>
+        <span class="stage-tag">BTS SIO SISR 1ère Année</span>
       </div>
-      <h1>Rapport de Stage – Immersion & Support d'Infrastructure</h1>
-      <p style="color: #cbd5e1; font-size: 1.05rem; margin: 0;">Participation à la maintenance du parc informatique, au support de proximité et à l'exploitation des équipements d'accès réseau au sein d'une institution régalienne.</p>
+      <h1>Stage 1ère Année – Département de Gestion des Crises & Télécommunications d'Urgence</h1>
+      <p style="color: #cbd5e1; font-size: 1.05rem; margin: 0;">Immersion au sein de la cellule de crise ministérielle : prévention réseau, continuité des liaisons d'alertes vitales (FR-Alert) et suivi technique inter-organismes avec les opérateurs télécoms (Orange, SFR, Bouygues, Free), Thales et l'ESA.</p>
 
       <div class="meta-grid">
         <div class="meta-item">
-          <strong>Organisme d'accueil :</strong>
-          Ministère de l'Intérieur (Paris)
+          <strong>Organisme & Lieu :</strong>
+          Ministère de l'Intérieur (Paris – Cellule de Crise)
         </div>
         <div class="meta-item">
-          <strong>Pôle / Service :</strong>
-          Direction des Systèmes d'Information & Support
+          <strong>Département :</strong>
+          Gestion des Crises, Télécommunications & Alertes
         </div>
         <div class="meta-item">
-          <strong>Période & Durée :</strong>
-          Fin de 1ère année (6 semaines)
+          <strong>Rôle du Stagiaire :</strong>
+          Technicien Réseaux & Support des Systèmes de Crise
         </div>
         <div class="meta-item">
-          <strong>Statut :</strong>
-          Stagiaire Technicien Systèmes & Réseaux
+          <strong>Partenaires & Acteurs :</strong>
+          Orange, SFR, Bouygues, Free, Thales, ESA
         </div>
       </div>
     </section>
@@ -202,93 +252,134 @@
     <!-- Clause de confidentialité -->
     <section class="glass-panel" style="padding: 18px 24px;">
       <div class="confidential-notice">
-        <strong>🔒 Clause de Confidentialité et Secret Professionnel :</strong><br>
-        En raison de la nature sensible et étatique des missions exercées au sein du Ministère de l'Intérieur, les données opérationnelles, adresses IP publiques, cartographies précises et identifiants d'utilisateurs ont été volontairement masqués ou anonymisés dans cette restitution afin de garantir le strict respect de la sécurité des systèmes d'information (SSI).
+        <strong>🔒 Clause de Confidentialité et Secret Défense / SSI :</strong><br>
+        En raison de la criticité opérationnelle du Département de Crise et des Alertes du Ministère de l'Intérieur, les fréquences tactiques protégées, les plans d'architecture confidentiels et les codes d'accès directs aux infrastructures régaliennes sont protégés par le secret professionnel. Cette présentation expose la méthodologie générale de prévention des pannes, la chaîne d'alerte multi-opérateurs et les compétences réseaux acquises sans divulgation d'éléments classifiés.
       </div>
     </section>
 
-    <!-- Missions & Réalisations -->
+    <!-- Contexte & Fonctionnement de la Cellule -->
     <section class="glass-panel">
-      <h2 class="section-title">🛠️ Missions & Réalisations Techniques</h2>
-
-      <!-- Mission 1 : Support & Masterisation -->
-      <div class="mission-card">
-        <h3>1. Masterisation de Postes Sécurisés & Gestion du Parc (Bloc 1)</h3>
-        <p>Intégration au sein de l'équipe de support informatique de proximité pour assurer le déploiement et la préparation des équipements des agents du ministère :</p>
-        <ul>
-          <li><strong>Masterisation via serveur de déploiement (WDS / PXE) :</strong> Déploiement d'images système standardisées Windows Entreprise durcies selon les préconisations ministérielles.</li>
-          <li><strong>Durcissement des postes clients :</strong> Vérification du chiffrement intégral des disques via <strong>BitLocker</strong> couplé à la puce matérielle <strong>TPM 2.0</strong>, verrouillage des ports USB externes non autorisés.</li>
-          <li><strong>Installation de la suite logicielle agréée :</strong> Configuration des clients VPN IPsec sécurisés pour le travail distant, suite bureautique, et agents antivirus/EDR managés centralement.</li>
-          <li><strong>Gestion du stock & inventaire :</strong> Enregistrement des entrées/sorties de matériel, étiquetage des immobilisations et mise à jour de la base de gestion de parc informatique (type GLPI).</li>
-        </ul>
-        <div class="skills-badge-list">
-          <span class="skill-pill">WDS / PXE</span>
-          <span class="skill-pill">BitLocker & TPM 2.0</span>
-          <span class="skill-pill">Gestion de Parc (GLPI)</span>
-          <span class="skill-pill">B1.1 Gérer le patrimoine</span>
-        </div>
-      </div>
-
-      <!-- Mission 2 : Assistance Utilisateurs -->
-      <div class="mission-card">
-        <h3>2. Assistance Utilisateurs & Résolution d'Incidents N1 / N2 (Bloc 1)</h3>
-        <p>Prise en charge quotidienne des sollicitations des agents ministériels à travers la file d'incidents :</p>
-        <ul>
-          <li><strong>Traitement des tickets d'incidents :</strong> Qualification, diagnostic téléphonique ou intervention directe sur site pour résoudre les blocages logiciels et matériels.</li>
-          <li><strong>Gestion des périphériques d'impression sécurisés :</strong> Raccordement et dépannage des copieurs multifonctions réseaux avec authentification par carte à puce/badge agent (PaperCut/FollowMe).</li>
-          <li><strong>Remplacement de composants défaillants :</strong> Diagnostic de pannes matérielles, remplacement de blocs d'alimentation, barrettes de RAM et migration vers des disques SSD chiffrés.</li>
-          <li><strong>Rédaction de fiches de procédure :</strong> Documentation des guides de dépannage récurrents à destination des techniciens et fiches réflexes pour les utilisateurs finaux.</li>
-        </ul>
-        <div class="skills-badge-list">
-          <span class="skill-pill">Ticketing ITSM</span>
-          <span class="skill-pill">Dépannage Matériel & OS</span>
-          <span class="skill-pill">Impression Réseau Sécurisée</span>
-          <span class="skill-pill">B1.2 Réponses aux incidents</span>
-        </div>
-      </div>
-
-      <!-- Mission 3 : Réseau & Baies de Brassage -->
-      <div class="mission-card">
-        <h3>3. Infrastructure Réseau Local & Baies de Brassage (Bloc 2)</h3>
-        <p>Interventions encadrées sur la couche d'accès réseau des bâtiments administratifs dans le respect des règles de cloisonnement :</p>
-        <ul>
-          <li><strong>Brassage en répartiteurs d'étage :</strong> Raccordement des prises murales RJ45 (Catégorie 6A blindée) vers les panneaux de brassage et les switchs de distribution Cisco.</li>
-          <li><strong>Tests de réflectométrie & continuité :</strong> Utilisation d'un testeur de câblage professionnel pour vérifier l'absence de court-circuit, la conformité de l'ordre des paires (norme T568B) et l'intégrité du signal.</li>
-          <li><strong>Affectation de ports sur Switchs Cisco :</strong> Affectation de ports d'accès sur les VLANs prévus (VLAN Bureautique, VLAN Téléphonie sur IP ToIP, VLAN Impression) sous la supervision de l'administrateur réseau.</li>
-          <li><strong>Diagnostic de connectivité :</strong> Analyse des pannes de liaison réseau (vérification des baux DHCP, résolutions DNS, tests ping et renouvellement de configuration IP).</li>
-        </ul>
-        <div class="skills-badge-list">
-          <span class="skill-pill">Câblage & Baies de Brassage</span>
-          <span class="skill-pill">Commutateurs Cisco (VLANs)</span>
-          <span class="skill-pill">Diagnostic DHCP / DNS</span>
-          <span class="skill-pill">B2.1 Infrastructure Réseau</span>
-        </div>
-      </div>
-
-      <!-- Mission 4 : Active Directory -->
-      <div class="mission-card">
-        <h3>4. Administration des Comptes & Annuaire Active Directory (Bloc 1 & 2)</h3>
-        <p>Gestion opérationnelle des identités et des droits d'accès sous Windows Server Active Directory Domain Services (AD DS) :</p>
-        <ul>
-          <li><strong>Cycle de vie des comptes agents :</strong> Création des comptes utilisateurs lors des nouvelles affectations, placement dans les Unités d'Organisation (OU) appropriées et désactivation des comptes lors des départs.</li>
-          <li><strong>Attribution des groupes de sécurité :</strong> Ajout des utilisateurs aux groupes de sécurité correspondants à leur direction pour donner accès aux partages de fichiers réseau (permissions NTFS et droits de partage).</li>
-          <li><strong>Application des GPO :</strong> Vérification de l'application des stratégies de groupe (Group Policy Objects) imposant la complexité des mots de passe, le verrouillage automatique de session et la mise à jour des agents de sécurité.</li>
-        </ul>
-        <div class="skills-badge-list">
-          <span class="skill-pill">Active Directory (AD DS)</span>
-          <span class="skill-pill">GPO & Droits NTFS</span>
-          <span class="skill-pill">Sécurité des Identités</span>
-          <span class="skill-pill">B1.3 Gestion des accès</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Bilan & Compétences -->
-    <section class="glass-panel">
-      <h2 class="section-title">📈 Bilan du Stage & Apports Professionnels</h2>
+      <h2 class="section-title">🛰️ 1. Le Fonctionnement Opérationnel de la Cellule de Crise</h2>
       <p style="line-height: 1.6; color: #e2e8f0;">
-        Ce stage au Ministère de l'Intérieur a constitué une opportunité majeure d'immersion professionnelle dans un environnement d'envergure nationale soumis à de très fortes contraintes de disponibilité et de cybersécurité. Il m'a permis de développer une rigueur méthodologique indispensable, un sens aigu de la confidentialité étatique, ainsi qu'une réactivité accrue face aux problématiques des utilisateurs. Cette expérience a validé de manière concrète mes compétences du <strong>Bloc 1 (Support et services informatiques)</strong> et posé les jalons pratiques des architectures étudiées en <strong>Bloc 2 (Administration réseau)</strong>.
+        La cellule de crise et des alertes est le point névralgique interministériel en cas d'événement majeur (catastrophes naturelles, alertes attentat, accidents industriels majeurs Seveso, pannes massives d'infrastructures). Sa mission est d'assurer <strong>l'alerte instantanée des populations (dispositif FR-Alert)</strong> et le maintien <strong>24/7/365 des télécommunications de commandement</strong> entre le ministère, les préfectures de zone et les secours opérationnels.
       </p>
+
+      <div class="partner-grid">
+        <div class="partner-box" style="border-left: 3px solid #38bdf8;">
+          <h4>⚡ Le Défi : Zéro Coupure Réseau (PCA / PRA)</h4>
+          <p>En cas de coupure de fibre optique ou de cyberattaque visant un opérateur national, l'alerte d'urgence <strong>doit impérativement être diffusée</strong>. Cela impose une <strong>redondance tripartite</strong> systématique : Réseau filaire terrestre (RIE) &bull; Réseaux cellulaires 4G/5G multi-opérateurs &bull; Secours satellitaire autonome.</p>
+        </div>
+        <div class="partner-box" style="border-left: 3px solid #f59e0b;">
+          <h4>📲 Le Système FR-Alert (Cell Broadcast)</h4>
+          <p>Le système n'envoie pas de SMS individuels (qui satureraient les antennes en quelques secondes), mais diffuse un message radioélectrique simultané (<em>Cell Broadcast</em>) sur tous les relais 4G/5G des 4 opérateurs français pour avertir des millions de citoyens en quelques secondes sur une zone géographique ciblée.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prévention Réseau & Réunions avec les Opérateurs / Industriels -->
+    <section class="glass-panel">
+      <h2 class="section-title">🤝 2. Prévention Réseau & Réunions Techniques Inter-Organismes</h2>
+      <p style="line-height: 1.6; color: #e2e8f0;">
+        Pour garantir la résilience des communications de crise, des comités de prévention technique et des exercices de bascule réguliers sont organisés avec l'ensemble des acteurs industriels et télécoms. Durant mon stage, j'ai assisté l'équipe technique lors de ces échanges :
+      </p>
+
+      <div class="partner-grid">
+        <!-- Orange, SFR, Bouygues, Free -->
+        <div class="partner-box" style="grid-column: 1 / -1; border-color: #ea580c;">
+          <h4 style="color: #fb923c;">📶 Les 4 Opérateurs Télécoms : Orange, SFR, Bouygues Telecom & Free</h4>
+          <p style="margin-bottom: 8px;"><strong>Objet des réunions de prévention réseau :</strong> Suivi de la disponibilité des boucles locales de télécommunications et validation de la diffusion des alertes nationales.</p>
+          <ul style="margin: 0; padding-left: 20px; line-height: 1.5; color: #e2e8f0;">
+            <li><strong>Dispositif de priorisation QCI (Quality of Service) :</strong> Vérification que les cartes SIM de crise du Ministère bénéficient d'un accès prioritaire réservé sur les antennes relais, même en cas de saturation extrême par le grand public.</li>
+            <li><strong>Supervision des liaisons louées & points de présence (PoP) :</strong> Analyse des rapports d'incidents travaux (ruptures accidentelles de fourreaux de fibre optique) et confirmation du basculement automatique (failover BGP/MPLS) vers les chemins de repli.</li>
+            <li><strong>Exercices conjoints de diffusion FR-Alert :</strong> Simulation de déclenchement de messages d'alerte en environnement de test pour valider les temps de réponse des passerelles CBC (Cell Broadcast Centre) de chaque opérateur.</li>
+          </ul>
+        </div>
+
+        <!-- Thales -->
+        <div class="partner-box" style="border-color: #0284c7;">
+          <h4 style="color: #38bdf8;">🛡️ THALES (Chiffrement & Sécurité Souveraine)</h4>
+          <p><strong>Objet :</strong> Maintien en condition opérationnelle (MCO) des chiffreurs matériels souverains.</p>
+          <p style="margin-top: 6px;">Échanges techniques sur le durcissement des tunnels VPN IPsec chiffrés reliant le centre de crise de Paris aux préfectures régionales. Validation de la résistance aux coupures et tests des valises tactiques de communication sécurisée pour les cellules mobiles de crise.</p>
+        </div>
+
+        <!-- ESA -->
+        <div class="partner-box" style="border-color: #a855f7;">
+          <h4 style="color: #c084fc;">🛰️ ESA (Agence Spatiale Européenne)</h4>
+          <p><strong>Objet :</strong> Secours satellitaire et données d'alerte spatiale (Galileo / Copernicus).</p>
+          <p style="margin-top: 6px;">En cas de catastrophe majeure détruisant les infrastructures télécoms terrestres, la cellule bascule sur les liaisons satellitaires souveraines. Coordination des fréquences d'urgence et tests de débit/latence sur les stations de réception satellites gouvernementales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Missions Concrètes & Réalisations (Attentes du Prof SISR) -->
+    <section class="glass-panel">
+      <h2 class="section-title">💻 3. Mes Réalisations Techniques au Quotidien (BTS SISR)</h2>
+      <p style="line-height: 1.6; color: #e2e8f0;">
+        Concrètement, au sein de l'équipe technique de la cellule de crise, mes missions ont couvert le support opérationnel et la prévention des défaillances réseaux :
+      </p>
+
+      <!-- Mission A -->
+      <div class="mission-card">
+        <h3>A. Supervision de l'État des Liaisons & Détection Proactive d'Incidents (Bloc 2)</h3>
+        <ul>
+          <li><strong>Monitoring des liaisons réseaux :</strong> Suivi quotidien sur tableaux de bord de supervision (sondes ICMP, SNMP, outils de métrologie réseau) vérifiant l'état UP/DOWN et la latence des liaisons reliant les préfectures au centre de crise.</li>
+          <li><strong>Tests de bascule automatique (Failover WAN & Redondance) :</strong> Participation aux tests réguliers de coupure simulée sur le lien principal pour s'assurer que les routeurs Cisco basculent sans interruption vers le lien de secours 4G/5G ou la liaison satellitaire.</li>
+          <li><strong>Suivi des tickets d'alerte opérateurs :</strong> Enregistrement et remontée immédiate dès qu'une dégradation de signal ou une perte de redondance était signalée par Orange Business, SFR Business ou Bouygues Entreprises.</li>
+        </ul>
+        <div class="skills-badge-list">
+          <span class="skill-pill">Supervision SNMP / ICMP</span>
+          <span class="skill-pill">Failover WAN & Redondance</span>
+          <span class="skill-pill">Continuité de Service (PCA)</span>
+          <span class="skill-pill">B2.3 Exploiter et superviser</span>
+        </div>
+      </div>
+
+      <!-- Mission B -->
+      <div class="mission-card">
+        <h3>B. Préparation & Déploiement des Postes de Crise (Bloc 1)</h3>
+        <ul>
+          <li><strong>Masterisation de PC de crise durcis :</strong> Déploiement d'images système sécurisées Windows Entreprise pré-équipées des certificats d'authentification étatiques et des logiciels d'accès aux cartes de situation.</li>
+          <li><strong>Configuration des accès distants sécurisés :</strong> Paramétrage de clients VPN IPsec chiffrés et vérification du chiffrement BitLocker avec puce TPM 2.0 pour les ordinateurs portables attribués aux astreintes de crise.</li>
+          <li><strong>Maintien de la salle opérationnelle :</strong> Vérification quotidienne du bon fonctionnement des postes de travail de la salle de crise, des lignes téléphoniques prioritaires et des écrans muraux de supervision.</li>
+        </ul>
+        <div class="skills-badge-list">
+          <span class="skill-pill">Masterisation de Postes</span>
+          <span class="skill-pill">BitLocker & TPM 2.0</span>
+          <span class="skill-pill">VPN IPsec Sécurisé</span>
+          <span class="skill-pill">B1.1 & B1.2 Support & Incidents</span>
+        </div>
+      </div>
+
+      <!-- Mission C -->
+      <div class="mission-card">
+        <h3>C. Vérification des Terminaux Mobiles & Valises Satellites d'Urgence (Bloc 2)</h3>
+        <ul>
+          <li><strong>Contrôle des terminaux multi-opérateurs :</strong> Vérification périodique des smartphones d'astreinte équipés de puces multi-opérateurs (roaming national prioritaire) pour s'assurer de leur connectivité permanente.</li>
+          <li><strong>Tests des kits satellites de secours :</strong> Déploiement de test d'antennes satellites d'urgence en extérieur (mesure de la qualité du signal, test de ping et vérification de la transmission de données d'urgence indépendantes du réseau internet public).</li>
+          <li><strong>Rédaction de fiches réflexes de secours :</strong> Mise à jour des fiches plastifiées pas-à-pas destinées aux officiers de quart pour raccorder un PC de crise sur la valise satellite en cas de coupure totale.</li>
+        </ul>
+        <div class="skills-badge-list">
+          <span class="skill-pill">Téléphonie d'Urgence</span>
+          <span class="skill-pill">Liaisons Satellites de Secours</span>
+          <span class="skill-pill">Fiches de Procédure</span>
+          <span class="skill-pill">B2.1 Adapter l'infrastructure</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Boîte d'aide pour l'oral d'examen BTS -->
+    <section class="glass-panel">
+      <div class="oral-memo">
+        <h4>🎓 Mémento pour l'Oral de Stage BTS SIO (Facile à retenir et à présenter au jury)</h4>
+        <p style="margin: 0 0 10px 0; line-height: 1.5; color: #e2e8f0;">
+          <strong>Le pitch en 3 points pour le jury :</strong>
+        </p>
+        <ol style="margin: 0; padding-left: 20px; line-height: 1.6; color: #f1f5f9;">
+          <li><strong>Le Contexte :</strong> <em>« J'ai effectué mon stage au Ministère de l'Intérieur au sein du département de gestion de crise et des alertes, un service stratégique dont la mission est d'assurer l'alerte à la population (FR-Alert) et la continuité des liaisons d'urgence sans aucune interruption. »</em></li>
+          <li><strong>La Prévention Réseau :</strong> <em>« J'ai découvert concrètement comment l'État collabore avec les 4 opérateurs télécoms (Orange, SFR, Bouygues, Free) via le Cell Broadcast et des canaux prioritaires (QoS), avec Thales pour le chiffrement des liaisons interministérielles, et avec l'ESA pour le secours par satellite en cas de destruction du réseau terrestre. »</em></li>
+          <li><strong>Mon Rôle Technique :</strong> <em>« Au quotidien, je supervisais l'état des liaisons WAN de secours, participais aux tests de basculement automatique (failover), masterisais les postes durcis de la salle de crise et maintenais les kits satellites de communication d'urgence. »</em></li>
+        </ol>
+      </div>
     </section>
   </main>
 
