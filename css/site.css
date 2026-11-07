@@ -253,3 +253,20 @@ html[data-skin="modern"] :is(.open-hint, .close-hint) { position: static !import
 /* La barre de navigation reste visible pendant tout le défilement (les deux skins) */
 body:not(:has(> .login-box)) { height: auto !important; min-height: 100%; }
 body:has(> .login-box) { min-height: 100vh; height: auto !important; }
+
+/* ===== Barre de navigation : boutons jamais coupés en deux (les deux skins) ===== */
+.nav { flex-wrap: wrap; justify-content: center; row-gap: 10px; }
+.nav > a, .nav > .dd, .nav .dd-toggle, .nav > .site-tools { flex-shrink: 0; }
+.nav > .dd { display: flex; }
+.nav a, .nav .dd-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  white-space: nowrap; line-height: 1.2; box-sizing: border-box;
+}
+.nav .tool-btn { white-space: nowrap; }
+.nav { max-width: 1280px; column-gap: 8px; }
+.nav .site-tools { margin-left: 0; gap: 8px; }
+/* écrans PC moyens : boutons Skin/Langue en icône seule pour garder une seule ligne */
+@media (min-width: 761px) and (max-width: 1240px) {
+  .nav .site-tools .tool-txt { display: none; }
+  .nav .site-tools .tool-btn { padding-left: 10px; padding-right: 10px; }
+}
