@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP0 ARCHIVES : One Piece (Final Version 2.6)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&family=Rye&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cp0: { base: '#02040a', panel: '#0f172a', accent: '#06b6d4', gold: '#c0a062', danger: '#ef4444' },
+                        western: { paper: '#e3d5b8', ink: '#4a3b2a', red: '#8b0000', dark: '#2c241b' }
+                    },
+                    fontFamily: { 
+                        serif: ['Cinzel', 'serif'], 
+                        sans: ['Inter', 'sans-serif'], 
+                        mono: ['JetBrains Mono', 'monospace'],
+                        western: ['Rye', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* BASE */
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #02040a; }
+        
+        .bg-texture {
+            background-image: 
+                linear-gradient(45deg, rgba(15, 23, 42, 0.4) 25%, transparent 25%, transparent 50%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0.4) 75%, transparent 75%, transparent),
+                linear-gradient(to bottom, #02040a, #050a14);
+            background-size: 40px 40px, 100% 100%;
+        }
+
+        .frame-overlay {
+            position: absolute; inset: 0; z-index: 50; pointer-events: none; border-style: solid; border-width: 4px; border-radius: 0.5rem; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); 
+        }
+
+        .card-glass-panel { background: rgba(15, 23, 42, 0.3); backdrop-filter: blur(0.2px); }
+        .neon-bar-top { width: 100%; height: 3px; background-color: #ffffff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.9); flex-shrink: 0; z-index: 60; }
+
+        .neon-border-red { border-color: #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.4); }
+        .neon-border-blue { border-color: #06b6d4; box-shadow: 0 0 25px rgba(6, 182, 212, 0.4); }
+        .neon-border-yellow { border-color: #eab308; box-shadow: 0 0 25px rgba(234, 179, 8, 0.4); }
+        .neon-border-purple { border-color: #a855f7; box-shadow: 0 0 25px rgba(168, 85, 247, 0.4); }
+        .neon-border-green { border-color: #22c55e; box-shadow: 0 0 25px rgba(34, 197, 94, 0.4); }
+
+        .paper-texture { background-color: #e3d5b8; background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"); }
+        
+        .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(6, 182, 212, 0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+        .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(6, 182, 212, 0.6); }
+    </style>
+</head>
+<body class="bg-texture text-slate-200">
+    <div id="root" class="w-full h-full"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { motion, AnimatePresence } = window.Motion;
+
+        // --- ICONES ---
+        const Icon = ({ name, size=24, className }) => {
+            
+            // >>> SPECIAL : L'IMAGE GAVEL (Uniquement pour Slide 3) <<<
+            if (name === 'RealGavel') {
+                return (
+                    <div className={className} style={{ width: size, height: size, position: 'relative' }}>
+                        <img 
+                            src="image/gavel.png" 
+                            alt="Marteau" 
+                            style={{ 
+                                width: '60px', 
+                                height: '60px', 
+                                objectFit: 'contain',
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                maxWidth: 'none'
+                            }} 
+                        />
+                    </div>
+                );
+            }
+
+            const icons = {
+                Shield: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
+                Marine: <path d="M12 2a3 3 0 0 0-3 3v2.17A7.001 7.001 0 0 0 3 14a1 1 0 1 0 2 0 5 5 0 0 1 9.9 1 1 1 0 1 0 2 0 7.001 7.001 0 0 0-6-6.83V5a3 3 0 0 0-3-3z M12 22a1 1 0 0 1-1-1v-4a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1z M5 12h14"/>,
+                Sword: <path d="M14.5 17.5L3 6V3h3l11.5 11.5 M13 19l6-6 M16 16l4 4 M19 21l2-2"/>,
+                Crown: <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/>,
+                Gavel: <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20 M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>,
+                Feather: <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z M16 8L2 22"/>,
+                ChevronDown: <path d="m6 9 6 6 6-6"/>,
+                ChevronLeft: <path d="m15 18-6-6 6-6"/>,
+                ChevronRight: <path d="m9 18 6-6-6-6"/>,
+                X: <path d="M18 6 6 18 M6 6l12 12"/>,
+                Anchor: <path d="M12 22a7 7 0 0 0 7-7v-2a1 1 0 0 0-2 0v2a5 5 0 0 1-10 0v-2a1 1 0 0 0-2 0v2a7 7 0 0 0 7 7z M12 2v13 M12 2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M5 8h14" />,
+                QR: <path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/>,
+                Lock: <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm5-6V7a5 5 0 0 0-10 0v4H5v10h14V11h-2zm-5-6a3 3 0 0 1 3 3v4H9V7a3 3 0 0 1 3-3z"/>
+            };
+            return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>{icons[name] || icons.Shield}</svg>;
+        };
+
+        // --- DATA ---
+        const DATA_STORE = {
+            slides: [
+                {
+                    id: "intro", type: "intro", title: "LÉGAL VS LÉGITIME",
+                    subtitle: "One Piece et la Justice",
+                    short: "One Piece est l'histoire d'une légende, mais aussi un récit géopolitique où Luffy, pirate libertaire, confronte un Gouvernement Mondial totalitaire.",
+                    // MISE A JOUR CHAPITRES ET NUMEROTATION
+                    chapters: ["I. AXIOME PASCALIEN", "II. LES MAJEURS POUVOIRS", "III. LE THÉÂTRE DU JUGEMENT ET DE LA DÉTENTION.", "IV. LA MARINE", "V. ÉTAT D'EXCEPTION", "VI. LÉGITIMITÉ", "CONCLUSION"],
+                    long_text: "Synopsis :\nOne Piece c’est l’histoire d’une légende d’un trésor trouvé par un certain Gold Roger, roi des pirates, un univers fantaisiste ou Luffy un jeune pirate se met à rechercher ce trésor.\nC’est dans ce milieu particulier que Luffy parcourt le monde en appliquant sa notion de la Justice, passant d’île en île pour aider la population souvent souffrante / sous le joug d’un pirate ou de la marine (partie défense du Gouvernement Mondial).\n\nI. Axiome Fondamental : Le « Coup d'État » Pascalien.\nL'ensemble de la structure politique de One Piece peut être décodé par cette pensée de Blaise Pascal (Pensées, fragment 298) : 'La justice sans la force est impuissante ; la force sans la justice est tyrannique. [...] Ne pouvant faire que ce qui est juste fût fort, on a fait que ce qui est fort fût juste.'"
+                },
+                {
+                    id: "axiome", type: "grid", title: "I. AXIOME PASCALIEN", subtitle: "Force vs Justice",
+                    blocks: [
+                        { title: "FORCE DEVENUE JUSTICE", icon: "Sword", short: "L'origine violente du pouvoir.", long: "A. Le Gouvernement Mondial comme 'Force devenue Justice'.\nDans l'univers d'Oda, le Gouvernement Mondial (GM) ne tire pas sa légitimité d'une élection ou d'une supériorité morale, mais d'une victoire militaire originelle (celle des 20 Royaumes lors du 'Siècle Oublié').\nL'imposture juridique : Les Dragons Célestes (Tenryubito) ont opéré ce que Pascal décrit : ils ont 'mis la force dans la justice'. En effaçant l'histoire (Siècle Oublié) et en monopolisant la violence (Armes Antiques, Marine, Cipher Pol), ils ont transformé leur domination factuelle en un Droit Divin." },
+                        { 
+                            title: "DICTATURE CACHÉE", 
+                            icon: "Crown", 
+                            short: "Le mensonge du Trône Vide.", 
+                            long: "L'existence du 'Trône Vide' à Mary Geoise est censée symboliser qu'aucun dictateur unique ne gouverne le monde, garantissant une paix entre les nations. Pourtant, la présence secrète d'Imu sur ce trône révèle la nature frauduleuse du régime : il s'agit d'une dictature cachée.\nCe système totalitaire repose sur une absence critique de la séparation des pouvoirs. Le GM fusionne tout. Les Dragons Célestes édictent la loi, le Conseil des Cinq Doyens l'exécute, et les tribunaux ne sont que des chambres d'enregistrement.",
+                            popupImg: "image/imu.png"
+                        },
+                        { title: "POSITIVISME JURIDIQUE", icon: "Gavel", short: "La Loi protège le bourreau.", long: "Le verrouillage est complété par une mainmise sur le 'Quatrième Pouvoir' : l'information. La presse est contrainte de masquer les siècles de crimes (Lulusia), rendant impossible l'émergence d'une opinion publique éclairée.\nConséquence : Ce qui est 'légal' (le Droit Positif) n'est que l'expression de la volonté du plus fort. La loi protège les bourreaux (esclavage à Sabaody) et condamne les chercheurs de vérité (génocide d'Ohara). La légalité n'est plus garante de la moralité." }
+                    ]
+                },
+                {
+                    id: "powers", type: "powers", title: "II. LES MAJEURS POUVOIRS", subtitle: "Organisation de l'État & Dictature",
+                    items: [
+                        { title: "1. POUVOIR LÉGISLATIF (La Loi)", icon: "Crown", color: "gold", content: "Détenteurs : Les Dragons Célestes & Le Gorosei.\nEn théorie, la Rêverie (assemblée des rois) ressemble à un parlement. En réalité, ce sont les Dragons Célestes qui sont au-dessus des lois. Leurs caprices deviennent des décrets absolus. Le Gorosei, sous les ordres d'Imu, rédige les règles qui régissent le monde." },
+                        { title: "2. POUVOIR EXÉCUTIF (Le Glaive)", icon: "Sword", color: "red", content: "Détenteurs : La Marine & Cipher Pol.\nC'est le bras armé. Dirigée par l'Amiral en Chef Sakazuki, la Marine exécute les ordres du GM sans poser de questions au nom de la 'Justice Absolue'. En parallèle, le Cipher Pol agit comme une police secrète (gestapo) chargée des assassinats politiques pour protéger les nobles." },
+                        { title: "3. POUVOIR JUDICIAIRE (Le Marteau)", icon: "RealGavel", color: "blue", content: "Détenteurs : Enies Lobby & les Juges.\nUn pouvoir fantoche. Dans One Piece, il n'y a pas de présomption d'innocence. Ce pouvoir ne sert pas à rendre la justice, mais à légaliser l'emprisonnement à Impel Down ou l'exécution. La séparation des pouvoirs est inexistante : si la Marine t'arrête, le juge te condamne." },
+                        { title: "4. POUVOIR MÉDIATIQUE (L'Information)", icon: "Feather", color: "green", content: "Détenteurs : Big News Morgans & W.E.N.P.\nMorgans détient le monopole absolu de l'information via ses mouettes. Il possède un pouvoir immense : il peut transformer un pirate en 'Empereur' ou cacher des génocides (Lulusia). C'est le seul pouvoir qui échappe parfois au contrôle total du GM car il privilégie le divertissement." }
+                    ]
+                },
+                // --- SLIDE 4 : LE THÉÂTRE DU JUGEMENT ---
+                {
+                    id: "judiciary_theater", type: "trial", title: "III. LE THÉÂTRE DU JUGEMENT ET DE LA DÉTENTION.", subtitle: "Simulacre & Spectacle",
+                    intro: "Dans One Piece, la Justice n'est pas rendue, elle est mise en scène. Enies Lobby, Impel Down et les échafauds publics servent un but unique : légitimer la violence d'État par le rituel.",
+                    cases: [
+                        {
+                            id: "enies", title: "ENIES LOBBY", icon: "Gavel",
+                            desc: "La mascarade judiciaire.",
+                            content: "Enies Lobby, l'île judiciaire, est une farce bureaucratique. Le juge en chef Baskerville (un homme à trois têtes) n'est qu'un monstre de foire qui rend des verdicts arbitraires. Il n'y a ni avocat, ni défense. Si un accusé arrive à Enies Lobby, il est déjà condamné. Le procès n'est qu'une formalité administrative avant la Porte de la Justice.",
+                            popupType: "gallery",
+                            gallery: [
+                                "image/enies1.png",
+                                "image/enies2.png",
+                                "image/enies3.png",
+                                "image/enies4.png",
+                                "video/enies.mp4"
+                            ]
+                        },
+                        {
+                            id: "tom", title: "L'AFFAIRE TOM", icon: "Anchor",
+                            desc: "Le crime de création.",
+                            content: "Le procès de Tom (mentor de Franky) par le juge Jorge sur le Navire Judiciaire est emblématique. Tom est condamné à mort non pas pour un acte de piraterie direct, mais pour avoir construit l'Oro Jackson, le navire de Roger. Le système judiciaire criminalise la technique et le savoir-faire. Les jurés ne sont là que pour valider la sentence préécrite.",
+                            popupType: "gallery",
+                            gallery: [
+                                "video/tom1.mp4",
+                                "video/tom2.mp4"
+                            ]
+                        },
+                        {
+                            id: "terror", title: "LA TERREUR", icon: "Sword",
+                            desc: "L'échafaud comme symbole.",
+                            content: "Comme sous la Terreur française, le Gouvernement Mondial utilise l'exécution publique pour marquer les esprits. Gold Roger et Mont Blanc Noland ont été exécutés sur l'échafaud devant la foule. Ce n'est pas seulement une mise à mort, c'est un spectacle politique destiné à imposer une vérité officielle par le sang et la peur.",
+                            popupType: "gallery",
+                            gallery: [
+                                "image/roger.png",
+                                "image/noland.png"
+                            ]
+                        },
+                        {
+                            id: "impel", title: "IMPEL DOWN", icon: "Lock",
+                            desc: "L'Enfer Sous-Marin.",
+                            content: "Impel Down n'est pas une prison de réhabilitation, mais un centre de torture structuré comme l'Enfer de Dante. Les prisonniers subissent des supplices croissants selon les étages (Lames, Bêtes, Faim, Chaleur, Froid). Le véritable but est de briser les corps et les esprits. \nLe NIVEAU 6 (Enfer Infini) est le secret le mieux gardé : on y efface de l'histoire les criminels trop dangereux ou gênants pour le Gouvernement Mondial, les faisant disparaître administrativement à jamais.",
+                            popupType: "gallery",
+                            gallery: [
+                                "image/impel1.png",
+                                "image/impel2.png"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "wanted", type: "wanted", title: "DÉLÉGATION DE LA VIOLENCE",
+                    intro_text: "Pour maintenir son emprise, le Gouvernement Mondial délègue officiellement son monopole de la violence légitime. Il transforme chaque citoyen en policier potentiel via l'appât du gain, et engage des criminels pour en chasser d'autres.\nLes Primes (Bounties) dépendent de deux facteurs :\n1. La Dangerosité : Cruauté et violence avérée envers les civils.\n2. La Menace Politique : L'intention de nuire à l'ordre établi (procès d'intention), indépendamment des crimes réels.",
+                    wanted_list: [
+                        { name: "MONKEY D. LUFFY", reward: "3.000.000.000 BERRY", img: "image/luffy.png" },
+                        { name: "EUSTASS KID", reward: "3.000.000.000 BERRY", img: "image/kid.png" }, 
+                        { name: "TRAFALGAR LAW", reward: "3.000.000.000 BERRY", img: "image/law.png" },
+                        { name: "MARSHALL D. TEACH", reward: "3.996.000.000 BERRY", img: "image/teach.png" },
+                        { name: "SHANKS", reward: "4.048.900.000 BERRY", img: "image/shanks.png" }
+                    ],
+                    shichibukai_list: [
+                        { name: "DRACULE MIHAWK", reward: "3.590.000.000 BERRY", img: "image/mihawk.png" }, 
+                        { name: "BOA HANCOCK", reward: "1.659.000.000 BERRY", img: "image/hancock.png" },
+                        { name: "BARTHOLOMEW KUMA", reward: "296.000.000 BERRY", img: "image/kuma.png" },
+                        { name: "DONQUIXOTE DOFLAMINGO", reward: "340.000.000 BERRY", img: "image/doflamingo.png" },
+                        { name: "CROCODILE", reward: "1.965.000.000 BERRY", img: "image/crocodile.png" }
+                    ]
+                },
+                {
+                    // CORRECTION NUMEROTATION IV
+                    id: "marine", type: "cards", title: "IV. LA MARINE", subtitle: "Philosophies de la Justice & Typologie",
+                    cards: [
+                        { name: "AKAINU", title: "JUSTICE ABSOLUE", color: "red", img: "image/akainu.png", desc: "Utilitarisme radical.", text: "Justice Absolue (Sakazuki) : Utilitarisme radical et dogmatisme. La fin (l'Ordre) justifie tous les moyens, y compris le sacrifice d'innocents (Ohara).\nExtrait : L'Incident d'Ohara. En détruisant le navire d'évacuation des civils sous prétexte qu'un archéologue pourrait s'y être caché, Akainu sacrifie l'innocent pour la sécurité du dogme. C'est la négation totale de l'individu face à la Raison d'État.", audio: "audio/akainu.mp3" },
+                        { 
+                            name: "AOKIJI", 
+                            title: "JUSTICE PARESSEUSE", 
+                            color: "blue", 
+                            img: "image/aokiji.png", 
+                            desc: "Équité Aristotélicienne.", 
+                            text: "Justice Paresseuse (Kuzan) : Le doute (carthésien) sceptique et l'équité aristotélicienne. Il adapte la loi aux circonstances particulières, pratiquant le pouvoir discrétionnaire pour éviter l'injustice flagrante.\nIl laisse partir Robin car il juge la condamnation d'une enfant immorale, même si elle est légale.",
+                            audio: "audio/aokiji.mp3"
+                        },
+                        { 
+                            name: "KIZARU", 
+                            title: "JUSTICE INCERTAINE", 
+                            color: "yellow", 
+                            img: "image/kizaru.png", 
+                            desc: "Banalité du Mal.", 
+                            text: "Justice Incertaine (Borsalino) : L'archétype de la 'Banalité du Mal' décrite par Hannah Arendt. Fonctionnaire zélé mais sans conviction apparente, il applique les ordres avec un détachement cynique, ne s'interrogeant que très peu sur la moralité de ses actes. Pour lui, la justice est simplement le règlement en vigueur. Sur Egghead, il montrea peu d'enthousiasme à exécucter les ordres, mais finira par le faire par dépit, zélé d'exister.",
+                            audio: "audio/kizaru.mp3"
+                        },
+                        { name: "FUJITORA", title: "JUSTICE VERTUEUSE", color: "purple", img: "image/fujitora.png", desc: "Droit Naturel.", text: "Justice Aveugle/Vertueuse (Issho) : Le Droit Naturel. Il refuse d'obéir à une loi inique. En s'aveuglant, il refuse de voir les 'apparences' (le grade, le statut) pour ne juger que l'essence morale des actes. À Dressrosa, il s'agenouille pour demander pardon, plaçant la responsabilité de l'État au-dessus de son honneur." },
+                        { name: "RYOKUGYU", title: "JUSTICE DÉTERMINÉE", color: "green", img: "image/ryokugyu.png", desc: "Darwinisme Social.", text: "Darwinisme Social & Fascisme : La force fait droit. Il justifie la discrimination et l'oppression des nations non-affiliées au Gouvernement Mondial (comme Wano). Pour lui, les droits de l'homme sont un privilège de citoyenneté. Le gouvernement tue des innocents au titre de la race ou de la non affiliation." }
+                    ]
+                },
+                {
+                    // CORRECTION NUMEROTATION V
+                    id: "exception", type: "exception", title: "V. ÉTAT D'EXCEPTION",
+                    main_img: "image/god_valley.png",
+                    incidents: [
+                        {
+                            title: "GOD VALLEY & HOMO SACER",
+                            img: "image/godvalley.png",
+                            text: "L'incident de God Valley, révélé comme une 'Chasse aux Autochtones', illustre le concept d'Homo Sacer. L'Homo Sacer est une vie nue que l'on peut tuer sans commettre d'homicide. Le souverain (Dragons Célestes) décide de l'État d'Exception (Carl Schmitt) : les habitants deviennent du gibier dans une zone de non-droit."
+                        },
+                        {
+                            title: "LULUSIA & MÉMORICIDE",
+                            img: "image/lulusia.png", 
+                            text: "La destruction de Lulusia par Imu est un acte de Damnatio Memoriae. Parallèle historique : Le décret de 1793 contre Lyon ('Lyon n'est plus'). Le Gouvernement Mondial utilise la terreur totale et l'effacement géographique pour maintenir la cohésion politique. La 'Justice' devient une administration de l'anéantissement."
+                        }
+                    ]
+                },
+                {
+                    // CORRECTION NUMEROTATION VI
+                    id: "legitimite", type: "cards", title: "VI. LÉGITIMITÉ", subtitle: "Conquête de la Légitimité : Révolution & Piraterie",
+                    cards: [
+                        { name: "GARP", title: "RÉFORME DE L'INTÉRIEUR", color: "blue", img: "image/garp.png", desc: "Éthique de responsabilité.", text: "A. Monkey D.Garp, le 'Héros de la Marine', méprise les Dragons Célestes mais refuse de déserter. Il reste au sein de cette institution mondiale toute-puissante car elle demeure le seul rempart concret des civils contre le chaos des pirates. Son objectif est de changer la Marine de l'intérieur. En formant la 'bleusaille' et la nouvelle génération (Koby, l'unité SWORD), il prépare une relève intègre capable d'incarner la véritable Justice, celle qui protège le peuple plutôt que les nobles.", audio: "audio/garp.mp3" },
+                        { name: "DRAGON", title: "CONTRAT SOCIAL", color: "red", img: "image/dragon.png", desc: "Droit de résistance.", text: "B. Monkey D. Dragon : Le Contrat Social (Rousseau).\nDragon incarne la réponse politique rationalisée. Si l'État rompt le contrat de sécurité (en chassant ses citoyens), le peuple est délié de son obligation d'obéissance. L'Armée Révolutionnaire se fonde sur le droit de résistance à l'oppression (DDHC 1789).\nSymbolique : Son navire, le Granma, référence celui de Fidel Castro. Il incarne l'efficacité de l'insurrection." },
+                        { name: "LUFFY", title: "DROIT NATUREL", color: "yellow", img: "image/luffy.png", desc: "Consentement pur.", text: "C. Monkey D. Luffy : Le Droit Naturel en Acte.\nLuffy incarne une réponse pré-politique. La Marine impose sa justice par la peur (Buster Call) ; Luffy acquiert sa légitimité par le consentement des peuples libérés.\nL'Incident de Sabaody : En frappant Charlos, il commet un crime impardonnable selon le Droit Positif, mais accomplit un acte de justice pure selon le Droit Naturel. Il nie le statut divin pour rappeler l'égalité fondamentale." }
+                    ]
+                },
+                {
+                    id: "conclusion", type: "intro", title: "CONCLUSION",
+                    subtitle: "Vers l'Aube ?",
+                    short: "La Justice n'est pas une valeur absolue gravée dans la pierre, mais un champ de bataille permanent.",
+                    chapters: ["FIN DE L'ARCHIVE", "DÉBAT", "QUESTIONS", "MERCI"],
+                    long_text: "En miroir de notre réalité, One Piece démontre que la Justice, lorsqu'elle n'est qu'un masque du Pouvoir, mute inévitablement en tyrannie. Tant que la domination prévaut sur la liberté, la justice peut être forte, mais jamais juste. L'œuvre nous rappelle ainsi l'impérieuse nécessité de la séparation des pouvoirs et d'une presse libre comme uniques remparts contre l'arbitraire et la manipulation d'État, illustrés par les tragédies d'Ohara et Lulusia. Loin du dogme rigide d'Akainu, la véritable Justice doit être un équilibre vivant et humain. C'est ce que nous enseigne Luffy : sa quête de liberté absolue restaure l'essence même du droit, celle de protéger la dignité de chacun face à l'oppression."
+                }
+            ]
+        };
+
+        // --- COMPONENTS ---
+        
+        const VideoManager = ({ isOpen, close, video }) => {
+            const [view, setView] = useState('resume'); 
+            
+            if (!isOpen || !video) return null;
+
+            const handleNext = () => {
+                if(view === 'resume') setView('video');
+                else if(view === 'video') setView('analyse');
+                else setView('resume');
+            };
+
+            const handlePrev = () => {
+                if(view === 'resume') setView('analyse');
+                else if(view === 'analyse') setView('video');
+                else setView('resume');
+            };
+
+            const content = {
+                'OHARA': {
+                    resume: "Le Buster Call d'Ohara : L'île des archéologues est détruite par la Marine pour avoir déchiffré l'Histoire interdite.",
+                    analyse: "LE GÉNOCIDE DU SAVOIR : C'est l'illustration de la Dictature par l'Ignorance. Le Gouvernement craint le Savoir plus que les armes. L'acte d'Akainu (tuer des civils 'au cas où') est du pur Utilitarisme monstrueux : sacrifier la minorité innocente pour la sécurité de la majorité. Face à cela, Aokiji incarne le doute moral : peut-on appeler 'Justice' un système qui massacre l'histoire et les innocents ?"
+                },
+                'SABAODY': {
+                    resume: "L'incident des Dragons Célestes : Luffy frappe Charlos en plein visage pour avoir tiré sur son ami Octo.",
+                    analyse: "LE PRIVILÈGE & LE SACRÉ :  Ce n'est pas une simple bagarre, c'est un conflit de Droits. Charlos se croit protégé par le Droit Divin et le privilège de naissance. En le frappant, Luffy brise le tabou suprême. Il fait prévaloir le Droit Naturel (l'égalité fondamentale entre les êtres, la défense d'un ami) sur la Loi inique du monde. Il ramène un 'Dieu' au rang de simple mortel."
+                },
+                'DOFLAMINGO': {
+                    resume: "Le discours de Doflamingo à Marineford : 'La Justice l'emportera ? Bien sûr ! Car celui qui l'emporte, c'est la Justice !'",
+                    analyse: "LE CYNISME RÉALISTE : Doflamingo dénonce l'hypocrisie morale. La Justice n'est pas une valeur objective, c'est l'histoire écrite par les vainqueurs. Si les pirates gagnent, ils définiront ce qui est juste. C'est la loi du plus fort déguisée en vertu."
+                }
+            }[video.key] || { resume: "", analyse: "" };
+
+            return (
+                <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+                    <div className="relative w-full max-w-4xl bg-black border border-cp0-accent p-1 shadow-2xl flex flex-col h-[70vh]">
+                        <button onClick={close} className="absolute top-0 right-0 z-50 text-white hover:text-red-500 bg-black/50 rounded-full p-2 hover:bg-black/80 transition-colors">
+                            <Icon name="X" size={32}/>
+                        </button>
+                        <div className="flex justify-between items-center mb-4 px-4 pt-4 mt-8 md:mt-2">
+                            <button onClick={handlePrev} className="text-white hover:text-cp0-accent"><Icon name="ChevronLeft" size={40}/></button>
+                            <h2 className="text-white font-mono text-xl text-center flex-1 tracking-widest text-cp0-accent">
+                                {video.title} <br/> 
+                                <span className="text-sm text-gray-400">
+                                    {view === 'resume' ? 'CONTEXTE' : view === 'video' ? 'EXTRAIT' : 'ANALYSE'}
+                                </span>
+                            </h2>
+                            <button onClick={handleNext} className="text-white hover:text-cp0-accent"><Icon name="ChevronRight" size={40}/></button>
+                        </div>
+                        <div className="flex-1 relative overflow-hidden flex items-center justify-center bg-gray-900 border-y border-white/10">
+                            <AnimatePresence mode='wait'>
+                                {view === 'video' && <motion.video key="vid" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} src={video.src} controls autoPlay className="w-full h-full object-contain"></motion.video>}
+                                {view === 'resume' && (
+                                    <motion.div key="res" initial={{opacity:0, x: 20}} animate={{opacity:1, x: 0}} exit={{opacity:0, x: -20}} className="p-12 text-center max-w-2xl">
+                                        <Icon name="Feather" size={80} className="mx-auto mb-8 text-cp0-gold opacity-50" />
+                                        <p className="text-3xl text-gray-200 font-serif leading-relaxed">{content.resume}</p>
+                                    </motion.div>
+                                )}
+                                {view === 'analyse' && (
+                                    <motion.div key="ana" initial={{opacity:0, x: 20}} animate={{opacity:1, x: 0}} exit={{opacity:0, x: -20}} className="p-8 text-justify border-l-4 border-cp0-danger m-8 bg-white/5 max-w-3xl">
+                                        <h3 className="text-2xl text-cp0-danger font-bold mb-6 font-serif">DÉCRYPTAGE PHILOSOPHIQUE</h3>
+                                        <p className="text-xl text-gray-300 font-light leading-loose">{content.analyse}</p>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                        <div className="flex justify-center gap-3 pb-4 pt-4">
+                            <div className={`w-3 h-3 rounded-full transition-colors ${view==='resume'?'bg-cp0-gold':'bg-gray-700'}`}></div>
+                            <div className={`w-3 h-3 rounded-full transition-colors ${view==='video'?'bg-cp0-gold':'bg-gray-700'}`}></div>
+                            <div className={`w-3 h-3 rounded-full transition-colors ${view==='analyse'?'bg-cp0-gold':'bg-gray-700'}`}></div>
+                        </div>
+                    </div>
+                </motion.div>
+            );
+        };
+
+        // --- COMPOSANT MODIFIÉ AVEC POPUPS (IMAGES, VIDÉO, GALERIE MIXTE) ---
+        const TrialSlide = ({ data }) => {
+            const [activeTab, setActiveTab] = useState(0);
+            const [popup, setPopup] = useState(null);
+            const [galleryIndex, setGalleryIndex] = useState(0);
+
+            // Gère le clic sur le dossier "TOP SECRET"
+            const handleFolderClick = (currentCase) => {
+                if(currentCase.popupType) {
+                    setPopup(currentCase);
+                    setGalleryIndex(0); // Reset galerie
+                }
+            };
+
+            const navigateGallery = (dir) => {
+                if(!popup || popup.popupType !== 'gallery') return;
+                const len = popup.gallery.length;
+                setGalleryIndex((prev) => (prev + dir + len) % len);
+            };
+
+            return (
+                <div className="h-full flex flex-col p-12 overflow-y-auto custom-scroll relative">
+                    <div className="max-w-6xl mx-auto w-full pt-20 pb-32 z-10">
+                        <div className="mb-12 text-center">
+                            <Icon name="Gavel" size={60} className="mx-auto text-cp0-gold mb-4" />
+                            <h2 className="text-5xl font-serif font-bold text-white mb-2">{data.title}</h2>
+                            <p className="text-cp0-accent font-mono text-xl tracking-widest">{data.subtitle}</p>
+                            <p className="mt-6 text-gray-400 max-w-3xl mx-auto italic border-b border-white/10 pb-6">{data.intro}</p>
+                        </div>
+
+                        <div className="flex flex-col md:flex-row gap-8 h-[55vh]">
+                            {/* ONGLETS DOSSIERS */}
+                            <div className="w-full md:w-1/3 flex flex-col gap-4 overflow-y-auto custom-scroll pr-2">
+                                {data.cases.map((c, i) => (
+                                    <button 
+                                        key={i}
+                                        onClick={() => setActiveTab(i)}
+                                        className={`p-6 text-left border-l-4 transition-all duration-300 flex items-center gap-4 group ${activeTab === i ? 'bg-white/10 border-cp0-gold' : 'bg-transparent border-white/10 hover:bg-white/5'}`}
+                                    >
+                                        <div className={`p-2 rounded bg-black/50 ${activeTab === i ? 'text-cp0-gold' : 'text-gray-500 group-hover:text-gray-300'}`}>
+                                            <Icon name={c.icon} size={24} />
+                                        </div>
+                                        <div>
+                                            <div className={`font-bold font-serif ${activeTab === i ? 'text-white' : 'text-gray-400'}`}>{c.title}</div>
+                                            <div className="text-xs text-cp0-accent font-mono mt-1">{c.desc}</div>
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* CONTENU DOSSIER (CLIQUABLE POUR POPUP) */}
+                            <div className="w-full md:w-2/3 relative cursor-pointer group" onClick={() => handleFolderClick(data.cases[activeTab])}>
+                                <AnimatePresence mode="wait">
+                                    <motion.div 
+                                        key={activeTab}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="h-full"
+                                    >
+                                        <div className="h-full paper-texture border-4 border-[#2c241b] p-8 shadow-2xl relative rotate-1 group-hover:rotate-0 transition-transform duration-300">
+                                            {/* CORRECTION DU BUG D'AFFICHAGE : right-0 au lieu de left-0 */}
+                                            <div className="absolute top-0 right-0 bg-[#8b0000] text-[#e3d5b8] px-4 py-1 font-bold font-mono text-xs uppercase tracking-widest shadow-md">TOP SECRET</div>
+                                            <div className="h-full border-2 border-[#4a3b2a]/20 p-6 flex flex-col justify-center">
+                                                <h3 className="text-3xl font-black text-[#4a3b2a] font-serif mb-6 border-b-2 border-[#4a3b2a] pb-2 inline-block">
+                                                    {data.cases[activeTab].title}
+                                                </h3>
+                                                <p className="text-[#2c241b] text-lg leading-loose font-serif text-left">
+                                                    {data.cases[activeTab].content}
+                                                </p>
+                                                <div className="mt-auto flex justify-end opacity-50 group-hover:opacity-100 transition-opacity group-hover:text-[#8b0000]">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-xs font-mono font-bold uppercase">Voir les preuves</span>
+                                                        <Icon name="Gavel" size={48} className="text-current" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* POPUP MODAL GÉRANT IMAGES / VIDÉOS / GALERIE */}
+                    <AnimatePresence>
+                        {popup && (
+                            <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-8 backdrop-blur-sm" onClick={() => setPopup(null)}>
+                                <div className="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center" onClick={e => e.stopPropagation()}>
+                                    
+                                    <button onClick={() => setPopup(null)} className="absolute -top-12 right-0 text-white hover:text-red-500"><Icon name="X" size={40}/></button>
+
+                                    {/* CONTENU SELON TYPE */}
+                                    {popup.popupType === 'image' && (
+                                        <img src={popup.popupSrc} className="max-w-full max-h-[80vh] rounded border-2 border-cp0-gold shadow-[0_0_50px_rgba(192,160,98,0.3)]" />
+                                    )}
+
+                                    {popup.popupType === 'video' && (
+                                        <video src={popup.popupSrc} controls autoPlay className="w-full max-h-[80vh] border-2 border-cp0-gold shadow-[0_0_50px_rgba(192,160,98,0.3)]"></video>
+                                    )}
+
+                                    {popup.popupType === 'gallery' && (
+                                        <div className="relative w-full flex items-center justify-center">
+                                            <button onClick={() => navigateGallery(-1)} className="absolute left-0 text-white/50 hover:text-white p-4 z-50"><Icon name="ChevronLeft" size={64}/></button>
+                                            
+                                            {/* DETECTION AUTOMATIQUE DU TYPE DE FICHIER (IMAGE OU VIDEO) DANS LA GALERIE */}
+                                            {popup.gallery[galleryIndex].endsWith('.mp4') ? (
+                                                <motion.video 
+                                                    key={galleryIndex}
+                                                    initial={{ opacity: 0, x: 50 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    exit={{ opacity: 0, x: -50 }}
+                                                    src={popup.gallery[galleryIndex]} 
+                                                    controls autoPlay 
+                                                    className="max-w-full max-h-[80vh] rounded border-2 border-cp0-gold shadow-[0_0_50px_rgba(192,160,98,0.3)]"
+                                                />
+                                            ) : (
+                                                <motion.img 
+                                                    key={galleryIndex}
+                                                    initial={{ opacity: 0, x: 50 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    exit={{ opacity: 0, x: -50 }}
+                                                    src={popup.gallery[galleryIndex]} 
+                                                    className="max-w-full max-h-[80vh] rounded border-2 border-cp0-gold shadow-[0_0_50px_rgba(192,160,98,0.3)]"
+                                                />
+                                            )}
+
+                                            <button onClick={() => navigateGallery(1)} className="absolute right-0 text-white/50 hover:text-white p-4 z-50"><Icon name="ChevronRight" size={64}/></button>
+                                        </div>
+                                    )}
+                                    
+                                    <div className="mt-4 text-cp0-gold font-mono tracking-widest uppercase">{popup.title} {popup.popupType === 'gallery' ? `(${galleryIndex + 1}/${popup.gallery.length})` : ''}</div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            );
+        };
+
+        const IntroSlide = ({ data }) => {
+            const [open, setOpen] = useState(false);
+            const mainIcon = data.id === "conclusion" ? "Anchor" : "Shield";
+            
+            return (
+                <div className="h-full flex flex-col items-center justify-center text-center p-8 relative z-10 overflow-y-auto custom-scroll">
+                    <div className="max-w-4xl mx-auto py-12">
+                        <Icon name={mainIcon} size={80} className="text-cp0-accent mb-6 animate-pulse mx-auto" />
+                        <h1 className="text-7xl font-serif font-black text-white mb-2">{data.title}</h1>
+                        <div className="text-cp0-gold font-mono tracking-widest mb-10 text-xl">{data.subtitle}</div>
+                        <div className="relative group z-50 mx-auto max-w-3xl" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+                            <div className="glass p-8 border-l-4 border-cp0-accent cursor-help bg-cp0-panel relative z-20 hover:bg-cp0-panel/80 transition-colors">
+                                <p className="text-xl text-gray-200">{data.short}</p>
+                                <div className="mt-4 flex justify-center text-cp0-accent"><Icon name="ChevronDown" className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`} /></div>
+                            </div>
+                            <AnimatePresence>
+                                {open && (
+                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="absolute top-full left-0 w-full glass z-10 border-x border-b border-cp0-accent/30 shadow-2xl mt-1 overflow-hidden">
+                                        <div className="p-6 max-h-[40vh] overflow-y-auto custom-scroll text-left bg-cp0-base/95 mb-4">
+                                            <div className="grid grid-cols-2 gap-4 mb-4 border-b border-white/10 pb-4">
+                                                {data.chapters.map((c, i) => (<div key={i} className="text-xs font-mono text-cp0-accent hover:text-white cursor-pointer transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-cp0-accent rounded-full"></span> {c}</div>))}
+                                            </div>
+                                            <p className="text-sm text-gray-400 leading-relaxed whitespace-pre-line font-light">{data.long_text}</p>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const GridSlide = ({ data }) => {
+            const [imuPopup, setImuPopup] = useState(null);
+
+            return (
+                <div className="h-full overflow-y-auto custom-scroll p-12">
+                    <div className="max-w-7xl mx-auto pt-20">
+                        <div className="mb-12 flex items-center">
+                            <div className="h-24 w-2 bg-cp0-gold mr-6 flex-shrink-0 rounded-sm self-center"></div>
+                            <div className="text-cp0-gold mr-6 flex-shrink-0 self-center">
+                                <Icon name="Gavel" size={64} />
+                            </div>
+                            <div>
+                                <h2 className="text-5xl font-serif font-bold text-white uppercase tracking-wider leading-tight">{data.title}</h2>
+                                <p className="text-cp0-gold font-mono text-xl mt-1">{data.subtitle}</p>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-20">
+                            {data.blocks.map((block, i) => (
+                                <div 
+                                    key={i} 
+                                    className={`relative group min-h-[300px] ${block.popupImg ? 'cursor-pointer' : ''}`}
+                                    onClick={() => block.popupImg && setImuPopup(block.popupImg)}
+                                >
+                                    <div className={`glass p-8 h-full flex flex-col items-center justify-center text-center z-20 relative bg-cp0-panel transition-all duration-300 group-hover:border-cp0-accent ${block.popupImg ? 'hover:bg-red-900/20' : ''}`}>
+                                        <div className="text-cp0-accent mb-4 transform group-hover:scale-110 transition-transform"><Icon name={block.icon} size={32} /></div>
+                                        <h3 className="text-xl font-bold text-white mb-2">{block.title}</h3>
+                                        <p className="text-xs text-gray-400 font-mono mb-4">{block.short}</p>
+                                        <Icon name="ChevronDown" className="text-gray-600 group-hover:text-white transition-colors animate-bounce" size={16} />
+                                    </div>
+                                    <div className="absolute top-[98%] left-0 w-full glass z-[60] opacity-0 group-hover:opacity-100 translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto shadow-2xl border-t-0 border-cp0-accent">
+                                        <div className="p-6 max-h-[40vh] overflow-y-auto custom-scroll bg-cp0-base/95">
+                                            {/* CORRECTION TYPO : TEXT-LEFT */}
+                                            <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-line text-left border-l-2 border-cp0-gold pl-3">{block.long}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <AnimatePresence>
+                        {imuPopup && (
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-8 backdrop-blur-sm" onClick={() => setImuPopup(null)}>
+                                <div className="relative max-w-4xl max-h-[90vh]">
+                                    <button onClick={() => setImuPopup(null)} className="absolute -top-12 right-0 text-white hover:text-red-500"><Icon name="X" size={40}/></button>
+                                    <img src={imuPopup} className="w-full h-full object-contain rounded border-2 border-cp0-gold shadow-[0_0_50px_rgba(192,160,98,0.3)]" onClick={(e) => e.stopPropagation()}/>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            );
+        };
+
+        const PowersSlide = ({ data }) => {
+            const [openIndex, setOpenIndex] = useState(null);
+            const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
+
+            return (
+                <div className="h-full flex flex-col p-12 overflow-y-auto custom-scroll">
+                    <div className="max-w-5xl mx-auto w-full pt-20 pb-32">
+                        <div className="mb-12 border-l-4 border-cp0-gold pl-6">
+                            <h2 className="text-5xl font-serif font-bold text-white">{data.title}</h2>
+                            <p className="text-cp0-gold font-mono">{data.subtitle}</p>
+                        </div>
+                        <div className="flex flex-col gap-6">
+                            {data.items.map((item, i) => (
+                                <div key={i} className="w-full">
+                                    <motion.button 
+                                        onClick={() => toggle(i)}
+                                        className={`w-full glass p-6 flex items-center justify-between text-left transition-all duration-300 border-l-4 hover:bg-white/5 ${openIndex === i ? 'border-cp0-accent bg-white/5' : 'border-transparent'}`}
+                                        style={{ borderColor: openIndex === i ? (item.color === 'gold' ? '#c0a062' : item.color === 'red' ? '#ef4444' : item.color === 'blue' ? '#06b6d4' : '#22c55e') : 'transparent' }}
+                                    >
+                                        <div className="flex items-center gap-6">
+                                            <div className={`p-3 rounded-full bg-black/50 border border-white/10 ${openIndex === i ? 'text-white' : 'text-gray-400'}`}>
+                                                <Icon name={item.icon} size={28} />
+                                            </div>
+                                            <h3 className="text-2xl font-serif font-bold text-white">{item.title}</h3>
+                                        </div>
+                                        <motion.div animate={{ rotate: openIndex === i ? 180 : 0 }}>
+                                            <Icon name="ChevronDown" className="text-gray-400" />
+                                        </motion.div>
+                                    </motion.button>
+                                    <AnimatePresence>
+                                        {openIndex === i && (
+                                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                                                <div className="glass mt-2 p-8 border-t-0 border-x-0 border-b border-white/10 bg-black/40">
+                                                    <p className="text-lg text-gray-300 leading-relaxed whitespace-pre-line font-light">{item.content}</p>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const WantedSlide = ({ data }) => {
+            const [popupItem, setPopupItem] = useState(null);
+            const [popupList, setPopupList] = useState([]);
+            const openPopup = (list, index) => { setPopupList(list); setPopupItem(index); };
+            const navigate = (dir) => {
+                if (popupItem === null) return;
+                let newIndex = popupItem + dir;
+                if (newIndex < 0) newIndex = popupList.length - 1;
+                if (newIndex >= popupList.length) newIndex = 0;
+                setPopupItem(newIndex);
+            };
+            const currentWanted = popupItem !== null ? popupList[popupItem] : null;
+
+            return (
+                <div className="h-full flex flex-col justify-center items-center p-12 bg-[#2c241b] relative overflow-hidden">
+                    <div className="absolute inset-0 paper-texture opacity-20 pointer-events-none"></div>
+                    <div className="z-10 text-center max-w-4xl mb-12">
+                        <h2 className="text-6xl font-serif text-[#e3d5b8] mb-6 drop-shadow-lg" style={{fontFamily: 'Rye'}}>{data.title}</h2>
+                        <div className="bg-[#4a3b2a]/90 p-6 border-2 border-[#e3d5b8] shadow-xl text-[#e3d5b8] font-mono text-sm leading-relaxed text-justify">
+                            <p className="whitespace-pre-line">{data.intro_text}</p>
+                        </div>
+                    </div>
+                    <div className="flex gap-24 z-10 w-full justify-center">
+                        <motion.div initial={{ rotate: 2 }} whileHover={{ scale: 1.05, rotate: 0 }} animate={{ rotate: 2 }} className="w-80 h-48 bg-[#e3d5b8] cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-8 border-[#2c241b] flex items-center justify-center" onClick={() => openPopup(data.wanted_list, 0)}>
+                            <div className="text-center">
+                                <div className="text-5xl font-black text-[#4a3b2a]" style={{fontFamily: 'Rye'}}>WANTED</div>
+                                <div className="text-sm font-bold text-[#8b0000] tracking-widest">DEAD OR ALIVE</div>
+                            </div>
+                        </motion.div>
+                        <motion.div initial={{ rotate: -2 }} whileHover={{ scale: 1.05, rotate: 0 }} animate={{ rotate: -2 }} className="w-80 h-48 bg-[#8b0000] cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-8 border-[#e3d5b8] flex items-center justify-center" onClick={() => openPopup(data.shichibukai_list, 0)}>
+                            <div className="text-center text-[#e3d5b8]">
+                                <Icon name="Sword" size={48} className="mx-auto mb-2" />
+                                <div className="text-2xl font-black" style={{fontFamily: 'Rye'}}>SHICHIBUKAI</div>
+                            </div>
+                        </motion.div>
+                    </div>
+                    <AnimatePresence>
+                        {currentWanted && (
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+                                <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }} className="relative w-full max-w-lg bg-[#e3d5b8] p-6 border-[12px] border-[#4a3b2a] shadow-2xl">
+                                    <button onClick={() => setPopupItem(null)} className="absolute -top-10 -right-10 bg-[#8b0000] text-white rounded-full p-3 hover:bg-red-700 transition-colors shadow-lg z-50 flex items-center justify-center">
+                                        <Icon name="X" size={24} className="text-white" />
+                                    </button>
+                                    <button onClick={(e) => {e.stopPropagation(); navigate(-1);}} className="absolute top-1/2 -left-20 text-white/50 hover:text-white p-4"><Icon name="ChevronLeft" size={64} /></button>
+                                    <button onClick={(e) => {e.stopPropagation(); navigate(1);}} className="absolute top-1/2 -right-20 text-white/50 hover:text-white p-4"><Icon name="ChevronRight" size={64} /></button>
+                                    <div className="text-center border-4 border-[#4a3b2a] p-4 bg-[#f0e6d2] relative">
+                                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#4a3b2a] text-[#e3d5b8] px-6 py-2 rounded-full font-bold shadow-lg border-2 border-[#e3d5b8] whitespace-nowrap z-20">{currentWanted.name}</div>
+                                        <div className="text-6xl font-black text-[#4a3b2a] mb-2 tracking-tighter" style={{fontFamily: 'Rye'}}>WANTED</div>
+                                        <div className="text-xl text-[#4a3b2a] mb-6 font-serif tracking-widest">DEAD OR ALIVE</div>
+                                        <div className="w-full aspect-square bg-gray-800 border-4 border-[#4a3b2a] mb-6 overflow-hidden relative shadow-inner">
+                                            <img src={currentWanted.img} className="w-full h-full object-cover" onError={(e) => e.target.style.display='none'}/>
+                                        </div>
+                                        <div className="flex items-end justify-end px-2 font-mono font-bold text-[#4a3b2a] border-t-2 border-[#4a3b2a] pt-4">
+                                            <span className="text-2xl">{currentWanted.reward}</span>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            );
+        };
+
+        const CardSlide = ({ data }) => {
+            const isFewCards = data.cards.length <= 3;
+            const playAudio = (audioPath) => {
+                if(audioPath) {
+                    const audio = new Audio(audioPath);
+                    audio.play().catch(e => console.log("Erreur lecture audio:", e));
+                }
+            };
+
+            return (
+                <div className="h-full flex flex-col p-8 pt-24 overflow-hidden">
+                    <div className="mb-12 px-4 flex-shrink-0">
+                        <h2 className="text-4xl font-serif text-white">{data.title}</h2>
+                        <p className="text-cp0-accent font-mono text-sm">{data.subtitle}</p>
+                    </div>
+                    <div className={`flex-1 overflow-x-auto overflow-y-hidden custom-scroll py-20 pb-32 flex ${isFewCards ? 'justify-center' : ''}`}>
+                        <div className="flex gap-8 h-full px-4 min-w-max items-center">
+                            {data.cards.map((card, i) => (
+                                <motion.div 
+                                    key={i} 
+                                    whileHover="hover"
+                                    initial="rest"
+                                    animate="rest"
+                                    variants={{ rest: { scale: 1, zIndex: 0 }, hover: { scale: 1.05, zIndex: 50 } }}
+                                    transition={{ duration: 0.3 }}
+                                    className={`relative w-80 h-[65vh] flex-shrink-0 ${card.audio ? 'cursor-pointer' : ''}`}
+                                    onClick={() => playAudio(card.audio)}
+                                >
+                                    <div className={`frame-overlay neon-border-${card.color}`}></div>
+                                    <div className="absolute inset-[4px] rounded-md overflow-hidden bg-black z-0">
+                                        <div className="absolute inset-0 bg-black">
+                                            <motion.img 
+                                                src={card.img} 
+                                                className="w-full h-full object-cover"
+                                                variants={{ rest: { opacity: 0.6 }, hover: { opacity: 0.3 } }}
+                                                transition={{ duration: 0.3 }}
+                                                onError={(e) => e.target.style.opacity = 0.2}
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-cp0-base via-transparent to-transparent"></div>
+                                        </div>
+                                        <div className="absolute top-0 left-0 w-full p-6 z-40 bg-gradient-to-b from-black/90 to-transparent">
+                                            <h3 className={`text-3xl font-black font-serif text-white mb-1 drop-shadow-md`}>{card.name}</h3>
+                                            <div className={`inline-block px-2 py-1 bg-black/50 backdrop-blur text-xs font-mono uppercase border border-white/20 text-${card.color === 'yellow' ? 'yellow-400' : card.color === 'purple' ? 'purple-400' : card.color + '-500'}`}>{card.title}</div>
+                                        </div>
+                                        <motion.div className="absolute bottom-0 left-0 w-full h-[85%] z-30 flex flex-col justify-end" variants={{ rest: { y: "65%" }, hover: { y: "0%" } }} transition={{ duration: 0.4, ease: "easeInOut" }}>
+                                            <div className="card-glass-panel w-full h-full flex flex-col relative">
+                                                <div className="neon-bar-top"></div>
+                                                <div className="overflow-y-auto custom-scroll pr-2 flex-1 p-6 pt-6">
+                                                    {/* CORRECTION TYPO : TEXT-LEFT */}
+                                                    <p className="text-sm text-gray-100 leading-relaxed font-light text-left shadow-black drop-shadow-sm">{card.text}</p>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const ExceptionSlide = ({ data }) => {
+            const [popupOpen, setPopupOpen] = useState(false);
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const currentIncident = data.incidents[currentIndex];
+            const navigate = (dir) => {
+                let newIndex = currentIndex + dir;
+                if (newIndex < 0) newIndex = data.incidents.length - 1;
+                if (newIndex >= data.incidents.length) newIndex = 0;
+                setCurrentIndex(newIndex);
+            };
+
+            return (
+                <div className="h-full flex items-center justify-center p-12 overflow-y-auto custom-scroll relative">
+                    <div className="grid grid-cols-2 gap-16 max-w-7xl items-center pt-20">
+                        <motion.div whileHover={{ scale: 1.02 }} className="relative h-[500px] bg-black border-2 border-cp0-danger group overflow-hidden rounded-lg shadow-[0_0_50px_rgba(220,38,38,0.2)] cursor-pointer" onClick={() => setPopupOpen(true)}>
+                            <img src={data.main_img} className="w-full h-full object-cover opacity-50 transition-transform duration-1000" onError={(e) => e.target.style.display='none'}/>
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <span className="text-cp0-danger font-mono text-4xl border-4 border-cp0-danger p-4 -rotate-12 uppercase opacity-50 group-hover:opacity-100 transition-opacity">CLASSIFIÉ</span>
+                            </div>
+                        </motion.div>
+                        <div className="space-y-12">
+                            <h2 className="text-6xl font-serif text-white">{data.title}</h2>
+                            {data.incidents.map((b,i) => (
+                                <div key={i} className="glass p-8 border-l-4 border-cp0-danger">
+                                    <h3 className="text-2xl font-bold text-cp0-danger mb-4">{b.title}</h3>
+                                    <p className="text-gray-300 text-lg leading-relaxed line-clamp-3">{b.text}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <AnimatePresence>
+                        {popupOpen && (
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-8">
+                                <button onClick={() => setPopupOpen(false)} className="absolute top-16 right-16 text-white hover:text-red-500 transition-colors z-50 p-2 bg-black/50 rounded-full">
+                                    <Icon name="X" size={40} />
+                                </button>
+                                <button onClick={(e) => {e.stopPropagation(); navigate(-1);}} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-cp0-accent transition-colors p-4 z-50"><Icon name="ChevronLeft" size={64} /></button>
+                                <button onClick={(e) => {e.stopPropagation(); navigate(1);}} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-cp0-accent transition-colors p-4 z-50"><Icon name="ChevronRight" size={64} /></button>
+                                <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="max-w-6xl w-full glass border-cp0-danger flex flex-col md:flex-row overflow-hidden relative h-[70vh] shadow-2xl">
+                                    <div className="w-full md:w-1/2 h-1/2 md:h-full relative border-b md:border-b-0 md:border-r border-cp0-danger/30">
+                                        <AnimatePresence mode='wait'>
+                                            <motion.img key={currentIndex} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:0.3}} src={currentIncident.img} className="w-full h-full object-cover" onError={(e) => e.target.src='https://via.placeholder.com/800x600?text=IMAGE+NON+TROUVÉE'}/>
+                                        </AnimatePresence>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+                                        <h3 className="absolute bottom-8 left-8 text-4xl font-serif font-bold text-white drop-shadow-lg z-10">{currentIncident.title}</h3>
+                                    </div>
+                                    <div className="w-full md:w-1/2 h-1/2 md:h-full p-12 overflow-y-auto custom-scroll bg-cp0-base/95 flex flex-col justify-center relative">
+                                        <Icon name="Gavel" className="text-cp0-danger mb-6 opacity-50 absolute top-8 right-8" size={60} />
+                                        <AnimatePresence mode='wait'>
+                                            <motion.div key={currentIndex} initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-20}} transition={{duration:0.3}}>
+                                                {/* CORRECTION TYPO : TEXT-LEFT */}
+                                                <p className="text-gray-300 text-lg leading-relaxed font-light whitespace-pre-line text-left relative z-10 border-l-2 border-cp0-danger pl-6">{currentIncident.text}</p>
+                                            </motion.div>
+                                        </AnimatePresence>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [idx, setIdx] = useState(0);
+            const [videoModal, setVideoModal] = useState({ open: false, src: null, title: '', key: '' });
+            const [qrOpen, setQrOpen] = useState(false);
+            const total = DATA_STORE.slides.length;
+            const next = () => setIdx(i => Math.min(i + 1, total - 1));
+            const prev = () => setIdx(i => Math.max(i - 1, 0));
+            
+            useEffect(() => {
+                const k = (e) => { if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); };
+                window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k);
+            }, []);
+
+            const openVideo = (type) => {
+                const vids = {
+                    'OHARA': { src: "video/ohara.mp4", title: 'INCIDENT OHARA' },
+                    'SABAODY': { src: "video/sabaody.mp4", title: 'LUFFY VS CHARLOS' },
+                    'DOFLAMINGO': { src: "video/doflamingo.mp4", title: 'DISCOURS JUSTICE' }
+                };
+                setVideoModal({ open: true, ...vids[type], key: type });
+            };
+
+            const renderSlide = () => {
+                const s = DATA_STORE.slides[idx];
+                switch(s.type) {
+                    case 'intro': return <IntroSlide data={s} />;
+                    case 'grid': return <GridSlide data={s} />;
+                    case 'powers': return <PowersSlide data={s} />;
+                    case 'trial': return <TrialSlide data={s} />;
+                    case 'wanted': return <WantedSlide data={s} />;
+                    case 'cards': return <CardSlide data={s} />;
+                    case 'exception': return <ExceptionSlide data={s} />;
+                    default: return <div />;
+                }
+            };
+
+            return (
+                <div className="w-full h-full relative font-sans overflow-hidden">
+                    <VideoManager isOpen={videoModal.open} video={videoModal} close={() => setVideoModal({ ...videoModal, open: false })} />
+
+                    <AnimatePresence>
+                        {qrOpen && (
+                            <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-md" onClick={() => setQrOpen(false)}>
+                                <div className="bg-white p-4 rounded-lg" onClick={(e) => e.stopPropagation()}>
+                                    <img src="image/QR.png" className="w-[80vw] h-[80vw] max-w-[600px] max-h-[600px] object-contain" alt="QR Code" />
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    <header className="absolute top-0 left-0 w-full p-6 z-50 flex justify-between items-center pointer-events-none">
+                        <div className="flex gap-4 pointer-events-auto items-center">
+                            <button onClick={() => setQrOpen(true)} className="text-white/70 hover:text-white transition-colors mr-4">
+                                <Icon name="QR" size={32} />
+                            </button>
+                            <button onClick={() => openVideo('OHARA')} className="px-4 py-1 rounded-full border border-cp0-danger text-xs font-mono text-cp0-danger hover:bg-cp0-danger hover:text-white transition-colors">OHARA</button>
+                            <button onClick={() => openVideo('SABAODY')} className="px-4 py-1 rounded-full border border-cp0-accent text-xs font-mono text-cp0-accent hover:bg-cp0-accent hover:text-white transition-colors">SABAODY</button>
+                            <button onClick={() => openVideo('DOFLAMINGO')} className="px-4 py-1 rounded-full border border-pink-500 text-xs font-mono text-pink-500 hover:bg-pink-500 hover:text-white transition-colors">DOFLAMINGO</button>
+                        </div>
+                        <div className="bg-cp0-panel/90 backdrop-blur px-4 py-2 border border-white/10 rounded-full flex items-center gap-4">
+                            <span className="font-serif font-bold text-white">CP0 ARCHIVES</span>
+                            <span className="w-px h-4 bg-gray-600"></span>
+                            <span className="font-mono text-xs text-cp0-accent">One Piece & La Justice</span>
+                        </div>
+                    </header>
+
+                    <main className="w-full h-full relative z-10">
+                        <AnimatePresence mode='wait'>
+                            <motion.div key={idx} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:0.5}} className="w-full h-full absolute top-0 left-0">
+                                {renderSlide()}
+                            </motion.div>
+                        </AnimatePresence>
+                    </main>
+
+                    <div className="fixed bottom-0 right-0 p-8 z-[9999] flex gap-4 pointer-events-auto">
+                        <button onClick={prev} disabled={idx===0} className="w-14 h-14 glass rounded-full flex items-center justify-center hover:bg-white/10 disabled:opacity-30 text-white transition active:scale-95"><Icon name="ChevronLeft" /></button>
+                        <button onClick={next} disabled={idx===total-1} className="w-14 h-14 glass rounded-full flex items-center justify-center hover:bg-white/10 disabled:opacity-30 text-white transition active:scale-95"><Icon name="ChevronRight" /></button>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

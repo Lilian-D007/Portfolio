@@ -14,6 +14,10 @@
     .videoback video { width: 100%; height: 100%; object-fit: cover; }
     footer.espace { height: 30px; }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js"></script>
 </head>
 <body>
 <header class="topnav">
@@ -39,70 +43,302 @@
 <div class="videoback"><video autoplay muted loop playsinline><source src="video/rainjapanwallpaper.mp4" type="video/mp4"></video></div>
 <main class="veille-container">
   <header class="veille-header">
-    <span class="tag" style="background: #ea580c;">Cybersécurité & Nouveaux Langages</span>
+    <span class="tag" style="background: #ea580c;">Cybersécurité & Langages</span>
     <h1>Pourquoi Rust est partout sans qu'on le sache ?</h1>
-    <p>La révolution silencieuse de la sécurité mémoire (Memory Safety) au cœur des systèmes critiques et de nos infrastructures.</p>
+    <p>La sécurité mémoire (Memory Safety) arrive au cœur des systèmes d'exploitation et des infrastructures réseau.</p>
+    <p class="veille-period">📅 Veille menée du 17 janvier au 7 novembre 2026 · 30 sources consultées</p>
   </header>
   <div class="veille-grid">
     <article class="v-card">
-      <h2>1. L'Infiltration Silencieuse dans nos OS</h2>
-      <p>Pourquoi « sans qu'on le sache » ? Parce que <strong>Rust</strong> ne remplace pas des applications visibles, mais les fondations invisibles du numérique :</p>
+      <h2>1. Rust dans les fondations du numérique</h2>
+      <p>Pourquoi « sans qu'on le sache » ? Parce que <strong>Rust</strong> ne remplace pas des applications visibles, mais des briques invisibles :</p>
       <ul class="v-list">
-        <li><strong>Noyau Linux :</strong> Depuis la version 6.1, Rust est le seul langage accepté aux côtés du C dans le kernel pour écrire des pilotes et sous-systèmes sécurisés.</li>
-        <li><strong>Noyau Windows 11 :</strong> Microsoft a discrètement réécrit des parties critiques de <code>win32k.sys</code>, GDI et DirectWrite en Rust pour éradiquer les vulnérabilités d'élévation de privilèges.</li>
-        <li><strong>Android & Chromium :</strong> Google utilise Rust par défaut pour tout nouveau code natif bas-niveau, réduisant drastiquement les failles zéro-day.</li>
-        <li><strong>Cloudflare & AWS :</strong> Le proxy Pingora de Cloudflare (qui gère 20% du web mondial) a remplacé Nginx (en C) par du Rust, gagnant en débit et en immunité contre les crashs mémoire.</li>
+        <li><strong>Noyau Linux :</strong> Rust est accepté depuis Linux 6.1 (2022) et, en décembre 2025, les mainteneurs ont déclaré que ce n'était <strong>plus une expérimentation</strong>. Des pilotes graphiques (Nova pour NVIDIA, Tyr pour Arm Mali) sont écrits en Rust.</li>
+        <li><strong>Windows 11 :</strong> une partie du noyau graphique (<code>win32kbase_rs.sys</code>, régions GDI) a été réécrite en Rust.</li>
+        <li><strong>Android :</strong> Google écrit le nouveau code bas niveau en Rust ; en 2025 les failles mémoire passent sous 20 % des vulnérabilités.</li>
+        <li><strong>Réseau et administration :</strong> le proxy Pingora de Cloudflare remplace NGINX, Ubuntu utilise <code>sudo-rs</code> et APT (Debian) dépend de Rust depuis 2026.</li>
       </ul>
     </article>
     <article class="v-card">
-      <h2>2. Le Fléau Historique : 70% des Failles Sont Mémoire</h2>
-      <p>Les rapports conjoints de la <strong>NSA</strong>, de la <strong>CISA</strong>, de <strong>Google</strong> et du <strong>Microsoft Security Response Center (MSRC)</strong> aboutissent tous au même constat terrifiant :</p>
-      <p><strong>70 % de l'ensemble des vulnérabilités de sécurité critiques (CVE)</strong> proviennent d'erreurs de gestion de la mémoire inhérentes au C et au C++ :</p>
+      <h2>2. Le problème : ~70 % des failles sont des erreurs mémoire</h2>
+      <p>Microsoft (MSRC) et Google arrivent au même constat : environ <strong>70 % des vulnérabilités graves</strong> de leurs produits viennent d'erreurs de gestion de la mémoire, typiques du C et du C++ :</p>
       <ul class="v-list">
-        <li><strong>Dépassement de tampon (Buffer Overflow) :</strong> écrasement de mémoire permettant l'exécution de code arbitraire à distance (RCE).</li>
-        <li><strong>Utilisation après libération (Use-After-Free) :</strong> manipulation de pointeurs obsolètes provoquant des prises de contrôle.</li>
-        <li><strong>Conditions de course (Data Races) :</strong> corruptions de données en multithreading.</li>
+        <li><strong>Dépassement de tampon (Buffer Overflow) :</strong> écrire en dehors d'une zone mémoire, ce qui peut permettre d'exécuter du code à distance.</li>
+        <li><strong>Utilisation après libération (Use-After-Free) :</strong> utiliser une mémoire déjà rendue au système.</li>
+        <li><strong>Accès concurrents (Data Races) :</strong> deux threads modifient la même donnée en même temps.</li>
       </ul>
     </article>
     <article class="v-card">
-      <h2>3. L'Arme Absolue : Le Borrow Checker</h2>
-      <p>Comment Rust résout-il ce dilemme sans sacrifier la vitesse ? Contrairement à Java, C# ou Go, Rust n'a <strong>aucun ramasse-miettes (Garbage Collector)</strong> : ses performances sont aussi fulgurantes que le C/C++.</p>
-      <p>Le compilateur intègre un <strong>Borrow Checker</strong> (vérificateur d'emprunts) fondé sur trois piliers :</p>
+      <h2>3. La solution de Rust : le Borrow Checker</h2>
+      <p>Rust n'a <strong>pas de ramasse-miettes (Garbage Collector)</strong> : il reste aussi rapide que le C. C'est le compilateur qui vérifie la mémoire grâce au <strong>Borrow Checker</strong> :</p>
       <ul class="v-list">
-        <li><strong>Propriété (Ownership) :</strong> Chaque ressource n'a qu'un seul propriétaire à un instant T.</li>
-        <li><strong>Emprunt (Borrowing) :</strong> Soit plusieurs lectures simultanées, soit une seule écriture exclusive, jamais les deux.</li>
-        <li><strong>Durées de vie (Lifetimes) :</strong> Aucun pointeur ne peut survivre à la donnée vers laquelle il pointe.</li>
+        <li><strong>Propriété (Ownership) :</strong> chaque valeur a un seul propriétaire à un instant donné.</li>
+        <li><strong>Emprunt (Borrowing) :</strong> soit plusieurs lectures en même temps, soit une seule écriture, jamais les deux.</li>
+        <li><strong>Durées de vie (Lifetimes) :</strong> une référence ne peut pas vivre plus longtemps que la donnée qu'elle désigne.</li>
       </ul>
-      <p style="margin-top: 10px;"><em>Règle absolue : si le code compile en Rust, il est mathématiquement garanti sans corruption mémoire !</em></p>
+      <p><em>Si le code compile sans bloc <code>unsafe</code>, ces erreurs mémoire sont impossibles. Rust ne protège pas des erreurs de logique : il faut toujours tester et auditer.</em></p>
     </article>
     <article class="v-card">
-      <h2>4. L'Injonction Politique : Maison Blanche & ANSSI</h2>
-      <p>La sécurité logicielle est désormais une question de souveraineté nationale :</p>
+      <h2>4. Une recommandation des agences de sécurité</h2>
+      <p>La sécurité mémoire est devenue un sujet de cybersécurité nationale :</p>
       <ul class="v-list">
-        <li><strong>Maison Blanche (ONCD, février 2024) :</strong> Publication d'un rapport fédéral exhortant l'ensemble des industriels et agences gouvernementales à abandonner C/C++ pour adopter des langages <em>Memory-Safe</em> avec Rust en chef de file.</li>
-        <li><strong>CISA (Cybersecurity and Infrastructure Security Agency) :</strong> Feuille de route imposant aux fabricants de logiciels critiques de concevoir des produits « Secure by Design » en éliminant les défauts de mémoire.</li>
-        <li><strong>ANSSI (France) :</strong> Recommandations officielles intégrant Rust dans le développement sécurisé et la protection des Opérateurs d'Importance Vitale (OIV).</li>
+        <li><strong>Maison Blanche (ONCD, février 2024) :</strong> rapport demandant aux éditeurs d'adopter des langages sûrs pour la mémoire.</li>
+        <li><strong>CISA et NSA (juin 2025) :</strong> guide commun qui fait des langages sûrs la principale mesure contre cette classe de failles.</li>
+        <li><strong>ANSSI (France) :</strong> guide de règles de programmation pour développer des applications sécurisées en Rust (usage de <code>unsafe</code>, dépendances, gestion des erreurs).</li>
+        <li><strong>Microsoft (décembre 2025) :</strong> un projet de recherche vise à éliminer le C/C++ d'ici 2030, présenté ensuite comme un objectif et non comme un plan officiel.</li>
       </ul>
     </article>
   </div>
   <div class="conclusion-box">
-    <h3>🔍 Mon avis (Étudiant BTS SIO SISR)</h3>
-    <p>Pour un futur administrateur systèmes et réseaux orienté cybersécurité, comprendre la montée en puissance de Rust est fondamental. Les outils d'infrastructure modernes (proxys comme Pingora, agents EDR, parseurs de paquets réseaux comme Snort 3 plugins, utilitaires CLI ultra-rapides comme ripgrep ou zoxide) sont tous réécrits en Rust. Ce n'est pas un effet de mode, mais la nouvelle norme de durcissement défensif recommandée par l'ANSSI et la NSA pour les 20 prochaines années.</p>
-    <hr style="border-color: rgba(255,255,255,0.2); margin: 15px 0;">
-    <h4>🔗 Sources et Bibliographie Vérifiées</h4>
-    <ul class="v-list" style="font-size: 0.9em; column-count: 2; column-gap: 20px;">
-      <li><a href="https://www.whitehouse.gov/oncd/briefing-room/2024/02/26/press-release-technical-report/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Maison Blanche (ONCD) : Rapport officiel Memory Safety</a></li>
-      <li><a href="https://www.cisa.gov/resources-tools/resources/roadmap-memory-safety" target="_blank" style="color: #ffd54f; text-decoration: underline;">CISA.gov : Roadmap pour les langages Memory-Safe</a></li>
-      <li><a href="https://cyber.gouv.fr/publications/developpement-securise-de-logiciels" target="_blank" style="color: #ffd54f; text-decoration: underline;">ANSSI : Recommandations développement sécurisé</a></li>
-      <li><a href="https://msrc.microsoft.com/blog/2019/07/a-proactive-approach-to-more-secure-code/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Microsoft MSRC : 70% de failles de mémoire</a></li>
-      <li><a href="https://security.googleblog.com/2022/12/memory-safe-languages-in-android-13.html" target="_blank" style="color: #ffd54f; text-decoration: underline;">Google Security : Rust dans Android 13</a></li>
-      <li><a href="https://www.kernel.org/doc/html/next/rust/index.html" target="_blank" style="color: #ffd54f; text-decoration: underline;">Kernel.org : Documentation Rust for Linux</a></li>
-      <li><a href="https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Cloudflare : Pingora en Rust remplace Nginx</a></li>
-      <li><a href="https://www.rust-lang.org/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Site officiel : The Rust Programming Language</a></li>
-      <li><a href="https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/3215264/nsa-releases-guidance-on-how-to-protect-against-software-memory-safety-issues/" target="_blank" style="color: #ffd54f; text-decoration: underline;">NSA : Protection contre les failles mémoire</a></li>
-      <li><a href="https://www.zdnet.com/article/microsoft-is-rewriting-core-windows-code-in-rust/" target="_blank" style="color: #ffd54f; text-decoration: underline;">ZDNet : Microsoft réécrit le code Windows en Rust</a></li>
-    </ul>
+    <h3>🔍 Mon avis (étudiant BTS SIO SISR)</h3>
+    <p>Pour un futur administrateur systèmes et réseaux, Rust n'est pas qu'un langage de développeur : il est déjà dans le noyau Linux, dans Windows, dans sudo, dans APT et dans les proxys qui transportent une grande partie du web. Comprendre pourquoi il réduit les failles mémoire permet de mieux évaluer les logiciels qu'on déploie. Ma veille montre aussi qu'il faut rester critique : une annonce comme « plus de C/C++ chez Microsoft en 2030 » a été nuancée quelques jours plus tard.</p>
   </div>
+  <section class="journal-box">
+    <h2>🗓️ Journal de veille – sources consultées</h2>
+    <p class="journal-intro">Chaque source a été vérifiée (lien, titre, date de publication). La date de gauche est le jour où je l'ai consultée.</p>
+    <ol class="journal">
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-01-17">17 janv. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=5C_HPTJg5ek" target="_blank" rel="noopener">Rust in 100 Seconds</a>
+          <span class="j-src">Fireship · YouTube · publié le 12 oct. 2021</span>
+          <p>Point de départ de ma veille : présentation express de Rust (pas de ramasse-miettes, ownership, sécurité mémoire).</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-01-24">24 janv. 2026</time><span class="j-type j-documentation">Documentation</span></div>
+        <div class="j-body">
+          <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html" target="_blank" rel="noopener">Understanding Ownership – The Rust Programming Language</a>
+          <span class="j-src">doc.rust-lang.org (le « Rust Book ») · documentation en ligne</span>
+          <p>Chapitre officiel sur la propriété et l'emprunt : c'est là que j'ai compris le fonctionnement du borrow checker.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-01-31">31 janv. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.microsoft.com/en-us/msrc/blog/2019/07/a-proactive-approach-to-more-secure-code" target="_blank" rel="noopener">A proactive approach to more secure code</a>
+          <span class="j-src">Microsoft Security Response Center (MSRC) · publié le 16 juil. 2019</span>
+          <p>Source du fameux chiffre : environ 70 % des vulnérabilités corrigées par Microsoft sont des erreurs de sécurité mémoire.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-07">7 févr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://security.googleblog.com/2022/12/memory-safe-languages-in-android-13.html" target="_blank" rel="noopener">Memory Safe Languages in Android 13</a>
+          <span class="j-src">Google Online Security Blog · publié le 1 déc. 2022</span>
+          <p>Google montre que la baisse des failles mémoire dans Android suit la hausse du code écrit en langages sûrs (Rust, Kotlin, Java).</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-14">14 févr. 2026</time><span class="j-type j-rapport">Rapport</span></div>
+        <div class="j-body">
+          <a href="https://bidenwhitehouse.archives.gov/oncd/briefing-room/2024/02/26/press-release-technical-report/" target="_blank" rel="noopener">Press Release: Future Software Should Be Memory Safe</a>
+          <span class="j-src">Maison Blanche – ONCD (archives) · publié le 26 févr. 2024</span>
+          <p>Annonce du rapport « Back to the Building Blocks » qui demande aux éditeurs de passer aux langages sûrs pour la mémoire.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-21">21 févr. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=hbHgIzIbzmQ" target="_blank" rel="noopener">Pourquoi les devs réécrivent tout en Rust ? (un langage pour masos)</a>
+          <span class="j-src">Underscore_ · YouTube · publié le 22 janv. 2026</span>
+          <p>Vidéo en français qui résume bien pourquoi les grandes entreprises abandonnent progressivement le C/C++.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-28">28 févr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/" target="_blank" rel="noopener">How we built Pingora, the proxy that connects Cloudflare to the Internet</a>
+          <span class="j-src">Cloudflare Blog · publié le 14 sept. 2022</span>
+          <p>Cloudflare remplace NGINX par un proxy maison en Rust : moins de CPU, moins de mémoire et aucun crash lié à la mémoire.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-03-07">7 mars 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://blog.cloudflare.com/pingora-open-source/" target="_blank" rel="noopener">Open sourcing Pingora: our Rust framework for building programmable network services</a>
+          <span class="j-src">Cloudflare Blog · publié le 28 févr. 2024</span>
+          <p>Pingora devient open source (licence Apache 2.0) : un exemple concret d'infrastructure réseau écrite en Rust.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-03-14">14 mars 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.thurrott.com/windows/windows-11/282995/first-rust-code-shows-up-in-the-windows-11-kernel" target="_blank" rel="noopener">First Rust Code Shows Up in the Windows 11 Kernel</a>
+          <span class="j-src">Thurrott.com · publié le 11 mai 2023</span>
+          <p>Apparition du pilote win32kbase_rs.sys : la gestion des régions GDI du noyau Windows est réécrite en Rust.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-03-21">21 mars 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=acdEF2ij04A" target="_blank" rel="noopener">Windows 11 Gets Rusty in the Name of Security</a>
+          <span class="j-src">Petri IT Knowledgebase · YouTube · publié le 3 mai 2023</span>
+          <p>Explications sur l'arrivée de Rust dans le noyau Windows 11 et l'intérêt pour la sécurité.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-04-04">4 avr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.theregister.com/software/2025/12/24/microsoft-wants-to-replace-its-entire-c-and-c-codebase/2339230" target="_blank" rel="noopener">Microsoft wants to replace its entire C and C++ codebase</a>
+          <span class="j-src">The Register · publié le 24 déc. 2025</span>
+          <p>Un ingénieur de Microsoft annonce l'objectif d'éliminer le C/C++ d'ici 2030 en s'aidant de l'IA pour traduire le code en Rust.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-04-11">11 avr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.techradar.com/computing/cloud-computing/microsoft-engineer-clarifies-speculation-around-plans-to-eliminate-c-c-languages-by-2030" target="_blank" rel="noopener">Microsoft engineer clarifies speculation around plans to &#x27;eliminate&#x27; C, C++ languages by 2030</a>
+          <span class="j-src">TechRadar · publié le 29 déc. 2025</span>
+          <p>Nuance importante : il s'agit d'un projet de recherche et pas d'une réécriture officielle de Windows. Il faut croiser les sources.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-04-25">25 avr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://lwn.net/Articles/1049831/" target="_blank" rel="noopener">The (successful) end of the kernel Rust experiment</a>
+          <span class="j-src">LWN.net · publié le 10 déc. 2025</span>
+          <p>Au Maintainers Summit 2025, les mainteneurs de Linux décident que Rust n'est plus « expérimental » dans le noyau.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-05-02">2 mai 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=L1sRHWiIYlw" target="_blank" rel="noopener">Rust for Linux – Miguel Ojeda</a>
+          <span class="j-src">Linux Plumbers Conference · YouTube · publié le 18 déc. 2025</span>
+          <p>Conférence du responsable du projet Rust for Linux : état des lieux et prochaines étapes.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-05-09">9 mai 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=kwXn_GSd8cA" target="_blank" rel="noopener">The Rust Linux Kernel Experiment Is Finally Over!!</a>
+          <span class="j-src">Brodie Robertson · YouTube · publié le 16 déc. 2025</span>
+          <p>Résumé accessible de la fin de l'expérimentation et de ce que ça change pour les pilotes.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-05-23">23 mai 2026</time><span class="j-type j-documentation">Documentation</span></div>
+        <div class="j-body">
+          <a href="https://www.kernel.org/doc/html/next/rust/index.html" target="_blank" rel="noopener">Rust — The Linux Kernel documentation</a>
+          <span class="j-src">kernel.org · documentation en ligne</span>
+          <p>Documentation officielle du noyau : prérequis, règles de codage et abstractions Rust disponibles.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-06-06">6 juin 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://blog.google/security/rust-in-android-move-fast-fix-things/" target="_blank" rel="noopener">Rust in Android: move fast and fix things</a>
+          <span class="j-src">Google Security Blog · publié le 13 nov. 2025</span>
+          <p>Pour la première fois, les failles mémoire passent sous les 20 % des vulnérabilités d'Android en 2025.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-06-13">13 juin 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://thehackernews.com/2025/11/rust-adoption-drives-android-memory.html" target="_blank" rel="noopener">Rust Adoption Drives Android Memory Safety Bugs Below 20% for First Time</a>
+          <span class="j-src">The Hacker News · publié le 17 nov. 2025</span>
+          <p>Reprise de l'étude de Google par un média cybersécurité, avec le chiffre d'une densité de failles 1000 fois plus faible en Rust.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-06-27">27 juin 2026</time><span class="j-type j-rapport">Rapport</span></div>
+        <div class="j-body">
+          <a href="https://www.cisa.gov/resources-tools/resources/memory-safe-languages-reducing-vulnerabilities-modern-software-development" target="_blank" rel="noopener">Memory Safe Languages: Reducing Vulnerabilities in Modern Software Development</a>
+          <span class="j-src">CISA & NSA · publié le 24 juin 2025</span>
+          <p>Guide commun des agences américaines : adopter les langages sûrs pour la mémoire est la mesure la plus efficace contre cette classe de failles.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-07-11">11 juil. 2026</time><span class="j-type j-documentation">Documentation</span></div>
+        <div class="j-body">
+          <a href="https://messervices.cyber.gouv.fr/guides/regles-de-programmation-pour-le-developpement-dapplications-securisees-en-rust" target="_blank" rel="noopener">Règles de programmation pour le développement d&#x27;applications sécurisées en Rust</a>
+          <span class="j-src">ANSSI – MesServicesCyber · publié le 9 juin 2020</span>
+          <p>Le guide de l'ANSSI : Rust aide, mais il faut encadrer l'usage de unsafe, des dépendances et de la gestion des erreurs.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-07-18">18 juil. 2026</time><span class="j-type j-documentation">Documentation</span></div>
+        <div class="j-body">
+          <a href="https://github.com/ANSSI-FR/rust-guide" target="_blank" rel="noopener">Secure Rust Guidelines (ANSSI-FR/rust-guide)</a>
+          <span class="j-src">ANSSI · GitHub · documentation en ligne</span>
+          <p>Version collaborative et mise à jour du guide de l'ANSSI, maintenue sur GitHub.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-07-25">25 juil. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://discourse.ubuntu.com/t/adopting-sudo-rs-by-default-in-ubuntu-25-10/60583" target="_blank" rel="noopener">Adopting sudo-rs By Default in Ubuntu 25.10</a>
+          <span class="j-src">Ubuntu Discourse (Canonical) · publié le 6 mai 2025</span>
+          <p>Ubuntu remplace sudo par sudo-rs, une réécriture en Rust : Rust arrive dans les outils d'administration du quotidien.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-08-08">8 août 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.phoronix.com/news/Debian-APT-Will-Require-Rust" target="_blank" rel="noopener">Debian&#x27;s APT Will Soon Begin Requiring Rust</a>
+          <span class="j-src">Phoronix · publié le 1 nov. 2025</span>
+          <p>Le gestionnaire de paquets APT de Debian dépendra de Rust à partir de mai 2026 (analyse des .deb, vérification des signatures).</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-08-22">22 août 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.phoronix.com/news/Tyr-Rust-DRM-Graphics-Driver" target="_blank" rel="noopener">&quot;Tyr&quot; Announced As New Rust-Written Linux Kernel Graphics Driver</a>
+          <span class="j-src">Phoronix · publié le 27 juin 2025</span>
+          <p>Après Nova (NVIDIA), un deuxième pilote graphique écrit en Rust pour les GPU Arm Mali.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-08-29">29 août 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.phoronix.com/news/NVIDIA-Nova-Rust-Linux-7.3" target="_blank" rel="noopener">Open-Source NVIDIA &quot;Nova&quot; Driver Sees More Functionality For Linux 7.3</a>
+          <span class="j-src">Phoronix · publié le 10 août 2026</span>
+          <p>Le pilote NVIDIA libre en Rust progresse noyau après noyau (Hopper, Blackwell).</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-09-19">19 sept. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.collabora.com/news-and-blog/news-and-events/building-gpu-drivers-in-rust-tyr-at-rustconf-2026.html" target="_blank" rel="noopener">Building GPU Drivers in Rust: Tyr at RustConf 2026</a>
+          <span class="j-src">Collabora · publié le 8 sept. 2026</span>
+          <p>Retour d'expérience présenté à la RustConf 2026 sur l'écriture d'un pilote noyau en Rust.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-10-03">3 oct. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=YuHoujk8SUc" target="_blank" rel="noopener">Rust : sûr et concurrent. Mais comment fait-il ? (Benjamin Coenen)</a>
+          <span class="j-src">Devoxx France · YouTube · publié le 12 oct. 2021</span>
+          <p>Conférence en français qui détaille comment Rust garantit la sûreté mémoire et l'absence de data races.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-10-17">17 oct. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=AIsNlT_s9Dw" target="_blank" rel="noopener">« Pourquoi choisir Rust pour les systèmes critiques et l&#x27;embarqué »</a>
+          <span class="j-src">KAIZEN Solutions · YouTube · publié le 21 mai 2025</span>
+          <p>Le point de vue de l'embarqué et des systèmes critiques, où un bug peut avoir des conséquences graves.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-10-31">31 oct. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=Nuba5LNy5cY" target="_blank" rel="noopener">Understand Rust&#x27;s Borrow Checker in 5 Minutes</a>
+          <span class="j-src">notgull · YouTube · publié le 23 oct. 2021</span>
+          <p>Révision rapide du borrow checker avant de rédiger ma synthèse.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-11-07">7 nov. 2026</time><span class="j-type j-documentation">Documentation</span></div>
+        <div class="j-body">
+          <a href="https://rust-lang.org/" target="_blank" rel="noopener">Rust Programming Language (site officiel)</a>
+          <span class="j-src">rust-lang.org · documentation en ligne</span>
+          <p>Dernière consultation : documentation, outils (cargo, rustup) et actualités du langage.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
 </main>
 <footer class="espace" style="height: auto; padding: 20px 0;"><p style="font-size: 0.8em; text-align: center; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
 </body>

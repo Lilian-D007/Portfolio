@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accès Sécurisé</title>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -11,7 +12,12 @@
         button { background: #7289da; color: white; padding: 12px 30px; cursor: pointer; border: none; font-family: inherit; font-weight: bold; border-radius: 8px; transition: 0.2s; }
         button:hover { background: #5b73c7; }
         #error-msg { color: #ff4d4d; margin-top: 20px; font-weight: bold; display: none; }
+        @media (max-width: 480px) { .login-box { width: auto; max-width: calc(100vw - 32px); padding: 28px 20px; box-sizing: border-box; margin-top: 40px; } }
     </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js"></script>
 </head>
 <body>
     <div class="login-box">
@@ -46,5 +52,6 @@
             }
         }
     </script>
-<footer style="position: absolute; bottom: 10px; width: 100%; text-align: center;"><p style="font-size: 0.8em; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>`n</body>
+<footer style="position: absolute; bottom: 10px; width: 100%; text-align: center;"><p style="font-size: 0.8em; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
+</body>
 </html>

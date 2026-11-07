@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="css/audio.css">
   <script src="js/audio.js" defer></script>
   <link rel="stylesheet" href="css/navigation.css">
-  <link rel="stylesheet" href="css/Lettre-de-motivation.css">
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
     html, body { height: 100%; margin: 0; }
@@ -17,9 +16,28 @@
     .lm-box { width: min(92vw, 720px); margin: 100px auto 50px; padding: 24px 28px; border: 2px solid #ffffff; border-radius: 16px; color: #ffffff; background: rgba(35,39,42,0.6); backdrop-filter: blur(6px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); box-sizing: border-box; line-height: 1.6; text-align: center; }
     .lm-box h1 { margin-top: 0; margin-bottom: 18px; }
     @media (hover: hover) and (pointer: fine) { .lm-box:hover { transform: scale(1.02); box-shadow: 0 10px 24px rgba(0,0,0,.55); } }
+    .lm-schema { width: min(92vw, 900px); margin: 0 auto 50px; padding: 24px 28px; border: 2px solid rgba(255,255,255,.6); border-radius: 16px; background: rgba(24,25,26,0.82); backdrop-filter: blur(6px); box-sizing: border-box; text-align: left; line-height: 1.55; }
+    .lm-schema h2 { text-align: center; margin: 0 0 6px; color: #9eb4ff; }
+    .lm-schema .sub { text-align: center; color: #ccc; margin: 0 0 20px; }
+    .letter-sheet { background: rgba(255,255,255,0.06); border: 2px dashed rgba(255,255,255,.35); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+    .ls-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .ls-block { border: 2px solid rgba(255,255,255,.25); border-radius: 10px; padding: 10px 12px; background: rgba(35,39,42,.75); font-size: .95rem; }
+    .ls-block b { display: block; color: #ffd54f; margin-bottom: 2px; }
+    .ls-block.right { margin-left: auto; text-align: right; }
+    .ls-block.vous { border-color: #3b82f6; } .ls-block.moi { border-color: #10b981; } .ls-block.nous { border-color: #a855f7; }
+    .ls-tag { display: inline-block; font-size: .75rem; padding: 1px 8px; border-radius: 10px; margin-left: 6px; color: #fff; }
+    .t-vous { background: #3b82f6; } .t-moi { background: #10b981; } .t-nous { background: #a855f7; }
+    .lm-tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 20px; }
+    .lm-tips div { border: 2px solid rgba(255,255,255,.2); border-radius: 12px; padding: 12px 14px; background: rgba(35,39,42,.7); }
+    .lm-tips h3 { margin: 0 0 6px; font-size: 1.05rem; color: #9eb4ff; }
+    .lm-tips ul { margin: 0; padding-left: 18px; }
     footer.espace { height: 30px; width: 100%; }
     @media (max-width: 700px) { .photoLilian { position: static; display: block; margin: 12px auto 0; } }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js"></script>
 </head>
 <body>
   <header class="topnav">
@@ -41,15 +59,45 @@
   <img src="image/LilianDUSSY.jpg" alt="Photo de Lilian DUSSY" class="photoLilian">
   <div class="lm-box">
     <h1>Ma lettre de motivation</h1>
-    <p>Bonjour je me présente Lilian DUSSY, actuellement étudiant en BTS informatique sur le développement web ainsi que la gestion de réseaux.</p> 
-    <p>J'ai déjà travaillé en tant que monteur indépendant, ainsi qu'à la mairie de Paris en informatique. Je suis sérieux et assidu, toujours ponctuel et avide d'apprendre.</p>
-    <p>Le BTS de Saint-Remi m'apprend actuellement le HTML, et m'apprendra la CSS ainsi que le JavaScript. De mon côté j'ai appris à coder en Python.</p>
-    <p>Je suis à la recherche d'un stage de 6 semaines dans le domaine de l'informatique, que ce soit en développement web ou en gestion de réseaux.</p>
-    <p>Je suis disponible du 3 juin au 12 juillet 2025, pour effectuer un stage dans votre entreprise « … ».</p>
-    <p>Je suis très motivé à l'idée de rejoindre votre équipe et de contribuer à vos projets tout en développant mes compétences professionnelles.</p>
-    <p>Je vous joins mon <a href="CV.html" style="color:#fff; text-decoration:underline;">CV</a> pour plus d'informations sur mon parcours et mes compétences.</p>
-    <p>Je vous remercie de l'attention que vous porterez à ma candidature, et reste à votre disposition pour un entretien.</p>
+    <p>Bonjour, je me présente : Lilian DUSSY, étudiant en deuxième année de BTS SIO (Services Informatiques aux Organisations), option SISR (Solutions d'Infrastructure, Systèmes et Réseaux), au lycée Saint-Rémi.</p>
+    <p>Lors de mon stage de première année au Ministère de l'Intérieur, j'ai découvert le fonctionnement d'une cellule de crise et l'importance d'une infrastructure réseau fiable et sécurisée. J'ai aussi travaillé comme monteur vidéo indépendant, ce qui m'a appris l'autonomie et le respect des délais.</p>
+    <p>En BTS, je mets en pratique l'administration de serveurs Linux et Windows, la virtualisation avec Proxmox, la configuration d'équipements Cisco (VLAN, routage, ACL, SSH) et l'audit de sécurité avec Nmap. Je suis sérieux, ponctuel et curieux.</p>
+    <p>Je suis à la recherche d'un stage de deuxième année dans le domaine des systèmes, des réseaux ou de la cybersécurité, sur la période prévue par mon établissement.</p>
+    <p>Rejoindre votre équipe me permettrait de contribuer à vos projets tout en développant mes compétences professionnelles sur une infrastructure réelle.</p>
+    <p>Vous trouverez mon <a href="CV.html" style="color:#fff; text-decoration:underline;">CV</a> pour plus d'informations sur mon parcours et mes compétences.</p>
+    <p>Je vous remercie de l'attention que vous porterez à ma candidature et reste à votre disposition pour un entretien.</p>
   </div>
+
+  <section class="lm-schema">
+    <h2>📝 Schéma type d'une lettre de motivation</h2>
+    <p class="sub">La structure que j'utilise pour chaque candidature : la méthode « Vous – Moi – Nous ».</p>
+    <div class="letter-sheet">
+      <div class="ls-row">
+        <div class="ls-block"><b>Mes coordonnées</b>Prénom NOM · adresse · téléphone · e-mail · lien vers le portfolio</div>
+      </div>
+      <div class="ls-row">
+        <div class="ls-block right"><b>Le destinataire</b>Nom de l'entreprise · service · nom du recruteur · adresse</div>
+      </div>
+      <div class="ls-row">
+        <div class="ls-block right"><b>Lieu et date</b>Paris, le 7 novembre 2026</div>
+      </div>
+      <div class="ls-block"><b>Objet</b>Candidature pour un stage de 2ᵉ année – BTS SIO option SISR</div>
+      <div class="ls-block"><b>Formule d'appel</b>Madame, Monsieur,</div>
+      <div class="ls-block vous"><b>1. Vous <span class="ls-tag t-vous">l'entreprise</span></b>Ce que je sais de l'entreprise (activité, valeurs, projets) et pourquoi c'est elle que je choisis.</div>
+      <div class="ls-block moi"><b>2. Moi <span class="ls-tag t-moi">mon profil</span></b>Ma formation, mes compétences (Linux, Windows Server, Cisco, virtualisation, sécurité) et des exemples concrets de TP ou de stage.</div>
+      <div class="ls-block nous"><b>3. Nous <span class="ls-tag t-nous">le projet commun</span></b>Ce que je peux apporter à l'équipe, ce que le stage m'apportera, les dates et la durée du stage.</div>
+      <div class="ls-block"><b>Conclusion</b>Proposition d'un entretien et remerciements.</div>
+      <div class="ls-block"><b>Formule de politesse</b>Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.</div>
+      <div class="ls-row">
+        <div class="ls-block right"><b>Signature</b>Prénom NOM</div>
+      </div>
+    </div>
+    <div class="lm-tips">
+      <div><h3>✅ À faire</h3><ul><li>Une seule page, 3 à 4 paragraphes courts.</li><li>Adapter chaque lettre à l'entreprise.</li><li>Citer des réalisations concrètes (TP, stage, projets).</li><li>Relire l'orthographe et envoyer en PDF.</li></ul></div>
+      <div><h3>❌ À éviter</h3><ul><li>Recopier le CV.</li><li>Une lettre générique envoyée partout.</li><li>Commencer chaque phrase par « Je ».</li><li>Les fautes et les formules trop familières.</li></ul></div>
+      <div><h3>🧩 Formules utiles</h3><ul><li>« Actuellement en deuxième année de BTS SIO option SISR… »</li><li>« Votre entreprise a retenu mon attention car… »</li><li>« Je serais ravi de vous présenter ma motivation lors d'un entretien. »</li></ul></div>
+    </div>
+  </section>
   <footer class="espace" style="height: auto; padding: 20px 0;"><p style="font-size: 0.8em; text-align: center; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
 </body>
 </html>

@@ -14,6 +14,10 @@
     .videoback video { width: 100%; height: 100%; object-fit: cover; }
     footer.espace { height: 30px; }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js"></script>
 </head>
 <body>
 <header class="topnav">
@@ -39,33 +43,245 @@
 <div class="videoback"><video autoplay muted loop playsinline><source src="video/veille2.mp4" type="video/mp4"></video></div>
 <main class="veille-container">
   <header class="veille-header">
-    <span class="tag" style="background:#76b900;">Hardware & IA</span><h1>NVIDIA DLSS 4.5 & Multi Frame Generation</h1><p>Comment l'IA de NVIDIA révolutionne la fluidité des jeux en 2026.</p>
+    <span class="tag" style="background:#76b900;">Hardware & IA</span>
+    <h1>NVIDIA DLSS 4.5 & Multi Frame Generation</h1>
+    <p>Comment l'IA de NVIDIA change la fluidité des jeux en 2026.</p>
+    <p class="veille-period">📅 Veille menée du 17 janvier au 7 novembre 2026 · 27 sources consultées</p>
   </header>
   <div class="veille-grid">
-    <article class="v-card"><h2>1. Le Multi Frame Generation (MFG)</h2><p>Le DLSS 4.5 (exclusif aux cartes RTX 50-series "Blackwell") introduit le <strong>Multi Frame Generation</strong>. Contrairement au DLSS 3 qui intercalait une seule image, le MFG peut générer jusqu'à <strong>5 images intermédiaires</strong> gérées par l'IA pour chaque image rendue par le GPU, offrant un multiplicateur de performances allant jusqu'à 6x.</p></article>
-    <article class="v-card"><h2>2. Dynamic MFG : La boîte automatique</h2><p>La nouveauté majeure de 2026 est le <strong>Dynamic Multi Frame Generation</strong>. Cette technologie agit comme une transmission automatique : l'IA ajuste en temps réel le multiplicateur d'images (de 1x à 6x) en fonction des besoins du jeu et du taux de rafraîchissement de l'écran, garantissant une latence minimale et une stabilité parfaite.</p></article>
-    <article class="v-card"><h2>3. Architecture Transformer</h2><p>Le DLSS 4 repose sur de nouveaux modèles d'IA basés sur les <strong>Transformers</strong>. Ces réseaux neuronaux offrent une meilleure compréhension du contexte spatial et temporel, ce qui réduit drastiquement les artefacts visuels (ghosting) et améliore considérablement la netteté des images générées, même lors de mouvements rapides.</p></article>
-    <article class="v-card"><h2>4. Latence et Écosystème (Reflex)</h2><p>Générer 5 fausses frames ajoute intrinsèquement de la latence entre l'action du joueur et l'affichage. C'est pourquoi le DLSS 4 oblige l'intégration de <strong>NVIDIA Reflex</strong> au niveau du moteur de jeu. Reflex court-circuite la file d'attente de rendu du processeur, permettant au jeu de réagir instantanément malgré l'interpolation massive.</p></article>
+    <article class="v-card"><h2>1. Le Multi Frame Generation (MFG)</h2><p>Avec les cartes <strong>RTX 50 « Blackwell »</strong>, le DLSS 4 (janvier 2025) génère jusqu'à <strong>3 images</strong> par image calculée (x4). Le DLSS 4.5 ajoute un mode <strong>6X</strong> : jusqu'à <strong>5 images générées</strong> par l'IA pour chaque image rendue par le GPU. NVIDIA annonce jusqu'à +35 % d'images par seconde en 4K path tracing par rapport au mode 4X.</p></article>
+    <article class="v-card"><h2>2. Dynamic MFG : la « boîte automatique »</h2><p>Disponible depuis le <strong>31 mars 2026</strong>, la génération <strong>dynamique</strong> ajuste en temps réel le multiplicateur d'images selon la fréquence d'affichage visée : elle ne génère que les images nécessaires. Les tests sont partagés : la fluidité augmente, mais la latence ne baisse pas.</p></article>
+    <article class="v-card"><h2>3. Les modèles Transformer</h2><p>Depuis le DLSS 4, les réseaux de neurones utilisent une architecture <strong>Transformer</strong> (comme les IA de texte), et le DLSS 4.5 passe à une <strong>2ᵉ génération</strong>. Résultat : moins de traînées (ghosting) et une image plus stable en mouvement. Cette amélioration fonctionne sur <strong>toutes les cartes RTX</strong>, contrairement au MFG réservé aux RTX 50.</p></article>
+    <article class="v-card"><h2>4. Latence et Reflex</h2><p>Les images générées n'existent pas pour le moteur du jeu : elles améliorent la fluidité affichée mais pas la réactivité. C'est pourquoi le Frame Generation impose <strong>NVIDIA Reflex</strong>, qui réduit la file d'attente de rendu, et <strong>Reflex 2 (Frame Warp)</strong> corrige l'image juste avant l'affichage avec la dernière position de la souris.</p></article>
+    <article class="v-card"><h2>5. La concurrence suit</h2><p><strong>AMD</strong> a lancé <strong>FSR Redstone</strong> (décembre 2025) avec une génération d'images par apprentissage automatique sur RDNA 4, et <strong>Intel</strong> propose <strong>XeSS 3</strong> avec une génération multi-images x2 à x4. La génération d'images par IA devient la norme chez les trois constructeurs.</p></article>
+    <article class="v-card"><h2>6. Et ensuite : le DLSS 5</h2><p>Annoncé à la <strong>GTC de mars 2026</strong> pour l'automne, le <strong>DLSS 5</strong> ne vise plus seulement les performances : un rendu neuronal modifie l'éclairage et l'apparence des matériaux (peau, cheveux, tissus). Les premières images ont fait débat, certains y voyant un « filtre IA » qui change la direction artistique.</p></article>
   </div>
-  
   <div class="conclusion-box">
     <h3>🔍 Mon avis</h3>
-    <p>L'évolution du DLSS montre que l'avenir du hardware gaming ne dépend plus seulement de la puissance brute (rasterisation), mais de l'optimisation algorithmique et de l'IA. Pour les techniciens et gamers, comprendre ces technologies d'interpolation devient crucial pour optimiser les configurations de demain.</p>
-    <hr style="border-color: rgba(255,255,255,0.2); margin: 15px 0;">
-    <h4>🔗 Sources et Bibliographie</h4>
-    <ul class="v-list" style="font-size: 0.9em; column-count: 2; column-gap: 20px;">
-      <li><a href="https://www.nvidia.com/fr-fr/geforce/news/" target="_blank" style="color: #ffd54f; text-decoration: underline;">NVIDIA Newsroom : DLSS 4.5</a></li>
-      <li><a href="https://www.tomshardware.com/pc-components/gpus" target="_blank" style="color: #ffd54f; text-decoration: underline;">Tom's Hardware : Architecture Blackwell</a></li>
-      <li><a href="https://www.techpowerup.com" target="_blank" style="color: #ffd54f; text-decoration: underline;">TechPowerUp : Analyse du Dynamic MFG</a></li>
-      <li><a href="https://www.youtube.com/user/DigitalFoundry" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (Digital Foundry) : DLSS 4 Frame Pacing</a></li>
-      <li><a href="https://www.youtube.com/c/Hardwareunboxednow" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (Hardware Unboxed) : DLSS vs FSR</a></li>
-      <li><a href="https://www.youtube.com/nvidia" target="_blank" style="color: #ffd54f; text-decoration: underline;">YouTube (NVIDIA) : Conférence CES</a></li>
-      <li><a href="https://www.reddit.com/r/nvidia/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Reddit : r/nvidia (Retours utilisateurs)</a></li>
-      <li><a href="https://www.reddit.com/r/hardware/" target="_blank" style="color: #ffd54f; text-decoration: underline;">Reddit : r/hardware (Débat technique)</a></li>
-      <li><a href="https://www.lesnumeriques.com/carte-graphique/nvidia-geforce-rtx-50-c-dlss-4-a-quoi-s-attendre-n228646.html" target="_blank" style="color: #ffd54f; text-decoration: underline;">Les Numériques : Test DLSS 4</a></li>
-      <li><a href="https://www.unrealengine.com/en-US/blog" target="_blank" style="color: #ffd54f; text-decoration: underline;">Unreal Engine : Plugin DLSS 4.5</a></li>
-    </ul>
+    <p>L'évolution du DLSS montre que les performances des cartes graphiques ne dépendent plus seulement de la puissance brute, mais aussi de l'IA. Pour un technicien, il faut savoir lire ces chiffres : un nombre d'images par seconde obtenu avec la génération d'images ne se compare pas directement à des images réellement calculées. Ma veille m'a appris à croiser les annonces de NVIDIA avec des tests indépendants (Digital Foundry, Gamers Nexus, presse spécialisée).</p>
   </div>
+  <section class="journal-box">
+    <h2>🗓️ Journal de veille – sources consultées</h2>
+    <p class="journal-intro">Chaque source a été vérifiée (lien, titre, date de publication). La date de gauche est le jour où je l'ai consultée.</p>
+    <ol class="journal">
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-01-17">17 janv. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.nvidia.com/en-us/geforce/news/dlss4-multi-frame-generation-ai-innovations/" target="_blank" rel="noopener">NVIDIA DLSS 4 Introduces Multi Frame Generation &amp; Enhancements For All DLSS Technologies</a>
+          <span class="j-src">NVIDIA GeForce News · publié le 6 janv. 2025</span>
+          <p>Point de départ : annonce officielle du DLSS 4 (CES 2025), du Multi Frame Generation x4 et des modèles Transformer.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-01-20">20 janv. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.nvidia.com/en-us/geforce/news/reflex-2-even-lower-latency-gameplay-with-frame-warp/" target="_blank" rel="noopener">NVIDIA Reflex 2 With New Frame Warp Technology Reduces Latency In Games By Up To 75%</a>
+          <span class="j-src">NVIDIA GeForce News · publié le 6 janv. 2025</span>
+          <p>Pour comprendre comment NVIDIA compense la latence ajoutée par la génération d'images.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-01-27">27 janv. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://80.lv/articles/nvidia-announces-dlss-4-with-multi-frame-generation/" target="_blank" rel="noopener">DLSS 4 with Multi-Frame Generation Presented by NVIDIA</a>
+          <span class="j-src">80 Level · publié le 7 janv. 2025</span>
+          <p>Résumé de l'annonce avec les chiffres mis en avant par NVIDIA (RTX 5090 contre RTX 4090).</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-03">3 févr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.tomshardware.com/pc-components/cpus/nvidia-introduces-dlss-4-5-and-multi-frame-generation-6x-at-ces-2026-updated-models-can-generate-higher-quality-upscaled-frames-and-more-of-them-dynamically" target="_blank" rel="noopener">Nvidia introduces DLSS 4.5 and Multi Frame Generation 6X at CES 2026</a>
+          <span class="j-src">Tom's Hardware · publié le 6 janv. 2026</span>
+          <p>Annonce du DLSS 4.5 : modèle Transformer de 2ᵉ génération, mode 6X et génération dynamique.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-07">7 févr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.cowcotland.com/news/99151/nvidia-fait-passer-le-dlss-dans-la-dimension-4-5.html" target="_blank" rel="noopener">NVIDIA fait passer le DLSS dans la dimension 4.5</a>
+          <span class="j-src">Cowcotland · publié le 6 janv. 2026</span>
+          <p>La même annonce expliquée en français.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-10">10 févr. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=1UpqcFg75wM" target="_blank" rel="noopener">Hands-On With DLSS 4.5 + Dynamic Multi-Frame Generation</a>
+          <span class="j-src">DF Clips (Digital Foundry) · YouTube · publié le 8 janv. 2026</span>
+          <p>Premières impressions de Digital Foundry, prises en main sur le salon.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-14">14 févr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.pcgamer.com/hardware/graphics-cards/ive-put-nvidias-new-dlss-4-5-to-the-test-heres-how-to-enable-it-yourself-and-whether-you-should" target="_blank" rel="noopener">I&#x27;ve put Nvidia&#x27;s new DLSS 4.5 to the test: Here&#x27;s how to enable it yourself and whether you should</a>
+          <span class="j-src">PC Gamer · publié le 13 janv. 2026</span>
+          <p>Test pratique du nouveau modèle de super-résolution, avec la méthode pour l'activer via l'application NVIDIA.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-21">21 févr. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=Lv8tJoiApd8" target="_blank" rel="noopener">DLSS 4.5 Preset L Review: Nvidia&#x27;s Most Advanced Upscaler Tested At 4K And 1440p</a>
+          <span class="j-src">Digital Foundry · YouTube · publié le 4 févr. 2026</span>
+          <p>Analyse détaillée de la qualité d'image du nouveau preset en 4K et 1440p.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-02-28">28 févr. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=hm8_mrB5Jh8" target="_blank" rel="noopener">DLSS 4.5 RT Artefacting: We Found A Fix And It&#x27;s Fascinating</a>
+          <span class="j-src">DF Clips (Digital Foundry) · YouTube · publié le 9 févr. 2026</span>
+          <p>Les limites de la technologie : artefacts avec le ray tracing et solution trouvée.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-03-07">7 mars 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=Nh1FHR9fkJk" target="_blank" rel="noopener">&quot;Fake Frames&quot; Tested | DLSS 4.0, MFG 4X, &amp; NVIDIA&#x27;s Misleading Review Guide</a>
+          <span class="j-src">Gamers Nexus · YouTube · publié le 1 févr. 2025</span>
+          <p>Point de vue critique : les images générées ne valent pas des images réellement calculées, et attention au marketing.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-03-14">14 mars 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://pausehardware.com/dlss-4-5-generation-images-dynamique-rtx-50/" target="_blank" rel="noopener">DLSS 4.5 : Génération d&#x27;images dynamique pour RTX 50</a>
+          <span class="j-src">Pause Hardware · publié le 10 mars 2026</span>
+          <p>Date de sortie de la génération dynamique (31 mars 2026) et compatibilité, en français.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-03-21">21 mars 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.pcgamer.com/hardware/nvidia-has-just-shown-off-dlss-5-coming-this-fall-and-currently-it-looks-a-lot-like-an-ai-lighting-filter/" target="_blank" rel="noopener">Nvidia has just shown off DLSS 5 coming this fall… and currently it looks a lot like an AI filter</a>
+          <span class="j-src">PC Gamer · publié le 16 mars 2026</span>
+          <p>Annonce du DLSS 5 à la GTC 2026 : le rendu neuronal modifie l'éclairage et les matériaux, ce qui fait débat.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-03-22">22 mars 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=GUxsmp8iojY" target="_blank" rel="noopener">DLSS 5 has shown that discourse is dead</a>
+          <span class="j-src">2kliksphilip · YouTube · publié le 18 mars 2026</span>
+          <p>Réaction aux débats autour du DLSS 5 et du rendu par IA.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-04-04">4 avr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.nvidia.com/en-us/geforce/news/dlss-4-5-dynamic-multi-frame-generation-6x-mode-released/" target="_blank" rel="noopener">DLSS 4.5 Dynamic Multi Frame Generation &amp; Multi Frame Generation 6X Available Now</a>
+          <span class="j-src">NVIDIA GeForce News · publié le 31 mars 2026</span>
+          <p>Sortie officielle de la génération dynamique (« boîte automatique ») et du mode 6X pour les RTX 50.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-04-06">6 avr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://hothardware.com/news/nvidia-dlss-45-dynamic-mfg-tested" target="_blank" rel="noopener">NVIDIA DLSS 4.5 Tested: The Real-World Impact Of Dynamic Multi-Frame Generation</a>
+          <span class="j-src">HotHardware · publié le 31 mars 2026</span>
+          <p>Mesures concrètes de l'impact du mode dynamique selon la fréquence cible.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-04-11">11 avr. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.pcgamesn.com/nvidia/dlss-4-5-dynamic-multi-frame-gen" target="_blank" rel="noopener">I had high hopes for Nvidia&#x27;s DLSS 4.5 Dynamic Multi Frame Gen, but it&#x27;s not quite what I expected</a>
+          <span class="j-src">PCGamesN · publié le 2 avr. 2026</span>
+          <p>Avis plus mitigé : la fluidité augmente mais la latence ne baisse pas vraiment.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-04-18">18 avr. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=3mrLbhg4ytk" target="_blank" rel="noopener">Dynamic Frame Generation (up to 6X) - Good or Gimmick?? (5 Games Tested)</a>
+          <span class="j-src">zWORMz Gaming · YouTube · publié le 1 avr. 2026</span>
+          <p>Test sur cinq jeux pour savoir si le mode 6X est utile ou gadget.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-04-25">25 avr. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=4SehYMQaXPw" target="_blank" rel="noopener">DLSS 4.5 Dynamic &amp; 5x/6x Multi Frame Gen for RTX 50 GPUs | Review &amp; Setup</a>
+          <span class="j-src">Gaming DJ · YouTube · publié le 1 avr. 2026</span>
+          <p>Tutoriel de configuration (application NVIDIA, profils) et premières mesures.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-05-16">16 mai 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=3nfEkuqNX4k" target="_blank" rel="noopener">Fake Frame Image Quality: DLSS 4, MFG 4X, &amp; NVIDIA Transformer Model Comparison</a>
+          <span class="j-src">Gamers Nexus · YouTube · publié le 20 févr. 2025</span>
+          <p>Comparaison image par image entre l'ancien modèle CNN et le modèle Transformer.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-05-30">30 mai 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=MhRK-OWZ0_8" target="_blank" rel="noopener">DLSS 4 Multi Frame Generation Review- it helps you win MORE, but it doesn&#x27;t help you win...</a>
+          <span class="j-src">Daniel Owen · YouTube · publié le 23 janv. 2025</span>
+          <p>Bonne explication de la différence entre fluidité affichée et réactivité réelle.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-06-13">13 juin 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.windowscentral.com/hardware/amd/amd-fsr-redstone-release" target="_blank" rel="noopener">AMD launches next-gen upscaling with FSR Redstone</a>
+          <span class="j-src">Windows Central · publié le 11 déc. 2025</span>
+          <p>La réponse d'AMD : FSR Redstone et sa génération d'images par apprentissage automatique sur RDNA 4.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-06-27">27 juin 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.pcgamer.com/hardware/graphics-cards/intel-announces-xess-3-with-multi-frame-generation-putting-it-ahead-of-amd-in-the-ai-powered-graphics-performance-race" target="_blank" rel="noopener">Intel announces XeSS 3 with multi-frame generation</a>
+          <span class="j-src">PC Gamer · publié le 9 oct. 2025</span>
+          <p>Intel propose aussi une génération multi-images (x2, x3, x4) avec XeSS 3 : la technologie se généralise.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-07-18">18 juil. 2026</time><span class="j-type j-documentation">Documentation</span></div>
+        <div class="j-body">
+          <a href="https://www.nvidia.com/fr-fr/geforce/technologies/dlss/" target="_blank" rel="noopener">Technologie DLSS</a>
+          <span class="j-src">NVIDIA (site officiel, FR) · documentation en ligne</span>
+          <p>Page de présentation officielle en français : fonctions disponibles selon la génération de carte RTX.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-08-08">8 août 2026</time><span class="j-type j-documentation">Documentation</span></div>
+        <div class="j-body">
+          <a href="https://developer.nvidia.com/rtx/dlss" target="_blank" rel="noopener">NVIDIA DLSS | NVIDIA Developer</a>
+          <span class="j-src">NVIDIA Developer · documentation en ligne</span>
+          <p>Côté développeurs : SDK, intégration dans les moteurs (Unreal, Unity) et prérequis comme Reflex.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-09-05">5 sept. 2026</time><span class="j-type j-article">Article</span></div>
+        <div class="j-body">
+          <a href="https://www.digit.in/features/gaming/nvidia-dlss-4-5-tested-what-dynamic-multi-frame-generation-and-ray-reconstruction-actually-do.html" target="_blank" rel="noopener">NVIDIA DLSS 4.5 tested: What Dynamic Multi Frame Generation and Ray Reconstruction actually do</a>
+          <span class="j-src">Digit · publié le 26 août 2026</span>
+          <p>Bilan après plusieurs mois : performances et latence mesurées sur Cyberpunk 2077.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-10-03">3 oct. 2026</time><span class="j-type j-video">Vidéo</span></div>
+        <div class="j-body">
+          <a href="https://www.youtube.com/watch?v=BUIpVNkadD0" target="_blank" rel="noopener">A Look At DLSS 4 Multi Frame Generation&#x27;s Image Quality</a>
+          <span class="j-src">Terra Ware · YouTube · publié le 20 janv. 2025</span>
+          <p>Retour sur les artefacts du MFG pour préparer la conclusion de ma veille.</p>
+        </div>
+      </li>
+      <li class="j-item">
+        <div class="j-date"><time datetime="2026-11-07">7 nov. 2026</time><span class="j-type j-documentation">Documentation</span></div>
+        <div class="j-body">
+          <a href="https://www.nvidia.com/en-us/geforce/news/dlss4-multi-frame-generation-ai-innovations/" target="_blank" rel="noopener">NVIDIA DLSS 4 Introduces Multi Frame Generation &amp; Enhancements For All DLSS Technologies</a>
+          <span class="j-src">NVIDIA GeForce News · publié le 6 janv. 2025</span>
+          <p>Relecture de l'annonce officielle pour vérifier les chiffres avant la mise à jour du portfolio.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
 </main>
 <footer class="espace" style="height: auto; padding: 20px 0;"><p style="font-size: 0.8em; text-align: center; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
 </body>

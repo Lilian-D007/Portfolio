@@ -99,3 +99,30 @@
     text-align: center;
     backdrop-filter: blur(10px);
 }
+/* ===== Période de veille ===== */
+.veille-period { margin-top: 10px !important; font-size: 0.95rem !important; color: #ffd54f !important; }
+
+/* ===== Journal de veille (sources datées) ===== */
+.journal-box {
+    background: rgba(24, 25, 26, 0.85);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 22px;
+    backdrop-filter: blur(8px);
+}
+.journal-box h2 { margin: 0 0 6px; color: #9eb4ff; }
+.journal-intro { margin: 0 0 18px; color: #ccc; font-size: 0.95rem; }
+.journal { list-style: none; margin: 0; padding: 0 0 0 18px; border-left: 2px solid rgba(110, 140, 255, 0.45); }
+.j-item { position: relative; display: grid; grid-template-columns: 150px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px dashed rgba(255, 255, 255, 0.12); }
+.j-item::before { content: ""; position: absolute; left: -25px; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: #6e8cfb; box-shadow: 0 0 8px #6e8cfb; }
+.j-date { display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; color: #ffd54f; }
+.j-type { align-self: flex-start; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; background: #6e8cfb; color: #fff; }
+.j-video { background: #e53935; }
+.j-article { background: #3b82f6; }
+.j-documentation { background: #10b981; }
+.j-rapport { background: #a855f7; }
+.j-body a { color: #fff; font-weight: 700; text-decoration: underline; text-decoration-color: rgba(255, 213, 79, 0.7); }
+.j-body a:hover { color: #ffd54f; }
+.j-src { display: block; font-size: 0.82rem; color: #b8c1d9; margin: 4px 0; }
+.j-body p { margin: 4px 0 0; color: #ddd; line-height: 1.5; font-size: 0.93rem; }
+@media (max-width: 600px) { .j-item { grid-template-columns: 1fr; gap: 4px; } }

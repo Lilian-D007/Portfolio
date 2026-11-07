@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Guide One Piece - Analyse Complète</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Cinzel:wght@600;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a',
+                        card: '#1e293b',
+                        gold: '#fbbf24',
+                        accent: '#38bdf8',
+                        danger: '#ef4444',
+                        success: '#10b981',
+                        marine: '#0ea5e9'
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        title: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-tap-highlight-color: transparent; }
+        /* Masquage scrollbar pour look App */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .nav-item.active { color: #fbbf24; border-top: 2px solid #fbbf24; }
+        
+        /* CORRECTION DES BADGES (Traduction en CSS standard) */
+        .badge-pirate { 
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-marine { 
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        .badge-rev { 
+            background-color: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .badge-cipher { 
+            background-color: rgba(107, 114, 128, 0.2);
+            color: #d1d5db;
+            border: 1px solid rgba(107, 114, 128, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-dark text-slate-200 font-sans pb-28">
+
+    <header class="fixed top-0 w-full bg-dark/95 backdrop-blur-md z-50 border-b border-white/10 p-4 text-center shadow-lg">
+        <h1 class="font-title text-xl text-gold tracking-widest">ONE PIECE</h1>
+        <p class="text-[10px] text-slate-400 uppercase tracking-widest">Guide Analytique & Philosophique</p>
+    </header>
+
+    <main class="pt-24 px-4 max-w-md mx-auto">
+
+        <div id="tab-perso" class="tab-content active">
+            
+            <div class="mb-8">
+                <h2 class="text-xl font-title text-white mb-4 border-l-4 border-red-500 pl-3">Forces Libératrices</h2>
+                
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg mb-4 border border-white/5">
+                    <img src="image/luffy.png" class="w-full h-40 object-cover object-top" onerror="this.src='https://placehold.co/600x400/red/white?text=LUFFY'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-lg font-bold text-white">Monkey D. Luffy</h3>
+                            <span class="text-[10px] font-bold badge-pirate px-2 py-1 rounded">PIRATE</span>
+                        </div>
+                        <p class="text-sm text-gray-300 leading-relaxed text-justify">
+                            Il ne cherche ni à conquérir ni à dominer. Son rêve est d'être "l'homme le plus libre des mers". Il incarne le <strong>Droit Naturel</strong> : il suit sa propre morale plutôt que les lois écrites (Droit Positif) du Gouvernement. Sa justice est instinctive : protéger ses amis et briser les chaînes de l'oppression partout où il passe.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg mb-4 border border-white/5">
+                    <img src="image/dragon.png" class="w-full h-40 object-cover object-top" onerror="this.src='https://placehold.co/600x400/green/white?text=DRAGON'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-lg font-bold text-white">Monkey D. Dragon</h3>
+                            <span class="text-[10px] font-bold badge-rev px-2 py-1 rounded">RÉVOLUTIONNAIRE</span>
+                        </div>
+                        <p class="text-sm text-gray-300 leading-relaxed text-justify">
+                            Le "Pire Criminel du Monde". Contrairement aux pirates qui vivent en marge du système, Dragon attaque le système frontalement. Il ne vise pas la Marine (les soldats), mais les <strong>Dragons Célestes</strong> (les tyrans). Il incarne la réponse politique et organisée face à l'injustice institutionnalisée (Le Contrat Social rompu).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h2 class="text-xl font-title text-white mb-4 border-l-4 border-marine pl-3">L'Ordre (La Marine)</h2>
+                <p class="text-xs text-gray-400 mb-6 italic px-2">"La Justice est une valeur qui change selon celui qui la porte."</p>
+
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg mb-6 border border-white/5">
+                    <img src="image/akainu.png" class="w-full h-32 object-cover object-top" onerror="this.src='https://placehold.co/600x400/darkred/white?text=AKAINU'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="text-lg font-bold text-white">Akainu (Sakazuki)</h3>
+                            <span class="text-[10px] font-bold bg-red-600 text-white px-2 py-1 rounded">AMIRAL EN CHEF</span>
+                        </div>
+                        <p class="text-xs text-red-400 font-bold uppercase mb-2">Justice Absolue</p>
+                        <p class="text-sm text-gray-300 leading-relaxed text-justify">
+                            Pour lui, le mal doit être éradiqué à la racine. C'est un utilitarisme radical : si tuer 100 innocents permet d'éliminer 1 terroriste qui menace le monde, il le fera sans hésiter (Exemple : Ohara). La fin justifie les moyens. Il représente l'ordre par la terreur.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg mb-6 border border-white/5">
+                    <img src="image/aokiji.png" class="w-full h-32 object-cover object-top" onerror="this.src='https://placehold.co/600x400/blue/white?text=AOKIJI'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="text-lg font-bold text-white">Aokiji (Kuzan)</h3>
+                            <span class="text-[10px] font-bold badge-marine px-2 py-1 rounded">EX-AMIRAL</span>
+                        </div>
+                        <p class="text-xs text-blue-400 font-bold uppercase mb-2">Justice Paresseuse</p>
+                        <p class="text-sm text-gray-300 leading-relaxed text-justify">
+                            Il représente la nuance et le doute. Il obéit aux ordres mais garde son humanité. Il peut épargner un ennemi (comme Robin) s'il juge que la loi est trop cruelle ou immorale. Il a fini par quitter la Marine, refusant de servir sous les ordres extrémistes d'Akainu.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg mb-6 border border-white/5">
+                    <img src="image/kizaru2.jpg" class="w-full h-32 object-cover object-top" onerror="this.src='https://placehold.co/600x400/yellow/white?text=KIZARU'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="text-lg font-bold text-white">Kizaru (Borsalino)</h3>
+                            <span class="text-[10px] font-bold badge-marine px-2 py-1 rounded">AMIRAL</span>
+                        </div>
+                        <p class="text-xs text-yellow-400 font-bold uppercase mb-2">Justice Incertaine</p>
+                        <p class="text-sm text-gray-300 leading-relaxed text-justify">
+                            L'archétype du fonctionnaire zélé. Il obéit aux ordres sans se poser de questions morales. C'est l'illustration parfaite de la <strong>"Banalité du Mal"</strong> (Hannah Arendt) : il ne commet pas le mal par haine, mais par absence de pensée, simplement parce que "c'est le règlement".
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg mb-6 border border-white/5">
+                    <img src="image/fujitora2.png" class="w-full h-32 object-cover object-top" onerror="this.src='https://placehold.co/600x400/purple/white?text=FUJITORA'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="text-lg font-bold text-white">Fujitora (Issho)</h3>
+                            <span class="text-[10px] font-bold badge-marine px-2 py-1 rounded">AMIRAL</span>
+                        </div>
+                        <p class="text-xs text-purple-400 font-bold uppercase mb-2">Justice Aveugle / Vertueuse</p>
+                        <p class="text-sm text-gray-300 leading-relaxed text-justify">
+                            Il s'est aveuglé volontairement pour ne plus voir la corruption du monde. Pour lui, la priorité n'est pas de vaincre les pirates, mais de protéger les civils (les <strong>"personnes lézées"</strong>). Il est prêt à humilier la Marine (s'excuser à genoux à Dressrosa) pour faire éclater la vérité.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg mb-6 border border-white/5">
+                    <img src="image/ryokugyu2.png" class="w-full h-32 object-cover object-top" onerror="this.src='https://placehold.co/600x400/green/white?text=RYOKUGYU'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="text-lg font-bold text-white">Ryokugyu (Aramaki)</h3>
+                            <span class="text-[10px] font-bold badge-marine px-2 py-1 rounded">AMIRAL</span>
+                        </div>
+                        <p class="text-xs text-green-400 font-bold uppercase mb-2">Justice Déterminée</p>
+                        <p class="text-sm text-gray-300 leading-relaxed text-justify">
+                            Une vision fasciste et darwiniste. Pour lui, les droits de l'homme ne s'appliquent qu'aux citoyens des pays affiliés au Gouvernement. Les autres sont des "sous-humains" qu'on peut tuer. Il pense que "la discrimination crée la stabilité". Il vénère les Dragons Célestes.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg mb-6 border border-white/5">
+                    <img src="image/garp.png" class="w-full h-32 object-cover object-top" onerror="this.src='https://placehold.co/600x400/darkblue/white?text=GARP'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="text-lg font-bold text-white">Monkey D. Garp</h3>
+                            <span class="text-[10px] font-bold badge-marine px-2 py-1 rounded">HÉROS</span>
+                        </div>
+                        <p class="text-xs text-slate-400 font-bold uppercase mb-2">Le Dilemme Moral</p>
+                        <p class="text-sm text-gray-300 leading-relaxed text-justify">
+                            Légende de la Marine. Il déteste les Dragons Célestes (qu'il traite d'ordures) mais refuse de quitter l'institution. Pourquoi ? Parce qu'il croit que sans la Marine, les civils seraient livrés aux pirates sanguinaires. Il accepte de servir un système pourri pour protéger les innocents au bas de l'échelle.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-world" class="tab-content">
+            <h2 class="text-xl font-title text-white mb-6 border-l-4 border-gold pl-3">Les 3 Grands Pouvoirs (+1)</h2>
+
+            <div class="space-y-6">
+                <div class="bg-card p-5 rounded-xl border-t-4 border-gold shadow-lg">
+                    <h3 class="font-bold text-lg text-white mb-2">1. Pouvoir LÉGISLATIF (La Loi)</h3>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded border border-yellow-500/30">Dragons Célestes</span>
+                        <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded border border-yellow-500/30">Gorosei</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-justify">
+                        Officiellement, la "Rêverie" (assemblée des rois) décide. En réalité, ce sont les <strong>Dragons Célestes</strong> et le conseil des 5 doyens (Gorosei) qui dictent les règles. Ils sont au-dessus des lois. Leurs caprices deviennent des décrets absolus.
+                    </p>
+                </div>
+
+                <div class="bg-card p-5 rounded-xl border-t-4 border-marine shadow-lg">
+                    <h3 class="font-bold text-lg text-white mb-2">2. Pouvoir EXÉCUTIF (Le Glaive)</h3>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-xs badge-marine px-2 py-1 rounded">Marine</span>
+                        <span class="text-xs badge-cipher px-2 py-1 rounded">Cipher Pol</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-justify mb-3">
+                        Le bras armé du Gouvernement.
+                    </p>
+                    <ul class="text-sm text-gray-300 list-disc pl-4 space-y-2 text-justify">
+                        <li><strong>La Marine :</strong> La face publique. Dirigée par Akainu, elle maintient l'ordre visible, chasse les pirates et protège les mers.</li>
+                        <li><strong>Le Cipher Pol (CP0-CP9) :</strong> L'agence de renseignement et police secrète. Ils opèrent dans l'ombre pour l'espionnage, les assassinats politiques et la protection directe des intérêts des nobles. C'est la "Gestapo" du Gouvernement.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-card p-5 rounded-xl border-t-4 border-purple-500 shadow-lg">
+                    <h3 class="font-bold text-lg text-white mb-2">3. Pouvoir JUDICIAIRE (Le Marteau)</h3>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Enies Lobby</span>
+                    </div>
+                    <p class="text-sm text-gray-400 text-justify">
+                        Un pouvoir fantoche. Dans One Piece, il n'y a pas de véritable procès équitable. L'île judiciaire d'Enies Lobby est un tribunal où l'accusé est toujours déclaré coupable s'il est un ennemi de l'État. C'est une machine à légaliser les exécutions.
+                    </p>
+                </div>
+
+                <div class="bg-card p-5 rounded-xl border-t-4 border-teal-400 shadow-lg relative overflow-hidden">
+                    <div class="absolute top-2 right-2 opacity-20 text-4xl">📰</div>
+                    <h3 class="font-bold text-lg text-teal-400 mb-2">4. Pouvoir MÉDIATIQUE (L'Info)</h3>
+                    <div class="flex gap-4 items-start">
+                        <img src="image/morgans.png" class="w-16 h-16 rounded object-cover bg-white/10" onerror="this.style.display='none'">
+                        <div>
+                            <p class="text-sm text-gray-300 text-justify">
+                                Détenu par <strong>Big News Morgans</strong> via le "World Economy News Paper". Ses mouettes distribuent le journal partout.
+                            </p>
+                            <p class="text-xs text-gray-400 mt-2 text-justify">
+                                Morgans manipule l'opinion mondiale. Il peut accepter de l'argent du Gouvernement pour cacher un génocide (Lulusia), ou refuser la censure pour publier un "scoop" sensationnel. Celui qui contrôle l'information contrôle la réalité perçue par le peuple.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-history" class="tab-content">
+            <h2 class="text-xl font-title text-white mb-6 border-l-4 border-red-500 pl-3">Dossiers Noirs & Concepts</h2>
+
+            <div class="relative border-l-2 border-slate-700 ml-3 space-y-10 pb-10">
+                
+                <div class="pl-6 relative">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-red-500 outline outline-4 outline-dark"></div>
+                    <div class="bg-card rounded-lg p-5 shadow-lg">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-bold text-white text-lg">Incident de God Valley</h3>
+                            <span class="text-[10px] text-slate-500 font-bold uppercase">Il y a 38 ans</span>
+                        </div>
+                        <img src="image/god_valley.png" class="w-full h-32 object-cover rounded mb-3 opacity-80" onerror="this.style.display='none'">
+                        <p class="text-sm text-gray-300 mb-4 text-justify">
+                            Une île a été rayée des cartes. Les Dragons Célestes y organisaient une "chasse à l'homme" sportive, utilisant les habitants comme gibier.
+                        </p>
+                        
+                        <div class="bg-dark/50 p-3 rounded border-l-2 border-gold">
+                            <h4 class="text-gold text-xs font-bold mb-1 uppercase tracking-wider">Concept : Homo Sacer</h4>
+                            <p class="text-xs text-gray-400 text-justify">
+                                (Giorgio Agamben). C'est un être humain réduit à l'état de "vie nue" (Zoe). Il peut être tué par le pouvoir souverain sans que ce soit considéré comme un homicide. Pour les Nobles, les humains normaux ne sont pas des citoyens, mais des objets jetables.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pl-6 relative">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 outline outline-4 outline-dark"></div>
+                    <div class="bg-card rounded-lg p-5 shadow-lg">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-bold text-white text-lg">L'Effacement de Lulusia</h3>
+                            <span class="text-[10px] text-slate-500 font-bold uppercase">Récent</span>
+                        </div>
+                        <img src="image/lulusia.png" class="w-full h-32 object-cover rounded mb-3 opacity-80" onerror="this.style.display='none'">
+                        <p class="text-sm text-gray-300 mb-4 text-justify">
+                            Le Royaume de Lulusia s'est rebellé contre l'impôt céleste. Quelques jours plus tard, une arme aérienne d'Imu a annihilé l'île en une fraction de seconde.
+                        </p>
+
+                        <div class="bg-dark/50 p-3 rounded border-l-2 border-purple-500">
+                            <h4 class="text-purple-400 text-xs font-bold mb-1 uppercase tracking-wider">Concept : Damnatio Memoriae</h4>
+                            <p class="text-xs text-gray-400 text-justify">
+                                "La condamnation de la mémoire". Le Gouvernement a déclaré : <em>"Le royaume de Lulusia n'a jamais existé"</em>. Cela fait écho au décret de 1793 en France : <strong>"Lyon n'est plus"</strong>. Le but n'est pas seulement de tuer, mais d'effacer l'existence même de la rébellion de l'Histoire.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pl-6 relative">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-500 outline outline-4 outline-dark"></div>
+                    <div class="bg-card rounded-lg p-5 shadow-lg">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-bold text-white text-lg">Impel Down : Les 6 Enfers</h3>
+                            <span class="text-[10px] text-slate-500 font-bold uppercase">Prison</span>
+                        </div>
+                        <img src="image/impel.png" class="w-full h-32 object-cover rounded mb-3 opacity-80" onerror="this.style.display='none'">
+                        <p class="text-sm text-gray-300 mb-2 text-justify">
+                            La grande prison sous-marine. Ce n'est pas un lieu de réhabilitation, mais de torture pure.
+                        </p>
+                        <ul class="text-xs text-gray-400 list-disc pl-4 space-y-1">
+                            <li><strong>Niveau 1-5 :</strong> Supplices croissants (Piques, Bêtes, Faim, Feu, Glace).</li>
+                            <li><strong>Niveau 6 (Enfer Infini) :</strong> Caché du monde. On y enferme à jamais les criminels dont l'existence même est un danger (effacement de l'histoire).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pl-6 relative">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-orange-500 outline outline-4 outline-dark"></div>
+                    <div class="bg-card rounded-lg p-5 shadow-lg">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-bold text-white text-lg">Le Complot du CP5 (Tom)</h3>
+                            <span class="text-[10px] text-slate-500 font-bold uppercase">Water 7</span>
+                        </div>
+                        <img src="image/tom.png" class="w-full h-32 object-cover rounded mb-3 opacity-80" onerror="this.style.display='none'">
+                        <p class="text-sm text-gray-300 mb-4 text-justify">
+                            Tom (mentor de Franky) devait être gracié pour la création du Train des Mers. Mais le <strong>CP5 (Spandam)</strong> voulait les plans de l'Arme Antique <strong>Pluton</strong>.
+                        </p>
+                        <div class="bg-dark/50 p-3 rounded border-l-2 border-danger">
+                            <h4 class="text-danger text-xs font-bold mb-1 uppercase tracking-wider">Falsification</h4>
+                            <p class="text-xs text-gray-400 text-justify">
+                                Le CP5 a utilisé les navires de Franky pour attaquer le navire judiciaire et faire condamner Tom. Tom s'est sacrifié pour sauver ses élèves. Le GM fabrique des coupables pour obtenir des armes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-philo" class="tab-content">
+            <h2 class="text-xl font-title text-white mb-6 border-l-4 border-gold pl-3">Concepts & Philo</h2>
+            
+            <div class="space-y-6">
+                
+                <div class="bg-card p-5 rounded-xl border border-white/10 shadow-lg">
+                    <h3 class="text-lg font-bold text-gold mb-2">Force et Justice (Blaise Pascal)</h3>
+                    <p class="text-sm text-gray-400 italic mb-3 border-l-2 border-slate-600 pl-3">"La justice sans la force est impuissante ; la force sans la justice est tyrannique."</p>
+                    <p class="text-sm text-gray-300 text-justify leading-relaxed">
+                        Pascal explique que les hommes, ne pouvant faire que ce qui est "Juste" soit "Fort", ont fait que ce qui est "Fort" soit "Juste".<br><br>
+                        Dans One Piece, le Gouvernement Mondial a gagné la guerre il y a 800 ans. Ils ont utilisé leur <strong>Force</strong> pour écrire l'Histoire et définir leur domination comme étant la "Justice". Ils ne sont pas légitimes moralement, ils sont juste les plus forts.
+                    </p>
+                </div>
+
+                <div class="bg-card p-5 rounded-xl border border-white/10 shadow-lg">
+                    <h3 class="text-lg font-bold text-accent mb-2">Droit Naturel vs Positif</h3>
+                    <div class="space-y-3 mt-3">
+                        <div class="pl-3 border-l-2 border-blue-500">
+                            <h4 class="text-sm font-bold text-blue-400">Droit Positif (La Loi Écrite)</h4>
+                            <p class="text-xs text-gray-400 text-justify">
+                                C'est la loi définie par l'État (la Marine). Selon cette loi, l'esclavage des Hommes-Poissons est légal, et frapper un Dragon Céleste est un crime de mort. Akainu défend ce droit.
+                            </p>
+                        </div>
+                        <div class="pl-3 border-l-2 border-red-500">
+                            <h4 class="text-sm font-bold text-red-400">Droit Naturel (La Morale)</h4>
+                            <p class="text-xs text-gray-400 text-justify">
+                                Ce sont les droits humains universels (liberté, dignité), supérieurs aux lois. Quand Luffy frappe un noble pour sauver un ami, il viole la Loi pour rétablir la Justice morale.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-card p-5 rounded-xl border border-white/10 shadow-lg">
+                    <h3 class="text-lg font-bold text-yellow-400 mb-2">Hannah Arendt</h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-white mb-1">La Banalité du Mal</h4>
+                        <p class="text-xs text-gray-400 text-justify">
+                            Illustrée par <strong>Kizaru</strong>. Le mal n'est pas toujours commis par des monstres, mais par des fonctionnaires qui "font juste leur travail" sans réfléchir. Kizaru détruit des vies avec le sourire, simplement parce que c'est l'ordre reçu.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-1">La Personne Lézée</h4>
+                        <p class="text-xs text-gray-400 text-justify">
+                            Illustrée par <strong>Fujitora</strong>. La justice ne doit pas servir l'État, mais réparer le tort fait à la victime. À Dressrosa, Fujitora s'excuse auprès du Roi Riku (la personne lézée) au lieu de sauver la réputation de la Marine.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <nav class="fixed bottom-0 w-full bg-dark border-t border-white/10 pb-safe z-50 shadow-2xl">
+        <div class="flex justify-around items-center h-16">
+            <button onclick="switchTab('tab-perso', this)" class="nav-item active flex flex-col items-center justify-center w-full h-full text-slate-500 transition-all duration-300">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span class="text-[10px] mt-1 font-bold">Persos</span>
+            </button>
+            
+            <button onclick="switchTab('tab-world', this)" class="nav-item flex flex-col items-center justify-center w-full h-full text-slate-500 transition-all duration-300">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4 8 4v14M12 3v18"/></svg>
+                <span class="text-[10px] mt-1 font-bold">Pouvoirs</span>
+            </button>
+
+            <button onclick="switchTab('tab-history', this)" class="nav-item flex flex-col items-center justify-center w-full h-full text-slate-500 transition-all duration-300">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span class="text-[10px] mt-1 font-bold">Histoire</span>
+            </button>
+
+            <button onclick="switchTab('tab-philo', this)" class="nav-item flex flex-col items-center justify-center w-full h-full text-slate-500 transition-all duration-300">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <span class="text-[10px] mt-1 font-bold">Philo</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('text-slate-500');
+                el.classList.remove('text-gold');
+            });
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.add('active');
+            btnElement.classList.remove('text-slate-500');
+            btnElement.classList.add('text-gold');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
