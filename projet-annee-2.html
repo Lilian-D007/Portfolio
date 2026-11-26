@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/audio.css">
   <script src="js/audio.js" defer></script>
   <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/tps.css">
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body { margin: 0; color: #fff; font-family: "Pixelify Sans", sans-serif; text-shadow: 1px 1px 2px black; background: #0b0d0f; }
@@ -21,12 +22,18 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
     .project-card h1 { color: #9eb4ff; margin-bottom: 20px; }
+    .projets-a2 { width: 100%; display: flex; flex-direction: column; gap: 25px; }
+    .projets-a2 .project-card { box-sizing: border-box; }
+    @media (max-width: 600px) { .projets-a2 .project-card { padding: 24px 18px; } }
+    .projet-titre { margin: 0 0 14px; font-size: 1.35rem; }
+    .project-card p { line-height: 1.6; }
+    .projet-tags { font-size: .85rem; color: #cfd8ff; opacity: .9; }
     footer.espace { height: 30px; }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css">
-  <script src="js/site.js"></script>
+  <link rel="stylesheet" href="css/site.css?v=2">
+  <script src="js/site.js?v=2"></script>
 </head>
 <body>
   <header class="topnav">
@@ -55,9 +62,45 @@
   </div>
 
   <main>
-    <div class="project-card">
-      <h1>Projets de Deuxième Année</h1>
-      <p>Cette section est en cours de construction pour accueillir mes futurs projets de BTS SIO 2.</p>
+    <div class="projets-a2">
+      <div class="project-card">
+        <h1>Projets de Deuxième Année</h1>
+        <h2 class="projet-titre">Projet 1 : infrastructure de l'entreprise lilian.local</h2>
+        <p>Dans ce projet, j'ai monté sur Proxmox l'infrastructure réseau complète d'une petite entreprise. On commence par un pare-feu pfSense qui sépare les réseaux, puis un serveur Windows Server 2022 avec Active Directory, DNS et DHCP. Ensuite viennent les partages de fichiers avec DFS, les stratégies de groupe et pour finir GLPI relié à l'annuaire.</p>
+        <p class="projet-tags">Proxmox · pfSense · Windows Server 2022 · Active Directory · DNS · DHCP · DFS · NTFS · GPO · Debian 12 · GLPI · LDAP</p>
+      </div>
+      <div class="tp-grid">
+        <a href="Projets_annee2/Projet1/Projet1_Etape_1_pfSense_Lilian_Dussy.pdf" target="_blank" class="tp-card">
+          <div class="tp-icon">🧱</div>
+          <h2>Étape 1 : pare-feu pfSense</h2>
+          <p>Création de la VM pfSense sur Proxmox avec trois cartes réseau, configuration des interfaces WAN, LAN et LAN_PDT, puis tests de connectivité et lecture des journaux du pare-feu.</p>
+          <div class="tp-action">📄 Voir le PDF</div>
+        </a>
+        <a href="Projets_annee2/Projet1/Projet_1_Etape_2_ActiveDirectory_Lilian_DUSSY.pdf" target="_blank" class="tp-card">
+          <div class="tp-icon">🏢</div>
+          <h2>Étape 2 : Active Directory, DNS et DHCP</h2>
+          <p>Installation du contrôleur de domaine WS-DC-1, création du domaine lilian.local, configuration du DNS, des OU, des utilisateurs et des groupes, puis du DHCP avec le relais sur pfSense.</p>
+          <div class="tp-action">📄 Voir le PDF</div>
+        </a>
+        <a href="Projets_annee2/Projet1/Projet_1_Etape_3_DFS_NTFS_Lilian_DUSSY.pdf" target="_blank" class="tp-card">
+          <div class="tp-icon">📂</div>
+          <h2>Étape 3 : partages DFS et droits NTFS</h2>
+          <p>Mise en place de l'espace de noms \\lilian.local\Partages avec un dossier par service, et réglage des droits NTFS pour que chaque groupe n'accède qu'à ses dossiers.</p>
+          <div class="tp-action">📄 Voir le PDF</div>
+        </a>
+        <a href="Projets_annee2/Projet1/Projet_1_Etape_4_GPO_Lilian_DUSSY.pdf" target="_blank" class="tp-card">
+          <div class="tp-icon">📜</div>
+          <h2>Étape 4 : stratégies de groupe (GPO)</h2>
+          <p>Connexion automatique du lecteur réseau P, fond d'écran par service, blocage du panneau de configuration et de l'invite de commandes pour les stagiaires et déploiement d'un logiciel MSI.</p>
+          <div class="tp-action">📄 Voir le PDF</div>
+        </a>
+        <a href="Projets_annee2/Projet1/Projet_1_Etape_5_GLPI_LDAP_Lilian_DUSSY.pdf" target="_blank" class="tp-card">
+          <div class="tp-icon">🎫</div>
+          <h2>Étape 5 : GLPI relié à l'Active Directory</h2>
+          <p>Installation de GLPI sur un serveur Debian 12 avec Apache, PHP et MariaDB, puis connexion à l'annuaire en LDAP pour importer les utilisateurs du domaine et leur donner le bon profil.</p>
+          <div class="tp-action">📄 Voir le PDF</div>
+        </a>
+      </div>
     </div>
   </main>
   <footer class="espace" style="height: auto; padding: 20px 0;"><p style="font-size: 0.8em; text-align: center; margin: 0; color: rgba(255,255,255,0.9);">créé par Lilian Dussy BTS SISR (SIO) Saint Rémi</p></footer>
