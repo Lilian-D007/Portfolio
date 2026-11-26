@@ -79,7 +79,7 @@
     }
     if (window.PF_I18N_EN) return apply();
     var s = document.createElement("script");
-    s.src = "js/i18n-en.js?v=2";  // changer le numéro à chaque mise à jour des traductions (cache navigateur)
+    s.src = "js/i18n-en.js?v=3";  // changer le numéro à chaque mise à jour des traductions (cache navigateur)
     s.onload = apply;
     s.onerror = function () { root.classList.remove("i18n-pending"); };
     document.head.appendChild(s);

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css?v=2">
-  <script src="js/site.js?v=2"></script>
+  <script src="js/site.js?v=3"></script>
 </head>
 <body>
   <header class="topnav">
@@ -59,7 +59,13 @@
 
     <!-- Liste des thèmes (Visible par défaut) -->
     <div id="themes-grid" style="margin-top: 40px;">
-      
+
+      <header class="page-header category-header-openable" onclick="openTheme('cat-5')">
+        <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">🏢 Projet 1 : infrastructure lilian.local (étapes 1 à 5)</h2>
+        <p>Le projet complet monté sur Proxmox : pare-feu pfSense, Active Directory avec DNS et DHCP, partages DFS et droits NTFS, stratégies de groupe, puis GLPI relié à l'annuaire.</p>
+        <div class="open-hint">📂 Voir les étapes</div>
+      </header>
+
       <header class="page-header category-header-openable" onclick="openTheme('cat-1')">
         <h2 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">☁️ Virtualisation & Hyperviseurs (Bloc 2)</h2>
         <p>Déploiement d'hyperviseurs Type 1 (Bare-metal), virtualisation imbriquée (nested), déploiement Windows 11 & Debian 12, pilotes VirtIO et contrôle RBAC.</p>
@@ -188,6 +194,47 @@
             <div class="tp-icon">🔍</div>
             <h2>Cartographie & Audit Nmap (Lab Sécurité)</h2>
             <p>Audit de sécurité et cartographie en environnement professionnel (Kali Linux, Ubuntu, Windows 10, Metasploitable2). Techniques de scan TCP SYN/Connect/UDP, interprétation des états open/closed/filtered, détection de versions et d'OS, analyse de vulnérabilités CVE avec le moteur de scripts NSE, tests d'évasion IDS/pare-feu et remédiations priorisées.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catégorie 5 : Projet 1 infrastructure lilian.local -->
+      <div id="cat-5" class="category-section" style="display: none;">
+        <header class="page-header category-header-active" onclick="closeTheme('cat-5')">
+          <h2>Projet 1 : infrastructure lilian.local</h2>
+          <p>Les cinq étapes du projet, de la mise en place du pare-feu jusqu'à GLPI.</p>
+          <div class="close-hint">🔙 Retour</div>
+        </header>
+        <div class="tp-grid">
+          <a href="Projets_annee2/Projet1/Projet1_Etape_1_pfSense_Lilian_Dussy.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🧱</div>
+            <h2>Étape 1 : pare-feu pfSense</h2>
+            <p>Création de la VM pfSense sur Proxmox avec trois cartes réseau, configuration des interfaces WAN, LAN et LAN_PDT, puis tests de connectivité et lecture des journaux du pare-feu.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="Projets_annee2/Projet1/Projet_1_Etape_2_ActiveDirectory_Lilian_DUSSY.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🏢</div>
+            <h2>Étape 2 : Active Directory, DNS et DHCP</h2>
+            <p>Installation du contrôleur de domaine WS-DC-1, création du domaine lilian.local, configuration du DNS, des OU, des utilisateurs et des groupes, puis du DHCP avec le relais sur pfSense.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="Projets_annee2/Projet1/Projet_1_Etape_3_DFS_NTFS_Lilian_DUSSY.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📂</div>
+            <h2>Étape 3 : partages DFS et droits NTFS</h2>
+            <p>Mise en place de l'espace de noms \\lilian.local\Partages avec un dossier par service, et réglage des droits NTFS pour que chaque groupe n'accède qu'à ses dossiers.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="Projets_annee2/Projet1/Projet_1_Etape_4_GPO_Lilian_DUSSY.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">📜</div>
+            <h2>Étape 4 : stratégies de groupe (GPO)</h2>
+            <p>Connexion automatique du lecteur réseau P, fond d'écran par service, blocage du panneau de configuration et de l'invite de commandes pour les stagiaires et déploiement d'un logiciel MSI.</p>
+            <div class="tp-action">📄 Voir le PDF</div>
+          </a>
+          <a href="Projets_annee2/Projet1/Projet_1_Etape_5_GLPI_LDAP_Lilian_DUSSY.pdf" target="_blank" class="tp-card">
+            <div class="tp-icon">🎫</div>
+            <h2>Étape 5 : GLPI relié à l'Active Directory</h2>
+            <p>Installation de GLPI sur un serveur Debian 12 avec Apache, PHP et MariaDB, puis connexion à l'annuaire en LDAP pour importer les utilisateurs du domaine et leur donner le bon profil.</p>
             <div class="tp-action">📄 Voir le PDF</div>
           </a>
         </div>
